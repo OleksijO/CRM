@@ -1,0 +1,14 @@
+th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=date] {
+    padding-left: 6px;
+    padding-right: 6px;
+}
