@@ -1,15 +1,17 @@
 package com.becomejavasenior.jdbc.impl;
 
-import com.becomejavasenior.entity.*;
+import com.becomejavasenior.entity.User;
+import com.becomejavasenior.entity.VisitHistory;
 import com.becomejavasenior.jdbc.entity.VisitHistoryDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
-
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("visitHistoryDao")
 public class VisitHistoryDAOImpl extends AbstractDAO<VisitHistory> implements VisitHistoryDAO {
 
     private static final String INSERT_SQL = "INSERT INTO visit_history (user_id, date_create, ip_address," +

@@ -4,11 +4,13 @@ import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.jdbc.entity.LanguageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("languageDao")
 public class LanguageDAOImpl extends AbstractDAO<Language> implements LanguageDAO {
 
     private static final String INSERT_SQL = "INSERT INTO language (id, name, code, deleted) " +

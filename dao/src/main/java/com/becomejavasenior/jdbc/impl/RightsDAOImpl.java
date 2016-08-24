@@ -6,11 +6,13 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.RightsDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("rightsDao")
 public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
 
     private static final String INSERT_SQL = "INSERT INTO rights (user_id, subject_type, subject_type_create," +

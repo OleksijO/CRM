@@ -5,15 +5,17 @@ import com.becomejavasenior.jdbc.entity.TaskDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
-
+@Repository("taskDao")
 public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

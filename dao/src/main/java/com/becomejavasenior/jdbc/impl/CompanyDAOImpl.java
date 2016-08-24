@@ -3,10 +3,11 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Tag;
 import com.becomejavasenior.entity.User;
+import com.becomejavasenior.jdbc.entity.CompanyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
-import com.becomejavasenior.jdbc.entity.CompanyDAO;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
+@Repository("companyDao")
 public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

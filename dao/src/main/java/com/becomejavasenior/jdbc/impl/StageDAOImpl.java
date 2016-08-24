@@ -5,11 +5,13 @@ import com.becomejavasenior.jdbc.entity.StageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("stageDao")
 public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
 
     private static final String INSERT_SQL = "INSERT INTO stage_deals (id, name, deleted) " +

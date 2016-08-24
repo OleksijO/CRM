@@ -4,11 +4,13 @@ import com.becomejavasenior.entity.Currency;
 import com.becomejavasenior.jdbc.entity.CurrencyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("currencyDao")
 public class CurrencyDAOImpl extends AbstractDAO<Currency> implements CurrencyDAO {
 
     private static final String INSERT_SQL = "INSERT INTO currency (id, name, active, deleted) " +

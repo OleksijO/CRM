@@ -5,6 +5,7 @@ import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
-
+@Repository("dealDao")
 public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

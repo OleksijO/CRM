@@ -3,8 +3,9 @@ package com.becomejavasenior.service.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.impl.*;
 import com.becomejavasenior.service.ContactService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class ContactServiceImpl implements ContactService {
 
     private static final String STR_0 = "0";
@@ -49,14 +51,32 @@ public class ContactServiceImpl implements ContactService {
     private static final String TASK_TEXT = "task_text";
     private static final String TASK_STATUS_NEW = "В работе";
 
-    private ContactDAO contactDAO;
-    private User currentUser;
+    private final ContactDAO contactDAO;
+    private final User currentUser;
+    private final UserDAO userDAO;
+    private final CompanyDAO companyDAO;
+    private final StageDAO stageDAO;
+    private final TaskDAO taskDAO;
+    private final DealDAO dealDAO;
+    private final TagDAO tagDAO;
+    private final NoteDAO noteDAO;
+    private final FileDAO fileDAO;
 
-    public ContactServiceImpl() {
-        this.contactDAO = new ContactDAOImpl();
+    @Autowired
+    public ContactServiceImpl(ContactDAO contactDAO, UserDAO userDAO, CompanyDAO companyDAO, StageDAO stageDAO, TaskDAO taskDAO, DealDAO dealDAO, TagDAO tagDAO, NoteDAO noteDAO, FileDAO fileDAO) {
+        this.contactDAO = contactDAO;
+        this.userDAO = userDAO;
+        this.companyDAO = companyDAO;
+        this.stageDAO = stageDAO;
+        this.taskDAO = taskDAO;
+        this.dealDAO = dealDAO;
+        this.tagDAO = tagDAO;
+        this.noteDAO = noteDAO;
+        this.fileDAO = fileDAO;
         //todo replace with current user
         currentUser = new User();
         currentUser.setId(1);
+
     }
 
     @Override
@@ -86,22 +106,22 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<User> getUserList() {
-        return new UserDAOImpl().getAll();
+        return userDAO.getAll();
     }
 
     @Override
     public List<Company> getCompanyList() {
-        return new CompanyDAOImpl().getAll();
+        return companyDAO.getAll();
     }
 
     @Override
     public List<Stage> getStageList() {
-        return new StageDAOImpl().getAll();
+        return stageDAO.getAll();
     }
 
     @Override
     public List<String> getTaskTypesList() {
-        return new TaskDAOImpl().getAllTaskType();
+        return taskDAO.getAllTaskType();
     }
 
     @Override
@@ -116,7 +136,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Tag> getTagList() {
-        return new TagDAOImpl().getAll();
+        return tagDAO.getAll();
     }
 
     @Override
@@ -199,7 +219,6 @@ public class ContactServiceImpl implements ContactService {
             }
             task.setTimeTask(timeTask);
 
-            TaskDAO taskDAO = new TaskDAOImpl();
             taskDAO.insert(task);
         }
         return task;
@@ -230,7 +249,6 @@ public class ContactServiceImpl implements ContactService {
             note.setContact(contact);
             note.setCreator(currentUser);
 
-            NoteDAO noteDAO = new NoteDAOImpl();
             noteDAO.insert(note);
         }
         return note;
@@ -241,7 +259,7 @@ public class ContactServiceImpl implements ContactService {
         if (contact.getCompany() != null
                 && !parameterMap.get(DEAL_NAME)[0].isEmpty()
                 && !parameterMap.get(DEAL_STAGE_NAME)[0].isEmpty()) {
-            StageDAO stageDAO = new StageDAOImpl();
+
             Stage stage = new Stage();
             stage.setName(parameterMap.get(DEAL_STAGE_NAME)[0]);
             stageDAO.insert(stage);
@@ -254,7 +272,6 @@ public class ContactServiceImpl implements ContactService {
             deal.setPrimaryContact(contact);
             deal.setCreator(currentUser);
 
-            DealDAO dealDAO = new DealDAOImpl();
             dealDAO.insert(deal);
         }
         return deal;
@@ -263,7 +280,6 @@ public class ContactServiceImpl implements ContactService {
     private Company getOrCreateCompany(Map<String, String[]> parameterMap) {
         Company company = null;
         if (parameterMap.get(COMPANY_NEW)[0].equals(STR_0) && !parameterMap.get(COMPANY_ID)[0].equals(STR_0)) {
-            CompanyDAO companyDAO = new CompanyDAOImpl();
             company = companyDAO.getById(Integer.parseInt(parameterMap.get(COMPANY_ID)[0]));
         } else if (!parameterMap.get(COMPANY_NEW)[0].equals(STR_0)
                 && !parameterMap.get(COMPANY_NAME)[0].isEmpty()
@@ -279,7 +295,6 @@ public class ContactServiceImpl implements ContactService {
             company.setAddress(parameterMap.get(COMPANY_ADDRESS)[0]);
             company.setWeb(parameterMap.get(COMPANY_WEB)[0]);
 
-            CompanyDAO companyDAO = new CompanyDAOImpl();
             companyDAO.insert(company);
         }
         return company;
@@ -308,7 +323,6 @@ public class ContactServiceImpl implements ContactService {
                 throw new DatabaseException("Error while loading file from browser", e);
             }
 
-            FileDAO fileDAO = new FileDAOImpl();
             fileDAO.insert(file);
         }
         return file;

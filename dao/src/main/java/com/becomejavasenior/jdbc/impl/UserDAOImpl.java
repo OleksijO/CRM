@@ -2,17 +2,19 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.entity.User;
+import com.becomejavasenior.jdbc.entity.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
-import com.becomejavasenior.jdbc.entity.UserDAO;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
-
+@Repository("userDao")
 public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

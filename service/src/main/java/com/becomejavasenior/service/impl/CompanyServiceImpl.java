@@ -2,21 +2,36 @@ package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
-import com.becomejavasenior.jdbc.factory.AbstractDAOFactory;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import com.becomejavasenior.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+@Service
 public class CompanyServiceImpl implements CompanyService {
-    private final CompanyDAO companyDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getCompanyDAO();
-    private final UserDAO userDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getUserDAO();
-    private final ContactDAO contactDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getContactDAO();
-    private final TaskDAO taskDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTaskDAO();
-    private final DealDAO dealDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getDealDAO();
-    private final NoteDAO noteDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getNoteDAO();
-    private final TagDAO tagDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getTagDAO();
-    private final FileDAO fileDAO = PostgresDAOFactory.getDAOFactory(AbstractDAOFactory.POSTGRESQL).getFileDAO();
+    private final CompanyDAO companyDAO;
+    private final UserDAO userDAO ;
+    private final ContactDAO contactDAO;
+    private final TaskDAO taskDAO;
+    private final DealDAO dealDAO;
+    private final NoteDAO noteDAO;
+    private final TagDAO tagDAO ;
+    private final FileDAO fileDAO ;
+
+    @Autowired
+    public CompanyServiceImpl(TagDAO tagDAO, ContactDAO contactDAO, TaskDAO taskDAO, DealDAO dealDAO, NoteDAO noteDAO, FileDAO fileDAO, UserDAO userDAO, CompanyDAO companyDAO) {
+        this.tagDAO = tagDAO;
+        this.contactDAO = contactDAO;
+        this.taskDAO = taskDAO;
+        this.dealDAO = dealDAO;
+        this.noteDAO = noteDAO;
+        this.fileDAO = fileDAO;
+        this.userDAO = userDAO;
+        this.companyDAO = companyDAO;
+    }
 
     @Override
     public int insert(Company company) {

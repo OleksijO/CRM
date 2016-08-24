@@ -5,13 +5,15 @@ import com.becomejavasenior.jdbc.entity.NoteDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
-
+@Repository("noteDao")
 public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

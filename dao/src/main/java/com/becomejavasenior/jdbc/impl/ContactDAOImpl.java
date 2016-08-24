@@ -3,19 +3,17 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.ContactDAO;
 import com.becomejavasenior.jdbc.entity.TagDAO;
-import com.becomejavasenior.entity.Company;
-import com.becomejavasenior.entity.Contact;
-import com.becomejavasenior.entity.TypeOfPhone;
-import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
-
+@Repository("contactDao")
 public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

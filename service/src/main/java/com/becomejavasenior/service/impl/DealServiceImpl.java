@@ -4,15 +4,22 @@ import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.entity.Stage;
 import com.becomejavasenior.jdbc.entity.DealDAO;
-import com.becomejavasenior.jdbc.impl.DealDAOImpl;
 import com.becomejavasenior.service.DealService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DealServiceImpl implements DealService {
 
-    private DealDAO dealDao = new DealDAOImpl();
-    private Deal deal = new Deal();
+    private final DealDAO dealDao;
+    //private Deal deal = new Deal();
+
+    @Autowired
+    public DealServiceImpl(DealDAO dealDao) {
+        this.dealDao = dealDao;
+    }
 
     @Override
     public int insert(Deal deal) {
@@ -23,6 +30,7 @@ public class DealServiceImpl implements DealService {
     public List<Deal> getAllDealsByStage(String stage) {
         return dealDao.getDealsByStage(stage);
     }
+
     @Override
     public List<Contact> getContactsByDealName(String dealName) {
         return dealDao.getContactsByDealName(dealName);

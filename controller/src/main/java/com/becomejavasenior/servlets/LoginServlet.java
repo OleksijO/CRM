@@ -1,9 +1,13 @@
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.service.impl.UserServiceImpl;
+import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -11,17 +15,27 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
+@Controller
 public class LoginServlet extends HttpServlet {
 
     private static final int MAX_INACTIVE_INTERVAL = 1800;
-    private static Map<String, User> userMap = new UserServiceImpl().getUserMap();
+    @Autowired
+    private UserService userService;
+    private Map<String, User> userMap;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+        userMap = userService.getUserMap();
+    }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         try {
             if (req.getParameter("updateUsers") != null) {
-                userMap = new UserServiceImpl().getUserMap();
+                    userMap = userService.getUserMap();
             }
             req.getRequestDispatcher("/pages/authLogin.jsp").forward(req, res);
 
