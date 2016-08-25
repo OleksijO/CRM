@@ -16,21 +16,21 @@ import java.util.Map;
 @Service("companyService")
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class CompanyServiceImpl implements CompanyService {
-    @Autowired(required = true)
+    @Autowired
     private CompanyDAO companyDAO;
-    @Autowired(required = true)
+    @Autowired
     private UserDAO userDAO;
-    @Autowired(required = true)
+    @Autowired
     private ContactDAO contactDAO;
-    @Autowired(required = true)
+    @Autowired
     private TaskDAO taskDAO;
-    @Autowired(required = true)
+    @Autowired
     private DealDAO dealDAO;
-    @Autowired(required = true)
+    @Autowired
     private NoteDAO noteDAO;
-    @Autowired(required = true)
+    @Autowired
     private TagDAO tagDAO;
-    @Autowired(required = true)
+    @Autowired
     private FileDAO fileDAO;
 
     @Override

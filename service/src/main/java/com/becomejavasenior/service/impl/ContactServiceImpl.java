@@ -54,25 +54,25 @@ public class ContactServiceImpl implements ContactService {
     private static final String TASK_TEXT = "task_text";
     private static final String TASK_STATUS_NEW = "В работе";
 
-    @Autowired(required = true)
+    @Autowired
     private ContactDAO contactDAO;
 
     private User currentUser;
-    @Autowired(required = true)
+    @Autowired
     private UserDAO userDAO;
-    @Autowired(required = true)
+    @Autowired
     private CompanyDAO companyDAO;
-    @Autowired(required = true)
+    @Autowired
     private StageDAO stageDAO;
-    @Autowired(required = true)
+    @Autowired
     private TaskDAO taskDAO;
-    @Autowired(required = true)
+    @Autowired
     private DealDAO dealDAO;
-    @Autowired(required = true)
+    @Autowired
     private TagDAO tagDAO;
-    @Autowired(required = true)
+    @Autowired
     private NoteDAO noteDAO;
-    @Autowired(required = true)
+    @Autowired
     private FileDAO fileDAO;
 
     @Override

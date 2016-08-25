@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service("dealService")
 public class DealServiceImpl implements DealService {
-    @Autowired(required = true)
+    @Autowired
     private DealDAO dealDao;
     //private Deal deal = new Deal();
 
