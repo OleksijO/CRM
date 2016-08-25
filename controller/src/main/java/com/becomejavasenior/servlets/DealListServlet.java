@@ -3,7 +3,6 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.service.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "DealListServlet", urlPatterns = "/dealList")
-@Controller("dealListServlet")
 public class DealListServlet extends HttpServlet {
     @Autowired
     private DealService dealService;

@@ -1,7 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.ConnectionPool;
 import com.becomejavasenior.jdbc.entity.FileDAO;
 import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
@@ -40,7 +39,7 @@ public class FileDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (fileTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM attached_file WHERE id = " + Integer.toString(fileTestId));
             } catch (SQLException e) {

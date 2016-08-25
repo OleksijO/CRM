@@ -4,7 +4,7 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.ContactDAO;
 import com.becomejavasenior.jdbc.entity.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -36,6 +36,8 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
     private static final String FIELD_CREATED_BY_ID = "created_by_id";
     private static final String FIELD_COMPANY_ID = "company_id";
     private static final String FIELD_COMPANY_NAME = "company_name";
+    @Autowired
+    private TagDAO tagDAO;
 
     @Override
     public int insert(Contact contact) {
@@ -45,7 +47,7 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
         }
         int id;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, contact.getName());
@@ -73,7 +75,6 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
             throw new DatabaseException(ex);
         }
         if (contact.getTags() != null && contact.getTags().size() > 0) {
-            TagDAO tagDAO = new TagDAOImpl();
             for (Tag tag : contact.getTags()) {
                 tagDAO.insertForCompanyContact(tag, contact);
             }
@@ -92,7 +93,7 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
         if (contact.getId() == 0) {
             throw new DatabaseException("contact must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
 
             statement.setString(1, contact.getName());
@@ -120,7 +121,7 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
     @Override
     public List<Contact> getAll() {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_SQL)) {
 
@@ -135,7 +136,7 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
     @Override
     public Contact getById(int id) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND contact.id = ?")) {
 
             statement.setInt(1, id);

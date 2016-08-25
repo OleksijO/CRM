@@ -4,7 +4,6 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
-@Controller
 public class LoginServlet extends HttpServlet {
 
     private static final int MAX_INACTIVE_INTERVAL = 1800;
@@ -52,7 +50,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         String fromPage = req.getParameter("fromPage");
 
-        if (fromPage == null || fromPage.isEmpty()) {
+        if (fromPage == null || fromPage.isEmpty()|| fromPage.equals("/")) {
             //todo go to dashboard
             fromPage = "/logout";
         }

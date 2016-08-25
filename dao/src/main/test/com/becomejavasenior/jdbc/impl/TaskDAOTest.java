@@ -44,7 +44,7 @@ public class TaskDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (taskTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM task WHERE id = " + Integer.toString(taskTestId));
             } catch (SQLException e) {

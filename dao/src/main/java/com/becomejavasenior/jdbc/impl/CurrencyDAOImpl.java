@@ -3,7 +3,6 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Currency;
 import com.becomejavasenior.jdbc.entity.CurrencyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -31,7 +30,7 @@ public class CurrencyDAOImpl extends AbstractDAO<Currency> implements CurrencyDA
         }
 
         int id;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement insertStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             insertStatement.setString(1, currency.getName());
@@ -55,7 +54,7 @@ public class CurrencyDAOImpl extends AbstractDAO<Currency> implements CurrencyDA
         if (currency.getId() == 0) {
             throw new DatabaseException("contact must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
 
             statement.setString(1, currency.getName());
@@ -77,7 +76,7 @@ public class CurrencyDAOImpl extends AbstractDAO<Currency> implements CurrencyDA
     @Override
     public List<Currency> getAll() {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_SQL)) {
 
@@ -91,7 +90,7 @@ public class CurrencyDAOImpl extends AbstractDAO<Currency> implements CurrencyDA
     @Override
     public Currency getById(int id) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND id = ?")) {
 
             statement.setInt(1, id);

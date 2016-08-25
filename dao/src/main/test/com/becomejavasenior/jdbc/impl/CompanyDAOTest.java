@@ -43,7 +43,7 @@ public class CompanyDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (companyTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM company WHERE id = " + Integer.toString(companyTestId));
             } catch (SQLException e) {

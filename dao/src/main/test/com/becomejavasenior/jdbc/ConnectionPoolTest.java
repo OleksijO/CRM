@@ -11,7 +11,7 @@ public class ConnectionPoolTest {
 
     @Test
     public void openConnectionTest() throws DatabaseException, SQLException {
-        Connection connection = ConnectionPool.getConnection();
+        Connection connection = getConnection();
         Assert.assertNotNull("connection does not exist", connection);
         Assert.assertFalse("connection must not be closed", connection.isClosed());
         Assert.assertFalse("connection must not be read only", connection.isReadOnly());

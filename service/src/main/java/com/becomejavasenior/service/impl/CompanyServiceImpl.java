@@ -12,26 +12,22 @@ import java.util.List;
 import java.util.Map;
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    private final CompanyDAO companyDAO;
-    private final UserDAO userDAO ;
-    private final ContactDAO contactDAO;
-    private final TaskDAO taskDAO;
-    private final DealDAO dealDAO;
-    private final NoteDAO noteDAO;
-    private final TagDAO tagDAO ;
-    private final FileDAO fileDAO ;
-
-    @Autowired
-    public CompanyServiceImpl(TagDAO tagDAO, ContactDAO contactDAO, TaskDAO taskDAO, DealDAO dealDAO, NoteDAO noteDAO, FileDAO fileDAO, UserDAO userDAO, CompanyDAO companyDAO) {
-        this.tagDAO = tagDAO;
-        this.contactDAO = contactDAO;
-        this.taskDAO = taskDAO;
-        this.dealDAO = dealDAO;
-        this.noteDAO = noteDAO;
-        this.fileDAO = fileDAO;
-        this.userDAO = userDAO;
-        this.companyDAO = companyDAO;
-    }
+    @Autowired(required = true)
+    private CompanyDAO companyDAO;
+    @Autowired(required = true)
+    private UserDAO userDAO ;
+    @Autowired(required = true)
+    private ContactDAO contactDAO;
+    @Autowired(required = true)
+    private TaskDAO taskDAO;
+    @Autowired(required = true)
+    private DealDAO dealDAO;
+    @Autowired(required = true)
+    private NoteDAO noteDAO;
+    @Autowired(required = true)
+    private TagDAO tagDAO ;
+    @Autowired(required = true)
+    private FileDAO fileDAO ;
 
     @Override
     public int insert(Company company) {

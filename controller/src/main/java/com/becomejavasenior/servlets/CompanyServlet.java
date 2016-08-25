@@ -4,7 +4,6 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.service.CompanyService;
 import com.google.common.base.Splitter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
@@ -26,7 +25,6 @@ import java.util.*;
 
 @WebServlet(name = "companyServlet", urlPatterns = "/company")
 @MultipartConfig
-@Controller("companyServlet")
 public class CompanyServlet extends HttpServlet {
 
     @Autowired

@@ -43,7 +43,7 @@ public class ContactDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (contactTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM contact WHERE id = " + Integer.toString(contactTestId));
             } catch (SQLException e) {

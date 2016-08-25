@@ -3,7 +3,6 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Stage;
 import com.becomejavasenior.jdbc.entity.StageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +22,7 @@ public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
 
     private final String className = getClass().getSimpleName().concat(": ");
 
+
     @Override
     public int insert(Stage stage) {
 
@@ -36,7 +36,7 @@ public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
             return id;
         }
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement insertStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             insertStatement.setString(1, stage.getName());
@@ -59,7 +59,7 @@ public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
         if (stage.getId() == 0) {
             throw new DatabaseException("stage must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
 
             statement.setString(1, stage.getName());
@@ -80,7 +80,7 @@ public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
     @Override
     public List<Stage> getAll() {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_SQL)) {
 
@@ -94,7 +94,7 @@ public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
     @Override
     public Stage getById(int id) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND id = ?")) {
 
             statement.setInt(1, id);
@@ -131,7 +131,7 @@ public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
 
         int id = 0;
         ResultSet resultSet = null;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND name = ?")) {
 
             statement.setString(1, stageName);

@@ -5,7 +5,6 @@ import com.becomejavasenior.entity.SubjectType;
 import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.RightsDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -45,7 +44,7 @@ public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
         }
 
         int id;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement insertStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             insertStatement.setObject(1, rights.getUser() == null ? null : rights.getUser().getId(), Types.INTEGER);
@@ -74,7 +73,7 @@ public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
         if (rights.getId() == 0) {
             throw new DatabaseException("rights must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(UPDATE_SQL)) {
 
             updateStatement.setInt(1, rights.getUser().getId());
@@ -101,7 +100,7 @@ public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
     @Override
     public List<Rights> getAll() {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_SQL)) {
 
@@ -115,7 +114,7 @@ public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
     @Override
     public Rights getById(int id) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND id = ?")) {
 
             statement.setInt(1, id);
@@ -155,7 +154,7 @@ public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
     @Override
     public List<Rights> getRightsByUserId(int userId) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND user_id = ?")) {
 
             statement.setInt(1, userId);

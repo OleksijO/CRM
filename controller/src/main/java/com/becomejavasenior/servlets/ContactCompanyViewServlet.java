@@ -5,7 +5,6 @@ import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "contactCompanyViewServlet", urlPatterns = "/viewcompanies")
-@Controller("contactCompanyViewServlet")
 public class ContactCompanyViewServlet extends HttpServlet {
     @Autowired
     private ContactService contactService;

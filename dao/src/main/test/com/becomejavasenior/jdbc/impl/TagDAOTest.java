@@ -33,7 +33,7 @@ public class TagDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (tagTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM tag WHERE id = " + Integer.toString(tagTestId));
             } catch (SQLException e) {

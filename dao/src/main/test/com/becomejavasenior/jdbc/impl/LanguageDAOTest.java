@@ -34,7 +34,7 @@ public class LanguageDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (languageTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM language WHERE id = " + Integer.toString(languageTestId));
             } catch (SQLException e) {

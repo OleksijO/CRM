@@ -3,7 +3,6 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.apache.commons.dbcp2.Utils;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 @Repository("dealDao")
@@ -58,6 +58,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
             "  JOIN contact ON deal.primary_contact_id = contact.id\n" +
             "  JOIN company ON contact.company_id = company.id\n";
 
+
     @Override
     public List<Deal> getDealsForList() {
         List<Deal> deals = new ArrayList<>();
@@ -66,7 +67,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
         Company company;
         Stage stage;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_DEALS_FOR_LIST)) {
 
             ResultSet resultSet = statement.executeQuery();
@@ -105,7 +106,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
         Deal deal;
         Company company;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_DEAL_BY_STAGE)) {
 
             statement.setString(1, stage);
@@ -138,7 +139,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
         List<Contact> contacts = new ArrayList<>();
         Contact contact;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_CONTACT)) {
 
             statement.setString(1, dealName);
@@ -164,7 +165,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
         List<Stage> stages = new ArrayList<>();
         Stage stage;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_STAGES)) {
 
@@ -191,7 +192,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
         }
         int id;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setInt(1, deal.getStage().getId());
@@ -235,7 +236,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
         if (deal.getId() == 0) {
             throw new DatabaseException("deal must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
 
             statement.setInt(1, deal.getStage().getId());
@@ -267,7 +268,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
         User creator;
         Company company;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
 
@@ -316,7 +317,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
         User creator;
         Company company;
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL + " AND id = ?")) {
 
             statement.setInt(1, id);
@@ -369,7 +370,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
     @Override
     public void addContactToDeal(Deal deal, Contact contact) {
         if (deal != null && deal.getId() > 0 && contact != null && contact.getId() > 0) {
-            try (Connection connection = PostgresDAOFactory.getConnection();
+            try (Connection connection = getConnection();
                  PreparedStatement statement = connection.prepareStatement(INSERT_DEAL_CONTACT_SQL)) {
                 statement.setInt(1, deal.getId());
                 statement.setInt(2, contact.getId());
@@ -385,7 +386,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
 
         Map<Integer, String> stageDeals = new HashMap<>();
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_STAGE_DEALS_SQL)) {
 

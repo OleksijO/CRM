@@ -51,33 +51,26 @@ public class ContactServiceImpl implements ContactService {
     private static final String TASK_TEXT = "task_text";
     private static final String TASK_STATUS_NEW = "В работе";
 
-    private final ContactDAO contactDAO;
-    private final User currentUser;
-    private final UserDAO userDAO;
-    private final CompanyDAO companyDAO;
-    private final StageDAO stageDAO;
-    private final TaskDAO taskDAO;
-    private final DealDAO dealDAO;
-    private final TagDAO tagDAO;
-    private final NoteDAO noteDAO;
-    private final FileDAO fileDAO;
+    @Autowired(required = true)
+    private ContactDAO contactDAO;
 
-    @Autowired
-    public ContactServiceImpl(ContactDAO contactDAO, UserDAO userDAO, CompanyDAO companyDAO, StageDAO stageDAO, TaskDAO taskDAO, DealDAO dealDAO, TagDAO tagDAO, NoteDAO noteDAO, FileDAO fileDAO) {
-        this.contactDAO = contactDAO;
-        this.userDAO = userDAO;
-        this.companyDAO = companyDAO;
-        this.stageDAO = stageDAO;
-        this.taskDAO = taskDAO;
-        this.dealDAO = dealDAO;
-        this.tagDAO = tagDAO;
-        this.noteDAO = noteDAO;
-        this.fileDAO = fileDAO;
-        //todo replace with current user
-        currentUser = new User();
-        currentUser.setId(1);
-
-    }
+    private User currentUser;
+    @Autowired(required = true)
+    private UserDAO userDAO;
+    @Autowired(required = true)
+    private CompanyDAO companyDAO;
+    @Autowired(required = true)
+    private StageDAO stageDAO;
+    @Autowired(required = true)
+    private TaskDAO taskDAO;
+    @Autowired(required = true)
+    private DealDAO dealDAO;
+    @Autowired(required = true)
+    private TagDAO tagDAO;
+    @Autowired(required = true)
+    private NoteDAO noteDAO;
+    @Autowired(required = true)
+    private FileDAO fileDAO;
 
     @Override
     public int insert(Contact contact) {

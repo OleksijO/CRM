@@ -40,7 +40,7 @@ public class NoteDAOTest {
     @After
     public void tearDown() throws SQLException {
         if (noteTestId > 0) {
-            try (Connection connection = ConnectionPool.getConnection();
+            try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
                 statement.executeUpdate("DELETE FROM note WHERE id = " + Integer.toString(noteTestId));
             } catch (SQLException e) {

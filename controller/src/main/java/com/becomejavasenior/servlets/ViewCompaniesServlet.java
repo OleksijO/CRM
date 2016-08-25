@@ -3,7 +3,6 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-@Controller
 public class ViewCompaniesServlet extends HttpServlet {
     @Autowired
     private CompanyService companyService;

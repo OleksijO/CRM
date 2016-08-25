@@ -5,7 +5,6 @@ import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Tag;
 import com.becomejavasenior.jdbc.entity.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -34,7 +33,7 @@ public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
         }
 
         int id;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement insertStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             insertStatement.setString(1, tag.getName());
@@ -57,7 +56,7 @@ public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
         if (tag.getId() == 0) {
             throw new DatabaseException("tag must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(UPDATE_SQL)) {
 
             updateStatement.setString(1, tag.getName());
@@ -78,7 +77,7 @@ public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
     @Override
     public List<Tag> getAll() {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_SQL)) {
 
@@ -92,7 +91,7 @@ public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
     @Override
     public Tag getById(int id) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND id = ?")) {
 
             statement.setInt(1, id);
@@ -141,7 +140,7 @@ public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
                 //todo: refactor for support transaction (autocommit=off)
                 id = insert(tag);
             }
-            try (Connection connection = PostgresDAOFactory.getConnection();
+            try (Connection connection = getConnection();
                  PreparedStatement insertStatement = connection.prepareStatement(INSERT_FOR_CONTACT_COMPANY_SQL)) {
 
                 insertStatement.setInt(1, id);

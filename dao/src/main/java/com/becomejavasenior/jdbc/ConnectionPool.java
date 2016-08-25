@@ -1,5 +1,6 @@
 package com.becomejavasenior.jdbc;
 
+/*
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
@@ -65,3 +66,4 @@ public class ConnectionPool {
         return dataSource.getConnection();
     }
 }
+*/

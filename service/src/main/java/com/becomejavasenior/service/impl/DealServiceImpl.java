@@ -12,14 +12,9 @@ import java.util.List;
 
 @Service
 public class DealServiceImpl implements DealService {
-
-    private final DealDAO dealDao;
+    @Autowired(required = true)
+    private DealDAO dealDao;
     //private Deal deal = new Deal();
-
-    @Autowired
-    public DealServiceImpl(DealDAO dealDao) {
-        this.dealDao = dealDao;
-    }
 
     @Override
     public int insert(Deal deal) {
@@ -64,5 +59,9 @@ public class DealServiceImpl implements DealService {
     @Override
     public void delete(int id) {
         dealDao.delete(id);
+    }
+
+    public static DealService createInstance(){
+        return new DealServiceImpl();
     }
 }

@@ -3,7 +3,6 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
@@ -19,7 +18,6 @@ import java.io.UnsupportedEncodingException;
 
 @WebServlet(name = "contactCreateServlet", urlPatterns = "/contactcreate")
 @MultipartConfig(maxFileSize = 102400)
-@Controller("contactCreateServlet")
 public class ContactCreateServlet extends HttpServlet {
     @Autowired
     private ContactService contactService;

@@ -17,15 +17,10 @@ import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+    @Autowired(required = true)
     private UserDAO userDAO;
+    @Autowired(required = true)
     private LanguageDAO languageDAO;
-
-    @Autowired
-    public UserServiceImpl(UserDAO userDAO, LanguageDAO languageDAO) {
-        this.userDAO = userDAO;
-        this.languageDAO = languageDAO;
-    }
 
     @Override
     public List<Language> getLanguageList() {
@@ -71,5 +66,9 @@ public class UserServiceImpl implements UserService {
             }
         }
         return errorString;
+    }
+
+    public static UserService createInstance() {
+        return new UserServiceImpl();
     }
 }

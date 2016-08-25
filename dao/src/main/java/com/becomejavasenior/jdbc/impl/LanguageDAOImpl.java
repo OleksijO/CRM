@@ -3,7 +3,6 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.jdbc.entity.LanguageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -23,6 +22,7 @@ public class LanguageDAOImpl extends AbstractDAO<Language> implements LanguageDA
     private static final String TABLE_NAME = "language";
     private final String className = getClass().getSimpleName().concat(": ");
 
+
     @Override
     public final int insert(Language language) {
 
@@ -31,7 +31,7 @@ public class LanguageDAOImpl extends AbstractDAO<Language> implements LanguageDA
         }
 
         int id;
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement insertStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             insertStatement.setString(1, language.getName());
@@ -55,7 +55,7 @@ public class LanguageDAOImpl extends AbstractDAO<Language> implements LanguageDA
         if (language.getId() == 0) {
             throw new DatabaseException("language must be created before update");
         }
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
 
             statement.setString(1, language.getName());
@@ -77,7 +77,7 @@ public class LanguageDAOImpl extends AbstractDAO<Language> implements LanguageDA
     @Override
     public List<Language> getAll() {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_SQL)) {
 
@@ -91,7 +91,7 @@ public class LanguageDAOImpl extends AbstractDAO<Language> implements LanguageDA
     @Override
     public Language getById(int id) {
 
-        try (Connection connection = PostgresDAOFactory.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND id = ?")) {
 
             statement.setInt(1, id);

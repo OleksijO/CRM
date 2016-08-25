@@ -1,17 +1,13 @@
 package com.becomejavasenior.jdbc.factory;
 
-import com.becomejavasenior.jdbc.ConnectionPool;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.impl.*;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 public class PostgresDAOFactory extends AbstractDAOFactory {
 
-    public static Connection getConnection() throws SQLException {
-        return ConnectionPool.getConnection();
-    }
+   /* public static Connection getConnection() throws SQLException {
+        return getConnection();
+    }*/
 
     @Override
     public CompanyDAO getCompanyDAO() {

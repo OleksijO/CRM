@@ -3,7 +3,6 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = "/register")
-@Controller
 public class RegisterServlet extends HttpServlet {
 
     private static final String URL_REGISTER = "/pages/authRegister.jsp";
