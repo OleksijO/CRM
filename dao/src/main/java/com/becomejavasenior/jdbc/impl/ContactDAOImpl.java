@@ -36,8 +36,12 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
     private static final String FIELD_CREATED_BY_ID = "created_by_id";
     private static final String FIELD_COMPANY_ID = "company_id";
     private static final String FIELD_COMPANY_NAME = "company_name";
+    private final TagDAO tagDAO;
+
     @Autowired
-    private TagDAO tagDAO;
+    public ContactDAOImpl(TagDAO tagDAO) {
+        this.tagDAO = tagDAO;
+    }
 
     @Override
     public int insert(Contact contact) {

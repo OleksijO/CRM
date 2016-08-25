@@ -5,6 +5,7 @@ import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Service("companyService")
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+@Lazy
 public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyDAO companyDAO;
