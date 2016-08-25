@@ -4,18 +4,22 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-@Service
+
+@Service("companyService")
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class CompanyServiceImpl implements CompanyService {
     @Autowired(required = true)
     private CompanyDAO companyDAO;
     @Autowired(required = true)
-    private UserDAO userDAO ;
+    private UserDAO userDAO;
     @Autowired(required = true)
     private ContactDAO contactDAO;
     @Autowired(required = true)
@@ -25,9 +29,9 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired(required = true)
     private NoteDAO noteDAO;
     @Autowired(required = true)
-    private TagDAO tagDAO ;
+    private TagDAO tagDAO;
     @Autowired(required = true)
-    private FileDAO fileDAO ;
+    private FileDAO fileDAO;
 
     @Override
     public int insert(Company company) {

@@ -5,6 +5,8 @@ import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
@@ -17,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("contactService")
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ContactServiceImpl implements ContactService {
 
     private static final String STR_0 = "0";
