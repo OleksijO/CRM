@@ -4,10 +4,6 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.service.ContactService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
@@ -19,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service("contactService")
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+//@Service("contactService")
+//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ContactServiceImpl implements ContactService {
 
     private static final String STR_0 = "0";
@@ -54,25 +50,25 @@ public class ContactServiceImpl implements ContactService {
     private static final String TASK_TEXT = "task_text";
     private static final String TASK_STATUS_NEW = "В работе";
 
-    @Autowired
+//    @Autowired
     private ContactDAO contactDAO;
 
     private User currentUser;
-    @Autowired
+//    @Autowired
     private UserDAO userDAO;
-    @Autowired
+//    @Autowired
     private CompanyDAO companyDAO;
-    @Autowired
+//    @Autowired
     private StageDAO stageDAO;
-    @Autowired
+//    @Autowired
     private TaskDAO taskDAO;
-    @Autowired
+//    @Autowired
     private DealDAO dealDAO;
-    @Autowired
+//    @Autowired
     private TagDAO tagDAO;
-    @Autowired
+//    @Autowired
     private NoteDAO noteDAO;
-    @Autowired
+//    @Autowired
     private FileDAO fileDAO;
 
     @Override
@@ -338,5 +334,41 @@ public class ContactServiceImpl implements ContactService {
             throw new DatabaseException("Error while uploading file to server", e);
         }
         return outputStream.toByteArray();
+    }
+
+    public void setContactDAO(ContactDAO contactDAO) {
+        this.contactDAO = contactDAO;
+    }
+
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    public void setCompanyDAO(CompanyDAO companyDAO) {
+        this.companyDAO = companyDAO;
+    }
+
+    public void setStageDAO(StageDAO stageDAO) {
+        this.stageDAO = stageDAO;
+    }
+
+    public void setTaskDAO(TaskDAO taskDAO) {
+        this.taskDAO = taskDAO;
+    }
+
+    public void setDealDAO(DealDAO dealDAO) {
+        this.dealDAO = dealDAO;
+    }
+
+    public void setTagDAO(TagDAO tagDAO) {
+        this.tagDAO = tagDAO;
+    }
+
+    public void setNoteDAO(NoteDAO noteDAO) {
+        this.noteDAO = noteDAO;
+    }
+
+    public void setFileDAO(FileDAO fileDAO) {
+        this.fileDAO = fileDAO;
     }
 }

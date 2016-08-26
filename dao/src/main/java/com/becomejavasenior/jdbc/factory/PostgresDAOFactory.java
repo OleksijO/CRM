@@ -1,3 +1,4 @@
+/*
 package com.becomejavasenior.jdbc.factory;
 
 import com.becomejavasenior.jdbc.entity.*;
@@ -5,9 +6,11 @@ import com.becomejavasenior.jdbc.impl.*;
 
 public class PostgresDAOFactory extends AbstractDAOFactory {
 
-   /* public static Connection getConnection() throws SQLException {
+   */
+/* public static Connection getConnection() throws SQLException {
         return getConnection();
-    }*/
+    }*//*
+
 
     @Override
     public CompanyDAO getCompanyDAO() {
@@ -74,3 +77,4 @@ public class PostgresDAOFactory extends AbstractDAOFactory {
         return new VisitHistoryDAOImpl();
     }
 }
+*/

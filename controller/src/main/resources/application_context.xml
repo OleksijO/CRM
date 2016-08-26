@@ -5,10 +5,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <import resource="datasource.xml" />
-    <import resource="services.xml" />
+
+    <import resource="classpath*:services.xml" />
+    <import resource="classpath*:model.xml" />
     <context:annotation-config/>
-    <context:component-scan base-package="com.becomejavasenior"/>
+    <context:component-scan base-package="com.becomejavasenior.servlets"/>
+
+    
 
 </beans>
 

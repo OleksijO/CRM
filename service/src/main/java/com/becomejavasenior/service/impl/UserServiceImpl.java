@@ -5,10 +5,10 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.LanguageDAO;
 import com.becomejavasenior.jdbc.entity.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import com.becomejavasenior.jdbc.impl.LanguageDAOImpl;
 import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,14 +18,11 @@ import java.util.Map;
 @Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
+    @Qualifier("userDao")
     private UserDAO userDAO;
     @Autowired
+    @Qualifier("languageDao")
     private LanguageDAO languageDAO;
-
-    @Override
-    public List<Language> getLanguageList() {
-        return new LanguageDAOImpl().getAll();
-    }
 
     @Override
     public Map<String, User> getUserMap() {
@@ -35,6 +32,11 @@ public class UserServiceImpl implements UserService {
             userMap.put(user.getEmail(), user);
         }
         return userMap;
+    }
+
+    @Override
+    public List<Language> getLanguageList() {
+        return languageDAO.getAll();
     }
 
     @Override
@@ -68,7 +70,17 @@ public class UserServiceImpl implements UserService {
         return errorString;
     }
 
-    public static UserService createInstance() {
+    public static UserServiceImpl createInstance() {
         return new UserServiceImpl();
+    }
+
+
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+
+    public void setLanguageDAO(LanguageDAO languageDAO) {
+        this.languageDAO = languageDAO;
     }
 }

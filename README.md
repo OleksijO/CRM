@@ -25,13 +25,28 @@ Task 3. -- \spring-framework\controller\src\main\webapp\WEB-INF\services.xml
 
 Task 4. 
 
-1) Реализовать один бин с scope="singleton" -- CompanyServiceImpl
+1) Реализовать один бин с scope="singleton" -- companyService
 
-2) Реализовать один бин с scope="prototype" -- ContactServiceImpl
+2) Реализовать один бин с scope="prototype" -- contactService
 
-4) Для одного бина реализовать и сконфигурировать init и destroy методы -- DealServiceImpl
+4) Для одного бина реализовать и сконфигурировать init и destroy методы -- dealService
 
 Task 5. 
 
 Добавить Spring DI в Controller слой -- SpringBeanAutowiringSupport used.
+
+Task 7.
+
+1) Реализовать внедрение зависимостей через конструктор (на свое усмотрение в DAO, Service или Controller слое) - contactDAO
+(abstractDAO не трогал, так как тянет изменение конструкторов потомков)
+
+2) Реализовать внедрение зависимостей через проперти (на свое усмотрение в DAO, Service или Controller слое) -- by XML: UserService -
+Interfaces UserDaoUser and LanguageDaoUser were added to implement appropriate setters of Dao.
+
+3) В XML конфигурации реализовать два autowire byName и два byType (на свое усмотрение в DAO, Service или Controller слое)
+-- один byName dealService; два byType - companyService, contactService
+
+4) Написать ментору в каких случаях используют @Autowired(required=false)
+
+5) Связать два бина с помощью аннотаций Qualifier("name") -- dealService
 

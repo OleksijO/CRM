@@ -7,24 +7,34 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <import resource="classpath*:dao.xml"/>
+
     <bean id="dealService" class="com.becomejavasenior.service.impl.DealServiceImpl"
           factory-method="createInstance"
           lazy-init="true"
           init-method="afterPropertiesSet"
-          destroy-method="destroy"/>
+          destroy-method="destroy"
+          autowire="byName"
+    />
 
     <bean id="userService" class="com.becomejavasenior.service.impl.UserServiceImpl"
-          factory-method="createInstance"/>
+          factory-method="createInstance" >
+        <property name="userDAO" ref="userDao"/>
+        <property name="languageDAO" ref="languageDao"/>
+    </bean>
 
     <!-- Factory service bean -->
     <bean id="serviceFactory" class="com.becomejavasenior.service.impl.ServiceFactoryImpl"/>
 
     <bean id="companyService" factory-bean="serviceFactory" factory-method="createCompanyServiceInstance"
           scope="singleton"
-          lazy-init="true"/>
+          lazy-init="true"
+          autowire="byType"/>
 
     <bean id="contactService" factory-bean="serviceFactory" factory-method="createContactServiceInstance"
-          scope="prototype"/>
+          scope="prototype"
+          autowire="byType"
+    />
 
 </beans>
 

@@ -3,36 +3,31 @@ package com.becomejavasenior.service.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.service.CompanyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@Service("companyService")
-@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-@Lazy
+//@Service("companyService")
+//@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+//@Lazy
 public class CompanyServiceImpl implements CompanyService {
-    @Autowired
+//    @Autowired
     private CompanyDAO companyDAO;
-    @Autowired
+//    @Autowired
     private UserDAO userDAO;
-    @Autowired
+//    @Autowired
     private ContactDAO contactDAO;
-    @Autowired
+//    @Autowired
     private TaskDAO taskDAO;
-    @Autowired
+//    @Autowired
     private DealDAO dealDAO;
-    @Autowired
+//    @Autowired
     private NoteDAO noteDAO;
-    @Autowired
+//    @Autowired
     private TagDAO tagDAO;
-    @Autowired
+//    @Autowired
     private FileDAO fileDAO;
 
     @Override
@@ -166,5 +161,37 @@ public class CompanyServiceImpl implements CompanyService {
             }
         }
         return timeList;
+    }
+
+    public void setCompanyDAO(CompanyDAO companyDAO) {
+        this.companyDAO = companyDAO;
+    }
+
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    public void setContactDAO(ContactDAO contactDAO) {
+        this.contactDAO = contactDAO;
+    }
+
+    public void setTaskDAO(TaskDAO taskDAO) {
+        this.taskDAO = taskDAO;
+    }
+
+    public void setDealDAO(DealDAO dealDAO) {
+        this.dealDAO = dealDAO;
+    }
+
+    public void setNoteDAO(NoteDAO noteDAO) {
+        this.noteDAO = noteDAO;
+    }
+
+    public void setTagDAO(TagDAO tagDAO) {
+        this.tagDAO = tagDAO;
+    }
+
+    public void setFileDAO(FileDAO fileDAO) {
+        this.fileDAO = fileDAO;
     }
 }
