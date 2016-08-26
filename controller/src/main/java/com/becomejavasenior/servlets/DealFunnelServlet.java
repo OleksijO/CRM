@@ -2,8 +2,9 @@ package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.entity.Stage;
-import com.becomejavasenior.service.impl.DealServiceImpl;
+import com.becomejavasenior.service.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
@@ -19,12 +20,17 @@ import java.util.List;
 @WebServlet(name = "DealFunnelServlet", urlPatterns = "/dealFunnel")
 public class DealFunnelServlet extends HttpServlet {
     @Autowired
-    private DealServiceImpl dealService;
+    @Qualifier("dealService")
+    private DealService dealService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+        //    OR:
+        //ApplicationContext ac = (ApplicationContext) config.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        //this.dealService = (DealService)ac.getBean("dealService");
     }
 
 //    private static final Logger logger = Logger.getLogger(DealFunnelServlet.class);
