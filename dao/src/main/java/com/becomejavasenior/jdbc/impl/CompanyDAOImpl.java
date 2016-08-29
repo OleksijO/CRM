@@ -14,7 +14,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
-@Repository("companyDao")
+@Repository("companyDaoPlain")
 public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

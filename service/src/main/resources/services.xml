@@ -29,12 +29,16 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
     <bean id="companyService" factory-bean="serviceFactory" factory-method="createCompanyServiceInstance"
           scope="singleton"
           lazy-init="true"
-          autowire="byType"/>
+          autowire="byType">
+        <property name="companyDAO" ref="companyDao"/>
+    </bean>
 
     <bean id="contactService" factory-bean="serviceFactory" factory-method="createContactServiceInstance"
           scope="prototype"
           autowire="byType"
-    />
+    >
+        <property name="companyDAO" ref="companyDao"/>
+    </bean>
 
 </beans>
 
