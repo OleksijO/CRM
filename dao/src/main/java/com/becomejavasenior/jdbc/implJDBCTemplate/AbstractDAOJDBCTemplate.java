@@ -1,21 +1,16 @@
-package com.becomejavasenior.jdbc.impl;
+package com.becomejavasenior.jdbc.implJDBCTemplate;
 
 import com.becomejavasenior.jdbc.entity.GenericDAO;
-import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 @Component
-abstract class AbstractDAO<T> extends JdbcTemplate implements GenericDAO<T> {
+abstract class AbstractDAOJDBCTemplate<T>extends JdbcTemplate implements GenericDAO<T> {
 
     static final String ERROR_PARSE_RESULT_SET = "error while parsing result set for ";
     static final String ERROR_PREPARING_INSERT = "error while preparing INSERT statement for ";
@@ -28,10 +23,9 @@ abstract class AbstractDAO<T> extends JdbcTemplate implements GenericDAO<T> {
     static final String FIELD_ID = "id";
     static final String FIELD_NAME = "name";
     @Autowired
-    private DataSource dataSource;
+    protected JdbcTemplate jdbcTemplate;
 
-    protected AbstractDAO() {
-
+    protected AbstractDAOJDBCTemplate() {
     }
 
     @Override
@@ -46,26 +40,8 @@ abstract class AbstractDAO<T> extends JdbcTemplate implements GenericDAO<T> {
     @Override
     abstract public T getById(int id);
 
-    protected Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
-
     public void delete(int id, String tableName /*, Logger logger*/) {
-
-        final String DELETE_SQL = "UPDATE " + tableName + " SET deleted = TRUE WHERE id = ?";
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_SQL)) {
-
-            statement.setInt(1, id);
-            statement.executeUpdate();
-
-            //logger.log(Level.INFO, "DELETE ENTITY WITH ID = " + id + " FROM TABLE " + tableName);
-
-        } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new DatabaseException(ex);
-        }
+        jdbcTemplate.update("UPDATE " + tableName + " SET deleted = TRUE WHERE id = " + id);
     }
 
 
