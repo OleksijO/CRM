@@ -70,14 +70,14 @@ public class DealServiceImpl implements DealService {
     @Override
     public void destroy() {
         //release resources
-        System.out.println("Deal Service Destroying...");
+        //System.out.println("Deal Service Destroying...");
     }
 
     @PostConstruct
     @Override
     public void afterPropertiesSet() throws Exception {
         // initializing resources
-        System.out.println("Deal Service Initialization...");
+        //System.out.println("Deal Service Initialization...");
     }
 
     public void setDealDao(DealDAO dealDao) {

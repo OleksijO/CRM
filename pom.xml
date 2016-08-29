@@ -127,7 +127,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.2.RELEASE</version>
+            <version>4.0.3.RELEASE</version>
         </dependency>
     </dependencies>
     <properties>

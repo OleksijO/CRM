@@ -10,6 +10,11 @@
 </head>
 <body style="padding: 25px;">
 <div class="container">
+    <div class="row">
+            <a class="hyperlink" href="?language=en">English</a> |
+            <a class="hyperlink" href="?language=ru_RU">Русский</a>
+
+    </div>
     <form class="form-signin" action="/login" method="post"
           style="max-width: 320px; margin: 0 auto; font-size: larger;">
         <h3 class="form-signin-heading" align="center">CRM "CRIUS"</h3>

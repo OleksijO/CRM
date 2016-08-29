@@ -50,3 +50,8 @@ Interfaces UserDaoUser and LanguageDaoUser were added to implement appropriate s
 
 5) Связать два бина с помощью аннотаций Qualifier("name") -- dealService
 
+Task 9.
+Разбить Spring XML Context на несколько файлов
+Сделать импорт всех файлов в главный файл конфигурации
+--- импорт по цепочке datasorce->dao->service-> application-context <-model
+
