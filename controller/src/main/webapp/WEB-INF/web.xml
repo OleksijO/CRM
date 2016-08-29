@@ -18,4 +18,9 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>jdbcTemplate</param-value>
+    </context-param>
+
 </web-app>
