@@ -74,11 +74,16 @@ public class File implements Serializable {
     }
 
     public byte[] getFile() {
+        if (file == null) return new byte[0];
         return file.clone();
     }
 
     public void setFile(byte[] file) {
-        this.file = file.clone();
+        if (file == null) {
+            this.file = new byte[0];
+        } else {
+            this.file = file.clone();
+        }
     }
 
     public Contact getContact() {

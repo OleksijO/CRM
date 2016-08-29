@@ -1,14 +1,16 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.ConnectionPool;
-import com.becomejavasenior.jdbc.entity.TaskDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import com.becomejavasenior.jdbc.SpringDaoTests;
+import com.becomejavasenior.jdbc.entity.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,23 +19,30 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class TaskDAOTest {
+public class TaskDAOTest extends SpringDaoTests{
 
     private static final String DEFAULT_NAME = "Default Task Name";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());
     private static final String DEFAULT_TASK_TYPE = "Важно";
     private static final String DEFAULT_TASK_STATUS = "В работе";
     private static final TypeOfPeriod DEFAULT_TASK_PERIOD = TypeOfPeriod.TO_DAY;
-
-    private final PostgresDAOFactory factory;
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
     private TaskDAO taskDAO;
+    @Autowired
+    @Qualifier("companyDao")
+    private CompanyDAO companyDAO;
+    @Autowired
+    private ContactDAO contactDAO;
+    @Autowired
+    private DealDAO dealDAO;
     private User userForTaskTest;
     private int taskTestId;
 
-    public TaskDAOTest() {
-        factory = new PostgresDAOFactory();
-        userForTaskTest = factory.getUserDAO().getById(1);
-        taskDAO = factory.getTaskDAO();
+    @PostConstruct
+    public void init() {
+        userForTaskTest = userDAO.getById(1);
     }
 
     @Before
@@ -91,10 +100,10 @@ public class TaskDAOTest {
     public void testUpdate() throws SQLException {
         String updatedTaskName = "Updated Task Name";
         Timestamp updatedCreateDate = new Timestamp(1L << 41);
-        User updatedUser = factory.getUserDAO().getById(2);
-        Company updatedCompany = factory.getCompanyDAO().getById(2);
-        Contact updatedContact = factory.getContactDAO().getById(2);
-        Deal updatedDeal = factory.getDealDAO().getById(2);
+        User updatedUser = userDAO.getById(2);
+        Company updatedCompany = companyDAO.getById(2);
+        Contact updatedContact = contactDAO.getById(2);
+        Deal updatedDeal = dealDAO.getById(2);
         String updatedTaskType = "Срочно";
         String updatedTaskStatus = "Выполнено";
         TypeOfPeriod updatedPeriod = TypeOfPeriod.NEXT_MONTH;

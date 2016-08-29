@@ -4,14 +4,18 @@ import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.TypeOfPhone;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.SpringDaoTests;
+import com.becomejavasenior.jdbc.entity.CompanyDAO;
 import com.becomejavasenior.jdbc.entity.ContactDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import com.becomejavasenior.jdbc.entity.UserDAO;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,20 +23,23 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class ContactDAOTest {
-
-    private final PostgresDAOFactory factory;
+public class ContactDAOTest extends SpringDaoTests {
+    @Autowired
     private ContactDAO contactDAO;
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
+    @Qualifier("companyDao")
+    private CompanyDAO companyDAO;
     private User userForContactTest;
     private static final String DEFAULT_NAME = "Default Name";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());
     private int contactTestId;
 
 
-    public ContactDAOTest() {
-        factory = new PostgresDAOFactory();
-        userForContactTest = factory.getUserDAO().getById(1);
-        contactDAO = factory.getContactDAO();
+    @PostConstruct
+    public void init(){
+        userForContactTest = userDAO.getById(1);
     }
 
     @Before
@@ -92,8 +99,8 @@ public class ContactDAOTest {
         String updatedSkype = "updated-skype";
         String updatedEmail = "updated@email.org";
         Timestamp updatedCreateDate = new Timestamp(1L << 41);
-        User userForTestUpdate = factory.getUserDAO().getById(2);
-        Company companyForTestUpdate = factory.getCompanyDAO().getById(2);
+        User userForTestUpdate = userDAO.getById(2);
+        Company companyForTestUpdate = companyDAO.getById(2);
 
         Contact contactTest = new Contact();
         contactTest.setName(DEFAULT_NAME);

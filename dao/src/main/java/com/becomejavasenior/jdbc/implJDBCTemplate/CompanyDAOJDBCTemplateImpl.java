@@ -19,7 +19,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
-@Repository("companyDao")
+@Repository("companyDaoJdbcTemplate")
 public class CompanyDAOJDBCTemplateImpl extends AbstractDAOJDBCTemplate<Company> implements CompanyDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

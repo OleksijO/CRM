@@ -2,14 +2,17 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.CompanyDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import com.becomejavasenior.jdbc.entity.UserDAO;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,10 +20,13 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class CompanyDAOTest {
+public class CompanyDAOTest extends SpringDaoTests {
 
-    private final PostgresDAOFactory factory;
+    @Autowired
+    @Qualifier("companyDao")
     private CompanyDAO companyDAO;
+    @Autowired
+    private UserDAO userDAO;
     private User userForCompanyTest;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_PHONE = "Default Phone Number";
@@ -29,10 +35,9 @@ public class CompanyDAOTest {
     private static final Timestamp DEFAULT_DATE = new Timestamp(new Date().getTime());
     private int companyTestId;
 
-    public CompanyDAOTest() {
-        factory = new PostgresDAOFactory();
-        userForCompanyTest = factory.getUserDAO().getById(1);
-        companyDAO = factory.getCompanyDAO();
+    @PostConstruct
+    public void init(){
+        userForCompanyTest = userDAO.getById(1);
     }
 
     @Before
@@ -94,7 +99,7 @@ public class CompanyDAOTest {
         String updatedAddress = "Updated Company Address";
         String updatedWeb = "http://updated.www.address";
         Date updatedCreateDate = new Timestamp(1L << 41);
-        User userForTestUpdate = factory.getUserDAO().getById(2);
+        User userForTestUpdate = userDAO.getById(2);
 
         Company companyTest = new Company();
         companyTest.setName(DEFAULT_NAME);

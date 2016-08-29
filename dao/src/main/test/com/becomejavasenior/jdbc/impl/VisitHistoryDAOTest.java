@@ -2,14 +2,17 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.User;
 import com.becomejavasenior.entity.VisitHistory;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.entity.UserDAO;
 import com.becomejavasenior.jdbc.entity.VisitHistoryDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+
+import com.becomejavasenior.jdbc.SpringDaoTests;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,18 +20,18 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class VisitHistoryDAOTest {
-
-    private static final Timestamp DEFAULT_DATE_TIME = new Timestamp(new Date().getTime());
-    private final PostgresDAOFactory factory;
-    private final User defaultUser;
+public class VisitHistoryDAOTest extends SpringDaoTests {
+    @Autowired
     private VisitHistoryDAO visitHistoryDAO;
+    @Autowired
+    private UserDAO userDAO;
+    private static final Timestamp DEFAULT_DATE_TIME = new Timestamp(new Date().getTime());
+    private User defaultUser;
     private int visitHistoryTestId;
 
-    public VisitHistoryDAOTest() {
-        factory = new PostgresDAOFactory();
-        defaultUser = factory.getUserDAO().getById(1);
-        visitHistoryDAO = factory.getVisitHistoryDAO();
+    @PostConstruct
+    public void init() {
+        defaultUser = userDAO.getById(1);
     }
 
     @Before
@@ -77,7 +80,7 @@ public class VisitHistoryDAOTest {
 
     @Test
     public void testUpdate() throws SQLException {
-        User updatedUser = factory.getUserDAO().getById(2);
+        User updatedUser = userDAO.getById(2);
         Timestamp updatedDateTime = new Timestamp(1L << 41);
         String updatedIpAddress = "111.222.025.222";
         String updatedBrowser = "Updated Browser ID String";

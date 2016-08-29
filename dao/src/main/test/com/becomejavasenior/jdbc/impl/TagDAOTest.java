@@ -1,29 +1,24 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Tag;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.TagDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class TagDAOTest {
-
+public class TagDAOTest extends SpringDaoTests{
+    @Autowired
     private TagDAO tagDAO;
     private static final String DEFAULT_NAME = "Default Name";
     private int tagTestId;
-
-    public TagDAOTest() {
-        PostgresDAOFactory factory = new PostgresDAOFactory();
-        tagDAO = factory.getTagDAO();
-    }
 
     @Before
     public void setUp() {

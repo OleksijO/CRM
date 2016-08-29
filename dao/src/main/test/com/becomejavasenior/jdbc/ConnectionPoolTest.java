@@ -3,11 +3,17 @@ package com.becomejavasenior.jdbc;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ConnectionPoolTest {
+
+public class ConnectionPoolTest extends SpringDaoTests {
+
+    @Autowired
+    DataSource dataSource;
 
     @Test
     public void openConnectionTest() throws DatabaseException, SQLException {

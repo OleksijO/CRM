@@ -1,28 +1,29 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Currency;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.CurrencyDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class CurrencyDAOTest {
-
+public class CurrencyDAOTest extends SpringDaoTests {
+    @Autowired
     private CurrencyDAO currencyDAO;
     private static final String DEFAULT_NAME = "Default Name";
     private int currencyTestId;
 
-    public CurrencyDAOTest() {
-        PostgresDAOFactory factory = new PostgresDAOFactory();
-        currencyDAO = factory.getCurrencyDAO();
+    @PostConstruct
+    public void init(){
+
     }
 
     @Before

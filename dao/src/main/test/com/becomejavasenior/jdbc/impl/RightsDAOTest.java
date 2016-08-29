@@ -3,31 +3,33 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Rights;
 import com.becomejavasenior.entity.SubjectType;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.RightsDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import com.becomejavasenior.jdbc.entity.UserDAO;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class RightsDAOTest {
-
-    private final PostgresDAOFactory factory;
+public class RightsDAOTest extends SpringDaoTests{
+    @Autowired
     private RightsDAO rightsDAO;
+    @Autowired
+    private UserDAO userDAO;
     private User defaultUser;
     private SubjectType defaultSubjectType = SubjectType.DEAL;
     private int rightsTestId;
 
-    public RightsDAOTest() {
-        factory = new PostgresDAOFactory();
-        defaultUser = factory.getUserDAO().getById(1);
-        rightsDAO = factory.getRightsDAO();
+    @PostConstruct
+    public void init() {
+        defaultUser = userDAO.getById(1);
     }
 
     @Before
@@ -76,7 +78,7 @@ public class RightsDAOTest {
 
     @Test
     public void testUpdate() throws SQLException {
-        User updatedUser = factory.getUserDAO().getById(2);
+        User updatedUser = userDAO.getById(2);
         SubjectType updatedSubjectType = SubjectType.COMPANY;
 
         Rights rightsTest = new Rights();

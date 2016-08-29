@@ -1,29 +1,24 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Stage;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.StageDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class StageDAOTest {
-
+public class StageDAOTest extends SpringDaoTests{
+    @Autowired
     private StageDAO stageDAO;
     private static final String DEFAULT_NAME = "Default Name";
     private int stageTestId;
-
-    public StageDAOTest() {
-        PostgresDAOFactory factory = new PostgresDAOFactory();
-        stageDAO = factory.getStageDAO();
-    }
 
     @Before
     public void setUp() {

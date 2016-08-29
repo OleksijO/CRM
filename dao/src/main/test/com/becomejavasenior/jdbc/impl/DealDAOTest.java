@@ -1,14 +1,16 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.ConnectionPool;
-import com.becomejavasenior.jdbc.entity.DealDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
+import com.becomejavasenior.jdbc.SpringDaoTests;
+import com.becomejavasenior.jdbc.entity.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,24 +19,30 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class DealDAOTest {
+public class DealDAOTest extends SpringDaoTests {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());
-    private final PostgresDAOFactory factory;
+    @Autowired
     private DealDAO dealDAO;
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
+    private StageDAO stageDAO;
+    @Autowired @Qualifier("companyDao")
+    private CompanyDAO companyDAO;
+    @Autowired
+    private ContactDAO contactDAO;
     private User userForDealTest;
     private Stage stageForDealTest;
     private Company companyForDealTest;
     private int dealTestId;
 
-
-    public DealDAOTest() {
-        factory = new PostgresDAOFactory();
-        userForDealTest = factory.getUserDAO().getById(1);
-        stageForDealTest = factory.getStageDAO().getById(1);
-        companyForDealTest = factory.getCompanyDAO().getById(1);
-        dealDAO = factory.getDealDAO();
+    @PostConstruct
+    public void init() {
+        userForDealTest = userDAO.getById(1);
+        stageForDealTest = stageDAO.getById(1);
+        companyForDealTest = companyDAO.getById(1);
     }
 
     @Before
@@ -90,10 +98,10 @@ public class DealDAOTest {
     public void testUpdate() throws SQLException {
         String updatedName = "Updated Name";
         Timestamp updatedCreateDate = new Timestamp(1L << 41);
-        User updatedUser = factory.getUserDAO().getById(2);
-        Company updatedCompany = factory.getCompanyDAO().getById(2);
-        Stage updatedStage = factory.getStageDAO().getById(2);
-        Contact updatedContact = factory.getContactDAO().getById(2);
+        User updatedUser = userDAO.getById(2);
+        Company updatedCompany = companyDAO.getById(2);
+        Stage updatedStage = stageDAO.getById(2);
+        Contact updatedContact = contactDAO.getById(2);
 
         Deal dealTest = new Deal();
         dealTest.setName(DEFAULT_NAME);

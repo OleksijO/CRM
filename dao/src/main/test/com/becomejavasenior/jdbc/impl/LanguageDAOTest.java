@@ -1,30 +1,25 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Language;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.LanguageDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class LanguageDAOTest {
-
+public class LanguageDAOTest extends SpringDaoTests{
+    @Autowired
     private LanguageDAO languageDAO;
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_CODE = "DN";
     private int languageTestId;
-
-    public LanguageDAOTest() {
-        PostgresDAOFactory factory = new PostgresDAOFactory();
-        languageDAO = factory.getLanguageDAO();
-    }
 
     @Before
     public void setUp() {

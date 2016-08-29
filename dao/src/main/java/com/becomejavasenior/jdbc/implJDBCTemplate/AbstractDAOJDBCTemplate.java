@@ -10,7 +10,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 @Component
-abstract class AbstractDAOJDBCTemplate<T>extends JdbcTemplate implements GenericDAO<T> {
+abstract class AbstractDAOJDBCTemplate<T> implements GenericDAO<T> {
 
     static final String ERROR_PARSE_RESULT_SET = "error while parsing result set for ";
     static final String ERROR_PREPARING_INSERT = "error while preparing INSERT statement for ";

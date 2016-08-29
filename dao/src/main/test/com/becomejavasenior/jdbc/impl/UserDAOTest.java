@@ -2,34 +2,36 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.ConnectionPool;
+import com.becomejavasenior.jdbc.SpringDaoTests;
+import com.becomejavasenior.jdbc.entity.LanguageDAO;
 import com.becomejavasenior.jdbc.entity.UserDAO;
-import com.becomejavasenior.jdbc.factory.PostgresDAOFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class UserDAOTest {
+public class UserDAOTest extends SpringDaoTests{
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_EMAIL = "default@email.org";
     private static final String DEFAULT_PASSWORD = "DefaultPassword123";
-
-    private final PostgresDAOFactory factory;
+    @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private LanguageDAO languageDAO;
     private Language defaultLanguage;
     private int userTestId;
 
-    public UserDAOTest() {
-        factory = new PostgresDAOFactory();
-        defaultLanguage = factory.getLanguageDAO().getById(1);
-        userDAO = factory.getUserDAO();
+    @PostConstruct
+    public void init() {
+        defaultLanguage = languageDAO.getById(1);
     }
 
     @Before
@@ -83,7 +85,7 @@ public class UserDAOTest {
         String updatedName = "Updated Name";
         String updatedEmail = "updated@email.org";
         String updatedPassword = "UpdatedPassWord_13";
-        Language updatedLanguage = factory.getLanguageDAO().getById(2);
+        Language updatedLanguage = languageDAO.getById(2);
         String updatedPhone = "UpdatedPhone 345-67-89";
         String updatedMobilePhone = "UpdatedMobilePhone 567-89-01";
         String updatedNote = "This is short story\nabout\tUSER";

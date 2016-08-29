@@ -173,7 +173,12 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
                 file.setFileSize(resultSet.getInt("filesize"));
                 file.setDelete(false);
                 file.setUrlFile(resultSet.getString("url_file"));
-                file.setFile(resultSet.getBytes("file"));
+                if (resultSet.getBytes("file")!=null){
+                    file.setFile(resultSet.getBytes("file"));
+                }else {
+                    file.setFile(new byte[0]);
+                }
+
                 if (resultSet.getObject("contact_id") != null) {
                     Contact contact = new Contact();
                     contact.setId(resultSet.getInt("contact_id"));

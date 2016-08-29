@@ -3,7 +3,6 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.jdbc.entity.GenericDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -15,7 +14,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 @Component
-abstract class AbstractDAO<T> extends JdbcTemplate implements GenericDAO<T> {
+abstract class AbstractDAO<T> implements GenericDAO<T> {
 
     static final String ERROR_PARSE_RESULT_SET = "error while parsing result set for ";
     static final String ERROR_PREPARING_INSERT = "error while preparing INSERT statement for ";
