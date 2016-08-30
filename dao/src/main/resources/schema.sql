@@ -1,8 +1,11 @@
 -- #development #IDEA
 -- Make sure your connection now
 -- is to database "crm-crius" !
-
+DROP SCHEMA IF EXISTS public CASCADE;
 CREATE SCHEMA IF NOT EXISTS public;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO public;
+
 SET SEARCH_PATH TO public;
 
 CREATE TABLE IF NOT EXISTS stage_deals (

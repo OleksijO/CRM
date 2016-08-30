@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:dao.xml")
+@ContextConfiguration("classpath:dao_test.xml")
 @ActiveProfiles("plainJDBC")
 abstract public class SpringDaoTests {
     @Autowired
