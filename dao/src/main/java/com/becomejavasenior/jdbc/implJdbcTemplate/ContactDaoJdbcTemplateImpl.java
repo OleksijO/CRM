@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.implJDBCTemplate;
+package com.becomejavasenior.jdbc.implJdbcTemplate;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;
@@ -23,7 +23,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 //@Repository("contactDaoJdbcTemplate")
-public class ContactDAOJDBCTemplateImpl extends AbstractDAOJDBCTemplate<Contact> implements ContactDAO {
+public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact> implements ContactDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
@@ -77,7 +77,7 @@ public class ContactDAOJDBCTemplateImpl extends AbstractDAOJDBCTemplate<Contact>
     };
 
     @Autowired
-    public ContactDAOJDBCTemplateImpl(TagDAO tagDAO) {
+    public ContactDaoJdbcTemplateImpl(TagDAO tagDAO) {
         this.tagDAO = tagDAO;
     }
 

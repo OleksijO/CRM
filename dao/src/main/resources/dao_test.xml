@@ -11,7 +11,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
     <context:annotation-config/>
     <context:component-scan
             base-package="com.becomejavasenior.jdbc.impl,
-                        com.becomejavasenior.jdbc.implJDBCTemplate"/>
+                        com.becomejavasenior.jdbc.implJdbcTemplate"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
@@ -24,11 +24,13 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
 
     <beans profile="JdbcTemplate">
         <bean id="companyDao"
-              class="com.becomejavasenior.jdbc.implJDBCTemplate.CompanyDAOJDBCTemplateImpl"
+              class="com.becomejavasenior.jdbc.implJdbcTemplate.CompanyDaoJdbcTemplateImpl"
               autowire="byType"/>
         <bean id="contactDao"
-              class="com.becomejavasenior.jdbc.implJDBCTemplate.ContactDAOJDBCTemplateImpl"
+              class="com.becomejavasenior.jdbc.implJdbcTemplate.ContactDaoJdbcTemplateImpl"
               autowire="byType"/>
+        <bean id="dealDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.DealDaoJdbcTemplateImpl"
+              autowire="default"/>
     </beans>
 
 

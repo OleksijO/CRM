@@ -60,7 +60,7 @@ Task 9.
 
 Разбить Spring XML Context на несколько файлов
 Сделать импорт всех файлов в главный файл конфигурации
---- импорт по цепочке datasorce->dao->service-> application-context <-model
+--- импорт xml по цепочке datasource->dao->service-> application-context <-model
 
 
 Task 13. Перевести CompanyDAOImpl на JdbcTemplate --готово
@@ -72,3 +72,6 @@ Task 14. Переписать Unit тесты на SpringJUnit4ClassRunner.class
 
 
 Task 12. Перевести ContactDAOImpl на JdbcTemplate -- готово
+
+
+Task 11. Перевести DealDAOImpl DAO на JdbcTemplate -- готово

@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.implJDBCTemplate;
+package com.becomejavasenior.jdbc.implJdbcTemplate;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Tag;
@@ -20,7 +20,7 @@ import java.util.List;
 //import java.util.logging.Logger;
 
 //@Repository("companyDaoJdbcTemplate")
-public class CompanyDAOJDBCTemplateImpl extends AbstractDAOJDBCTemplate<Company> implements CompanyDAO {
+public class CompanyDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Company> implements CompanyDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 

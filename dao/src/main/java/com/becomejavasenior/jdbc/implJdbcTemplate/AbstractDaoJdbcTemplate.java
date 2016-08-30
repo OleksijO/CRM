@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.implJDBCTemplate;
+package com.becomejavasenior.jdbc.implJdbcTemplate;
 
 import com.becomejavasenior.jdbc.entity.GenericDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 @Component
-abstract class AbstractDAOJDBCTemplate<T> implements GenericDAO<T> {
+abstract class AbstractDaoJdbcTemplate<T> implements GenericDAO<T> {
 
     static final String ERROR_PARSE_RESULT_SET = "error while parsing result set for ";
     static final String ERROR_PREPARING_INSERT = "error while preparing INSERT statement for ";
@@ -25,7 +25,7 @@ abstract class AbstractDAOJDBCTemplate<T> implements GenericDAO<T> {
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
-    protected AbstractDAOJDBCTemplate() {
+    protected AbstractDaoJdbcTemplate() {
     }
 
     @Override
