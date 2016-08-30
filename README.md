@@ -75,3 +75,18 @@ Task 12. Перевести ContactDAOImpl на JdbcTemplate -- готово
 
 
 Task 11. Перевести DealDAOImpl DAO на JdbcTemplate -- готово
+
+
+Task 10. Кофигурация Spring JdbcTemplate
+
+Подключить datasource из jndi:
+
+<jee:jndi-lookup id="dataSource"
+        jndi-name="java:comp/env/jdbc/datasource"/>
+Сконфигурировать встроеную БД HSQL:
+
+<jdbc:embedded-database id="dataSource">
+        <jdbc:script location="schema.sql"/>
+        <jdbc:script location="test-data.sql"/>
+    </jdbc:embedded-database>
+Убедить что база данных успешно создаться и наполняется тестовыми данными

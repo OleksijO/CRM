@@ -107,7 +107,7 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(preparedStatementCreator, keyHolder);
-        int id=(int) keyHolder.getKey();
+        int id=(int) keyHolder.getKey().longValue();
         contact.setId(id);
         return id;
     }
