@@ -1,94 +1,122 @@
-INSERT INTO language VALUES
-  (1, 'Українська', 'UA', FALSE),
-  (2, 'Русский', 'RU', FALSE),
-  (3, 'English', 'EN', FALSE);
 
-INSERT INTO user VALUES
-  (DEFAULT, 'Геннадий Петров', 'petrov@adiddas.com.ua', '456', FALSE, '(044) 466-45-46',
-            '+380974563232', 'some note', FALSE, DEFAULT, 'http://www.someurl.com/someurl', 2),
-  (DEFAULT, 'Админис Тратор', 'admin@adiddas.com.ua', '555', TRUE, '+380441234321',
-            '+380970012332', 'first note', FALSE, DEFAULT, 'http://www.adiddas.com.ua/contacts/admin', 1),
-  (DEFAULT, 'Иван Иванов', 'ivan@unknown.net', '111', TRUE, '+380443333333',
-            '+380973333333', 'this note belongs Ivan', FALSE, DEFAULT, 'http://www.unknown.net', 3);
+INSERT INTO language VALUES  (NULL, 'Українська', 'UA', FALSE);
+INSERT INTO language VALUES  (NULL, 'Русский', 'RU', FALSE);
+INSERT INTO language VALUES  (NULL, 'English', 'EN', FALSE);
+
+INSERT INTO users  VALUES
+  (NULL,'Геннадий Петров', 'petrov@adiddas.com.ua', '456', FALSE, '(044) 466-45-46',
+            '+380974563232', 'some note', FALSE, NULL, 'http://www.someurl.com/someurl', 1);
+INSERT INTO users VALUES
+  (NULL,'Админис Тратор', 'admin@adiddas.com.ua', '555', TRUE, '+380441234321',
+            '+380970012332', 'first note', FALSE, NULL, 'http://www.adiddas.com.ua/contacts/admin', 0);
+INSERT INTO users  VALUES
+  (NULL,'Иван Иванов', 'ivan@unknown.net', '111', TRUE, '+380443333333',
+            '+380973333333', 'this note belongs Ivan', FALSE, NULL, 'http://www.unknown.net', 2);
 
 INSERT INTO company VALUES
-  (DEFAULT, 'Adiddas LTD', '(044)5888-52-85', 'adiddas@adiddas.com.ua', 'Киев, ул. Малышка, 1', 1, 'http://www.adiddas.com.ua', FALSE,
-   1, '2015-02-18 15:36:38'),
-  (DEFAULT, 'Le Staro', '+380111111111', 'info@lestaro.com.tw', 'Somewhere in Asia, 1', 1, 'http://www.lestaro.com.tw', FALSE,
-   2, '2015-08-11 05:22:12');
+  (NULL, 'Adiddas LTD', '(044)5888-52-85', 'adiddas@adiddas.com.ua', 'Киев, ул. Малышка, 1', 0, 'http://www.adiddas.com.ua', FALSE,
+   0, '2015-02-18 15:36:38');
+INSERT INTO company VALUES
+  (NULL, 'Le Staro', '+380111111111', 'info@lestaro.com.tw', 'Somewhere in Asia, 1', 0, 'http://www.lestaro.com.tw', FALSE,
+   1, '2015-08-11 05:22:12');
 
 INSERT INTO currency VALUES
-  (1, 'грн', TRUE, FALSE),
-  (2, 'usd', TRUE, FALSE),
-  (3, 'euro', FALSE, FALSE);
+  (NULL , 'грн', TRUE, FALSE);
+INSERT INTO currency VALUES
+  (NULL, 'usd', TRUE, FALSE);
+INSERT INTO currency VALUES
+  (NULL, 'euro', FALSE, FALSE);
 
 INSERT INTO contact VALUES
-  (DEFAULT, 'Володимир Грицків', 1, 'junior java developer', 1, 1, '+380505656545', 'gryts.vol', 'some@ukr.net', FALSE,
-            '2015-12-16 20:38:40', 1),
-  (DEFAULT, 'Майкл Щур', 1, 'director', 1, 1, '+380505585957', 'michael.shur', 'michael@ukr.net',
-            FALSE, '2016-02-16 15:16:44', 1),
-  (DEFAULT, 'Просто Герасим', 3, 'sales manager', 3, 2, '+380503333333', 'skayp-gerasima', 'geras@idiotov.net',
-            FALSE, '2016-01-02 09:00:00', 2);
+  (1,'Володимир Грицків', 0, 'junior java developer', 1, 0, '+380505656545', 'gryts.vol', 'some@ukr.net', FALSE,
+            '2015-12-16 20:38:40', 1);
+INSERT INTO contact VALUES
+  (2,'Майкл Щур', 0, 'director', 1, 0, '+380505585957', 'michael.shur', 'michael@ukr.net',
+            FALSE, '2016-02-16 15:16:44', 0);
+INSERT INTO contact  VALUES
+  (3, 'Просто Герасим', 2, 'sales manager', 3, 1, '+380503333333', 'skayp-gerasima', 'geras@idiotov.net',
+            FALSE, '2016-01-02 09:00:00', 1);
 
-INSERT INTO stage_deals VALUES
-  (1, 'Рассмотрение', FALSE),
-  (2, 'Оформление', FALSE),
-  (3, 'В ожидании', FALSE),
-  (4, 'Закрыто', FALSE);
+INSERT INTO stage_deals VALUES  (NULL , 'Рассмотрение', FALSE);
+INSERT INTO stage_deals VALUES  (NULL , 'Оформление', FALSE);
+INSERT INTO stage_deals VALUES (NULL , 'В ожидании', FALSE);
+INSERT INTO stage_deals VALUES (NULL , 'Закрыто', FALSE);
 
 INSERT INTO deal VALUES
-  (DEFAULT, 'small deal', 3, 1, 2500.25, 1, FALSE, '2016-02-11 10:26:44', 1),
-  (DEFAULT, 'deal-2 (крепеж 2 палеты)', 2, 3, 15330, 2, FALSE, '2016-03-11 00:00:40', 3),
-  (DEFAULT, 'big deal', 1, 1, 12500, 1, FALSE, '2016-02-11 10:26:44', 1);
+  (NULL , 'small deal', 2, 0, 2500.25, 0, FALSE, '2016-02-11 10:26:44', 0);
+INSERT INTO deal VALUES
+  (NULL , 'deal-2 (крепеж 2 палеты)', 1, 2, 15330, 1, FALSE, '2016-03-11 00:00:40', 2);
+INSERT INTO deal VALUES
+  (NULL , 'big deal', 0, 0, 12500, 0, FALSE, '2016-02-11 10:26:44', 0);
 
 INSERT INTO note VALUES
-  (DEFAULT, 'some note some some note', 1, '2016-02-11 10:26:44', FALSE, 1, NULL, NULL),
-  (DEFAULT, 'some second note about the same', 1, '2016-02-15 11:46:42', FALSE, NULL, 1, NULL),
-  (DEFAULT, 'some third note about the some other', 1, '2016-03-15 12:16:01', FALSE, NULL, NULL, 1);
+  (NULL , 'some note some some note', 0, '2016-02-11 10:26:44', FALSE, 0, NULL, NULL);
+INSERT INTO note VALUES
+  (NULL , 'some second note about the same', 0, '2016-02-15 11:46:42', FALSE, NULL, 0, NULL);
+INSERT INTO note VALUES
+  (NULL , 'some third note about the some other', 0, '2016-03-15 12:16:01', FALSE, NULL, NULL, 0);
 
 INSERT INTO rights VALUES
-  (DEFAULT, 1, 0, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE),
-  (DEFAULT, 2, 0, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE),
-  (DEFAULT, 3, 0, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE),
-  (DEFAULT, 1, 1, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE),
-  (DEFAULT, 2, 1, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE),
-  (DEFAULT, 3, 1, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE),
-  (DEFAULT, 1, 2, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE),
-  (DEFAULT, 2, 2, FALSE, TRUE, FALSE, TRUE, TRUE, FALSE),
-  (DEFAULT, 3, 2, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE);
+  (NULL, 0, 0, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE);
+INSERT INTO rights VALUES
+  (NULL, 1, 0, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE);
+INSERT INTO rights VALUES
+  (NULL, 2, 0, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE);
+INSERT INTO rights VALUES
+  (NULL, 0, 1, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE);
+INSERT INTO rights VALUES
+  (NULL, 1, 1, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE);
+INSERT INTO rights VALUES
+  (NULL, 2, 1, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE);
+INSERT INTO rights VALUES
+  (NULL, 0, 2, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE);
+INSERT INTO rights VALUES
+  (NULL, 1, 2, FALSE, TRUE, FALSE, TRUE, TRUE, FALSE);
+INSERT INTO rights VALUES
+  (NULL, 2, 2, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE);
 
 INSERT INTO tag VALUES
-  (DEFAULT, '#general-01', FALSE),
-  (DEFAULT, '#general-02', FALSE),
-  (DEFAULT, '#special-01', FALSE);
+  (NULL, '#general-01', FALSE);
+INSERT INTO tag VALUES
+  (NULL, '#general-02', FALSE);
+INSERT INTO tag VALUES
+  (NULL, '#special-01', FALSE);
 
 INSERT INTO task_type VALUES
-  (1, 'Важно', FALSE),
-  (2, 'Срочно', FALSE),
-  (3, 'Работка', FALSE);
+  (NULL, 'Важно', FALSE);
+INSERT INTO task_type VALUES
+  (NULL, 'Срочно', FALSE);
+INSERT INTO task_type VALUES
+  (NULL, 'Работка', FALSE);
 
 INSERT INTO task_status VALUES
-  (1, 'В работе', FALSE),
-  (2, 'Выполнено', FALSE),
-  (3, 'Приостановлено', FALSE);
+  (NULL, 'В работе', FALSE);
+INSERT INTO task_status VALUES
+  (NULL, 'Выполнено', FALSE);
+INSERT INTO task_status VALUES
+  (NULL, 'Приостановлено', FALSE);
 
 INSERT INTO task VALUES
-  (DEFAULT, 2, 1, 2, 1, 'Выяснить ситуацию', 2, FALSE, '2016-02-11 10:26:44', 1, NULL, NULL),
-  (DEFAULT, 3, 2, 1, 2, 'Выяснить ситуацию тоже', 1, FALSE, '2016-02-11 10:26:44', NULL, 1, NULL),
-  (DEFAULT, 4, 1, 3, 1, 'Выяснить и эту ситуацию', 1, FALSE, '2016-02-11 10:26:44', NULL, NULL, 1);
+  (NULL, 2, 0, 1, 0, 'Выяснить ситуацию', 1, FALSE, '2016-02-11 10:26:44', 0, NULL, NULL);
+INSERT INTO task VALUES
+  (NULL, 3, 1, 0, 1, 'Выяснить ситуацию тоже', 0, FALSE, '2016-02-11 10:26:44', NULL, 0, NULL);
+INSERT INTO task VALUES
+  (NULL, 4, 0, 2, 0, 'Выяснить и эту ситуацию', 0, FALSE, '2016-02-11 10:26:44', NULL, NULL, 0);
 
 INSERT INTO visit_history VALUES
-  (DEFAULT, 1, '2016-02-11 10:26:44', '192.168.0.100',
-   'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36 OPR/35.0.2066.92', FALSE),
-  (DEFAULT, 1, '2016-02-11 10:28:44', '192.168.0.102',
+  (NULL, 0, '2016-02-11 10:26:44', '192.168.0.100',
+   'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36 OPR/35.0.2066.92', FALSE);
+INSERT INTO visit_history VALUES
+  (NULL, 0, '2016-02-11 10:28:44', '192.168.0.102',
    'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36 OPR/35.0.2066.92', FALSE);
 
 INSERT INTO attached_file VALUES
-  (DEFAULT, 1, '2016-02-11 10:36:44', 'document.png', 156882, FALSE, './files/1/document.png', DEFAULT, NULL, 1, NULL);
+  (NULL,0 , '2016-02-11 10:36:44', 'document.png', 156882, FALSE, './files/1/document.png', NULL, NULL, 0, NULL);
 
 INSERT INTO contact_company_tag VALUES
-  (DEFAULT, 1, 3, NULL, FALSE);
+  (NULL, 0, 2, NULL, FALSE);
 
 INSERT INTO deal_contact VALUES
-  (1, 1),
-  (1, 2);
+  (0, 0);
+INSERT INTO deal_contact VALUES
+  (0, 1);

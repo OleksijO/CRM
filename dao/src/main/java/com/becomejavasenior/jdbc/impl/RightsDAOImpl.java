@@ -14,17 +14,17 @@ import java.util.List;
 @Repository("rightsDao")
 public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
 
-    private static final String INSERT_SQL = "INSERT INTO rights (user_id, subject_type, subject_type_create," +
+    private static final String INSERT_SQL = "INSERT INTO rights (users_id, subject_type, subject_type_create," +
             " subject_type_read, subject_type_delete, subject_type_change, subject_type_export, deleted)\n" +
             "VALUES (?, ?, ?, ?, ?, ?, ?, FALSE)";
-    private static final String UPDATE_SQL = "UPDATE rights SET user_id = ?, subject_type = ?," +
+    private static final String UPDATE_SQL = "UPDATE rights SET users_id = ?, subject_type = ?," +
             " subject_type_create = ?, subject_type_read = ?, subject_type_delete = ?, subject_type_change = ?," +
             " subject_type_export = ?, deleted = ?\nWHERE id = ?;";
-    private static final String SELECT_SQL = "SELECT id, user_id, subject_type, subject_type_create," +
+    private static final String SELECT_SQL = "SELECT id, users_id, subject_type, subject_type_create," +
             " subject_type_read, subject_type_delete, subject_type_change, subject_type_export\n" +
             "FROM rights WHERE NOT deleted";
 
-    private static final String FIELD_USER_ID = "user_id";
+    private static final String FIELD_USER_ID = "users_id";
     private static final String FIELD_SUBJECT_TYPE = "subject_type";
     private static final String FIELD_SUBJECT_TYPE_CREATE = "subject_type_create";
     private static final String FIELD_SUBJECT_TYPE_READ = "subject_type_read";
@@ -155,7 +155,7 @@ public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
     public List<Rights> getRightsByUserId(int userId) {
 
         try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND user_id = ?")) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_SQL + " AND users_id = ?")) {
 
             statement.setInt(1, userId);
             return parseResultSet(statement.executeQuery());

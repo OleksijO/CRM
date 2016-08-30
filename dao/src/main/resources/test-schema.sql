@@ -2,6 +2,26 @@
 -- Make sure your connection now
 -- is to database "crm-crius" !
 
+DROP TABLE currency IF EXISTS ;
+DROP TABLE deal_tag IF EXISTS ;
+DROP TABLE contact_company_tag IF EXISTS ;
+DROP TABLE tag IF EXISTS ;
+DROP TABLE visit_history IF EXISTS ;
+DROP TABLE deal_contact IF EXISTS ;
+DROP TABLE rights IF EXISTS ;
+DROP TABLE attached_file IF EXISTS ;
+DROP TABLE note IF EXISTS ;
+DROP TABLE task  IF EXISTS ;
+DROP TABLE task_status IF EXISTS ;
+DROP TABLE task_type IF EXISTS ;
+DROP TABLE deal IF EXISTS ;
+DROP TABLE contact IF EXISTS ;
+DROP TABLE company IF EXISTS ;
+DROP TABLE users IF EXISTS ;
+DROP TABLE language IF EXISTS ;
+DROP TABLE stage_deals IF EXISTS ;
+
+
 CREATE TABLE stage_deals (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
@@ -19,7 +39,7 @@ CREATE TABLE language (
 
 
 
-CREATE TABLE user (
+CREATE TABLE users (
   id IDENTITY NOT NULL,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(320) NOT NULL,
@@ -45,17 +65,17 @@ CREATE TABLE company (
   phone VARCHAR(45) NOT NULL,
   email VARCHAR(320) NOT NULL,
   address VARCHAR(200) NOT NULL,
-  responsible_user_id INT NOT NULL,
+  responsible_users_id INT NOT NULL,
   web VARCHAR(255),
   deleted BOOLEAN,
   created_by_id INT NOT NULL,
   date_create TIMESTAMP,
-    FOREIGN KEY (responsible_user_id)
-    REFERENCES user (id)
+    FOREIGN KEY (responsible_users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (created_by_id)
-    REFERENCES user (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -64,8 +84,8 @@ CREATE TABLE company (
 CREATE TABLE contact (
   id IDENTITY NOT NULL,
   name VARCHAR(300) NOT NULL,
-  responsible_user_id INT NOT NULL,
-  position VARCHAR(100),
+  responsible_users_id INT NOT NULL,
+  pos VARCHAR(100),
   type_of_phone INT NOT NULL,
   company_id INT,
   phone VARCHAR(45),
@@ -74,12 +94,12 @@ CREATE TABLE contact (
   deleted BOOLEAN,
   date_create TIMESTAMP,
   created_by_id INT NOT NULL,
-    FOREIGN KEY (responsible_user_id)
-    REFERENCES user (id)
+    FOREIGN KEY (responsible_users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (created_by_id)
-    REFERENCES user (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (company_id)
@@ -93,7 +113,7 @@ CREATE TABLE deal (
   id IDENTITY NOT NULL,
   name VARCHAR(200) NOT NULL,
   stage_id INT NOT NULL,
-  responsible_user_id INT,
+  responsible_users_id INT,
   amount DECIMAL(20,2),
   company_id INT NOT NULL,
   deleted BOOLEAN,
@@ -103,8 +123,8 @@ CREATE TABLE deal (
     REFERENCES stage_deals (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-    FOREIGN KEY (responsible_user_id)
-    REFERENCES user (id)
+    FOREIGN KEY (responsible_users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (company_id)
@@ -112,7 +132,7 @@ CREATE TABLE deal (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (created_by_id)
-    REFERENCES user (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -137,7 +157,7 @@ CREATE TABLE task_status (
 CREATE TABLE task (
   id IDENTITY NOT NULL,
   period INT NOT NULL,
-  responsible_user_id INT NOT NULL,
+  responsible_users_id INT NOT NULL,
   task_type_id INT NOT NULL,
   created_by_id INT NOT NULL,
   name VARCHAR(500),
@@ -147,12 +167,12 @@ CREATE TABLE task (
   company_id INT,
   contact_id INT,
   deal_id INT,
-    FOREIGN KEY (responsible_user_id)
-    REFERENCES user (id)
+    FOREIGN KEY (responsible_users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (created_by_id)
-    REFERENCES user (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (task_type_id)
@@ -188,7 +208,7 @@ CREATE TABLE note (
   company_id INT,
   contact_id INT,
     FOREIGN KEY (created_by_id)
-    REFERENCES user (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (deal_id)
@@ -235,7 +255,7 @@ CREATE TABLE attached_file (
 
 CREATE TABLE rights (
   id IDENTITY NOT NULL,
-  user_id INT NOT NULL,
+  users_id INT NOT NULL,
   subject_type INT NOT NULL,
   subject_type_create BOOLEAN,
   subject_type_read BOOLEAN,
@@ -243,8 +263,8 @@ CREATE TABLE rights (
   subject_type_change BOOLEAN,
   subject_type_export BOOLEAN,
   deleted BOOLEAN,
-    FOREIGN KEY (user_id)
-    REFERENCES user (id)
+    FOREIGN KEY (users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -273,13 +293,13 @@ CREATE TABLE deal_contact (
 
 CREATE TABLE visit_history (
   id IDENTITY NOT NULL,
-  user_id INT NOT NULL,
+  users_id INT NOT NULL,
   date_create TIMESTAMP NOT NULL,
   ip_address VARCHAR(45),
   browser VARCHAR(255),
   deleted BOOLEAN,
-    FOREIGN KEY (user_id)
-    REFERENCES user (id)
+    FOREIGN KEY (users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -335,3 +355,4 @@ CREATE TABLE currency (
   active BOOLEAN,
   deleted BOOLEAN,
   PRIMARY KEY (id));
+

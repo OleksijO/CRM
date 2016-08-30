@@ -18,11 +18,11 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
-    private static final String INSERT_SQL = "INSERT INTO company (name, phone, email, address, responsible_user_id," +
+    private static final String INSERT_SQL = "INSERT INTO company (name, phone, email, address, responsible_users_id," +
             " web, deleted, created_by_id, date_create) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE company SET name = ?, phone = ?, email = ?, address = ?, responsible_user_id = ?," +
+    private static final String UPDATE_SQL = "UPDATE company SET name = ?, phone = ?, email = ?, address = ?, responsible_users_id = ?," +
             " web = ?, deleted = ?, created_by_id = ?, date_create = ? WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT id, name, phone, email, address, responsible_user_id, web," +
+    private static final String SELECT_ALL_SQL = "SELECT id, name, phone, email, address, responsible_users_id, web," +
             " created_by_id, date_create\nFROM company WHERE NOT deleted";
     private final String INSERT_COMPANY_TAG_SQL = "INSERT INTO contact_company_tag (tag_id, company_id) VALUES (?, ?)";
 
@@ -121,7 +121,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
                 company.setEmail(resultSet.getString("email"));
                 company.setAddress(resultSet.getString("address"));
                 company.setResponsibleUser(responsibleUser);
-                responsibleUser.setId(resultSet.getInt("responsible_user_id"));
+                responsibleUser.setId(resultSet.getInt("responsible_users_id"));
                 company.setWeb(resultSet.getString("web"));
                 company.setDelete(false);
                 company.setCreator(creator);
@@ -163,7 +163,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
                 company.setEmail(resultSet.getString("email"));
                 company.setAddress(resultSet.getString("address"));
                 company.setResponsibleUser(responsibleUser);
-                responsibleUser.setId(resultSet.getInt("responsible_user_id"));
+                responsibleUser.setId(resultSet.getInt("responsible_users_id"));
                 company.setWeb(resultSet.getString("web"));
                 company.setDelete(false);
                 company.setCreator(creator);

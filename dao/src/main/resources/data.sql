@@ -5,7 +5,7 @@ INSERT INTO language VALUES
   (2, 'Русский', 'RU', FALSE),
   (3, 'English', 'EN', FALSE);
 
-INSERT INTO "user" VALUES
+INSERT INTO users VALUES
   (DEFAULT, 'Геннадий Петров', 'petrov@adiddas.com.ua', '456', FALSE, '(044) 466-45-46',
             '+380974563232', 'some note', FALSE, DEFAULT, 'http://www.someurl.com/someurl', 2),
   (DEFAULT, 'Админис Тратор', 'admin@adiddas.com.ua', '555', TRUE, '+380441234321',

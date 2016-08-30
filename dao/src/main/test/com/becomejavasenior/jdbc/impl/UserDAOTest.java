@@ -44,7 +44,7 @@ public class UserDAOTest extends SpringDaoTests{
         if (userTestId > 0) {
             try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
-                statement.executeUpdate("DELETE FROM \"user\" WHERE id = " + Integer.toString(userTestId));
+                statement.executeUpdate("DELETE FROM users WHERE id = " + Integer.toString(userTestId));
             } catch (SQLException e) {
                 throw new SQLException("Test User clean up failed!", e);
             }

@@ -27,15 +27,15 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
-    private static final String INSERT_SQL = "INSERT INTO contact (name, responsible_user_id, position, type_of_phone, phone," +
+    private static final String INSERT_SQL = "INSERT INTO contact (name, responsible_users_id, position, type_of_phone, phone," +
             " skype, email, deleted, date_create, created_by_id, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE contact SET name = ?, responsible_user_id = ?, position = ?, type_of_phone = ?, phone = ?," +
+    private static final String UPDATE_SQL = "UPDATE contact SET name = ?, responsible_users_id = ?, position = ?, type_of_phone = ?, phone = ?," +
             " skype = ?, email = ?, deleted = ?, date_create = ?, created_by_id = ?, company_id = ? WHERE id = ?";
-    private static final String SELECT_SQL = "SELECT contact.id, contact.name, contact.responsible_user_id, position," +
+    private static final String SELECT_SQL = "SELECT contact.id, contact.name, contact.responsible_users_id, position," +
             " type_of_phone, contact.phone, skype, contact.email, contact.date_create, contact.created_by_id, company_id," +
             " company.name AS company_name FROM contact LEFT JOIN company ON contact.company_id = company.id WHERE NOT contact.deleted";
 
-    private static final String FIELD_RESPONSIBLE_USER_ID = "responsible_user_id";
+    private static final String FIELD_RESPONSIBLE_USER_ID = "responsible_users_id";
     private static final String FIELD_POSITION = "position";
     private static final String FIELD_TYPE_OF_PHONE = "type_of_phone";
     private static final String FIELD_PHONE = "phone";

@@ -19,13 +19,13 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
-    private static final String INSERT_SQL = "INSERT INTO task (responsible_user_id, task_type_id, created_by_id," +
+    private static final String INSERT_SQL = "INSERT INTO task (responsible_users_id, task_type_id, created_by_id," +
             " company_id, contact_id, deal_id, period, name, deleted, date_create, status_id, date_task, time_task)\n" +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE task SET responsible_user_id = ?, task_type_id = ?, created_by_id = ?," +
+    private static final String UPDATE_SQL = "UPDATE task SET responsible_users_id = ?, task_type_id = ?, created_by_id = ?," +
             " company_id = ?, contact_id = ?, deal_id = ?, period = ?, name = ?, deleted = ?, date_create = ?, status_id = ?," +
             " date_task = ?, time_task = ?\nWHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT task.id, period, responsible_user_id, created_by_id, task.name," +
+    private static final String SELECT_ALL_SQL = "SELECT task.id, period, responsible_users_id, created_by_id, task.name," +
             "  task_type.name as task_type_name, task_status.name as task_status_name," +
             "  date_create, company_id, contact_id, deal_id, date_task, time_task\n" +
             "FROM task\n" +
@@ -41,7 +41,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     private static final String TASK_TYPE_SELECT_SQL = "SELECT id, name FROM task_type WHERE NOT deleted";
 
     private static final String FIELD_PERIOD = "period";
-    private static final String FIELD_RESPONSIBLE_USER_ID = "responsible_user_id";
+    private static final String FIELD_RESPONSIBLE_USER_ID = "responsible_users_id";
     private static final String FIELD_CREATED_BY_ID = "created_by_id";
     private static final String FIELD_DATE_CREATE = "date_create";
     private static final String FIELD_TASK_TYPE_NAME = "task_type_name";

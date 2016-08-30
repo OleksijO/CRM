@@ -18,12 +18,12 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
-    private static final String INSERT_SQL = "INSERT INTO user (name, email, password, is_admin, phone, " +
+    private static final String INSERT_SQL = "INSERT INTO users (name, email, password, is_admin, phone, " +
             "mobile_phone, note, deleted, url, image, language_id) VALUES (?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE user SET name = ?, email = ?, password = ?, is_admin = ?, phone = ?," +
+    private static final String UPDATE_SQL = "UPDATE users SET name = ?, email = ?, password = ?, is_admin = ?, phone = ?," +
             " mobile_phone = ?, note = ?, deleted = ?, image = ?, url = ?, language_id = ? WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT id, name, email, password, is_admin, phone, mobile_phone," +
-            " note, image, url, language_id FROM user WHERE NOT deleted";
+            " note, image, url, language_id FROM users WHERE NOT deleted";
 
     @Override
     public int insert(User user) {
@@ -64,7 +64,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 
     @Override
     public void delete(int id) {
-        delete(id, "user");
+        delete(id, "users");
     }
 
     @Override
@@ -90,7 +90,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
             statement.setInt(12, user.getId());
             statement.executeUpdate();
 
-            //logger.log(Level.INFO, "UPDATE USER " + user.toString());
+            //logger.log(Level.INFO, "UPDATE USERS " + user.toString());
 
         } catch (SQLException ex) {
             //logger.log(Level.SEVERE, ex.getMessage(), ex);

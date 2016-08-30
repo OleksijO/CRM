@@ -24,11 +24,11 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
-    private static final String INSERT_SQL = "INSERT INTO deal (stage_id, responsible_user_id, company_id, created_by_id, " +
+    private static final String INSERT_SQL = "INSERT INTO deal (stage_id, responsible_users_id, company_id, created_by_id, " +
             "name, amount, deleted, date_create, primary_contact_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE deal SET stage_id = ?, responsible_user_id = ?, company_id = ?, created_by_id = ?, name = ?," +
+    private static final String UPDATE_SQL = "UPDATE deal SET stage_id = ?, responsible_users_id = ?, company_id = ?, created_by_id = ?, name = ?," +
             " amount = ?, deleted = ?, date_create = ?, primary_contact_id = ? WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT id, name, stage_id, responsible_user_id," +
+    private static final String SELECT_ALL_SQL = "SELECT id, name, stage_id, responsible_users_id," +
             " amount, company_id, date_create, created_by_id, primary_contact_id FROM deal WHERE NOT deleted";
     private static final String INSERT_DEAL_CONTACT_SQL = "INSERT INTO deal_contact (deal_id, contact_id) VALUES (?, ?)";
     private static final String SELECT_ALL_STAGE_DEALS_SQL = "SELECT id, name FROM stage_deals WHERE deleted = FALSE";
@@ -111,7 +111,7 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
         Stage stage = new Stage();
 
         deal.setId(resultSet.getInt(FIELD_ID));
-        responsibleUser.setId(resultSet.getInt("responsible_user_id"));
+        responsibleUser.setId(resultSet.getInt("responsible_users_id"));
         deal.setResponsibleUser(responsibleUser);
         company.setId(resultSet.getInt("company_id"));
         deal.setCompany(company);

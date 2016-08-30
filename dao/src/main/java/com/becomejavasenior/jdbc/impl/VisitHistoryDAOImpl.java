@@ -13,16 +13,16 @@ import java.util.List;
 @Repository("visitHistoryDao")
 public class VisitHistoryDAOImpl extends AbstractDAO<VisitHistory> implements VisitHistoryDAO {
 
-    private static final String INSERT_SQL = "INSERT INTO visit_history (user_id, date_create, ip_address," +
+    private static final String INSERT_SQL = "INSERT INTO visit_history (users_id, date_create, ip_address," +
             " browser, deleted)\nVALUES (?, ?, ?, ?, false)";
-    private static final String UPDATE_SQL = "UPDATE visit_history SET user_id = ?, date_create = ?, ip_address = ?," +
+    private static final String UPDATE_SQL = "UPDATE visit_history SET users_id = ?, date_create = ?, ip_address = ?," +
             " browser = ?, deleted = ?\nWHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT id, user_id, date_create, ip_address, browser\n" +
+    private static final String SELECT_ALL_SQL = "SELECT id, users_id, date_create, ip_address, browser\n" +
             "FROM visit_history WHERE NOT deleted";
 
     private static final String TABLE_NAME = "visit_history";
 
-    private static final String FIELD_USER_ID = "user_id";
+    private static final String FIELD_USER_ID = "users_id";
     private static final String FIELD_DATE_CREATE = "date_create";
     private static final String FIELD_IP_ADDRESS = "ip_address";
     private static final String FIELD_BROWSER = "browser";

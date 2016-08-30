@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS stage_deals (
 
 
 
-CREATE TABLE IF NOT EXISTS "language" (
+CREATE TABLE IF NOT EXISTS language (
   id INT NOT NULL,
   name VARCHAR(45) NOT NULL,
   code CHAR(2) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS "language" (
 
 
 
-CREATE TABLE IF NOT EXISTS "user" (
+CREATE TABLE IF NOT EXISTS users (
   id SERIAL NOT NULL,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(320) NOT NULL UNIQUE,
@@ -52,18 +52,18 @@ CREATE TABLE IF NOT EXISTS company (
   phone VARCHAR(45) NOT NULL,
   email VARCHAR(320) NOT NULL,
   address VARCHAR(200) NOT NULL,
-  responsible_user_id INT NOT NULL,
+  responsible_users_id INT NOT NULL,
   web VARCHAR(255),
   deleted BOOLEAN,
   created_by_id INT NOT NULL,
   date_create TIMESTAMP,
   PRIMARY KEY (id),
-    FOREIGN KEY (responsible_user_id)
-    REFERENCES "user" (id)
+    FOREIGN KEY (responsible_users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (created_by_id)
-    REFERENCES "user" (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS company (
 CREATE TABLE IF NOT EXISTS contact (
   id SERIAL NOT NULL,
   name VARCHAR(300) NOT NULL,
-  responsible_user_id INT NOT NULL,
+  responsible_users_id INT NOT NULL,
   position VARCHAR(100),
   type_of_phone INT NOT NULL,
   company_id INT,
@@ -83,12 +83,12 @@ CREATE TABLE IF NOT EXISTS contact (
   date_create TIMESTAMP,
   created_by_id INT NOT NULL,
   PRIMARY KEY (id),
-    FOREIGN KEY (responsible_user_id)
-    REFERENCES "user" (id)
+    FOREIGN KEY (responsible_users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (created_by_id)
-    REFERENCES "user" (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (company_id)
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS deal (
   id SERIAL NOT NULL,
   name VARCHAR(200) NOT NULL,
   stage_id INT NOT NULL,
-  responsible_user_id INT,
+  responsible_users_id INT,
   amount DECIMAL(20,2),
   company_id INT NOT NULL,
   deleted BOOLEAN,
@@ -113,8 +113,8 @@ CREATE TABLE IF NOT EXISTS deal (
     REFERENCES stage_deals (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-    FOREIGN KEY (responsible_user_id)
-    REFERENCES "user" (id)
+    FOREIGN KEY (responsible_users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (company_id)
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS deal (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (created_by_id)
-    REFERENCES "user" (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS task_status (
 CREATE TABLE IF NOT EXISTS task (
   id SERIAL NOT NULL,
   period INT NOT NULL,
-  responsible_user_id INT NOT NULL,
+  responsible_users_id INT NOT NULL,
   task_type_id INT NOT NULL,
   created_by_id INT NOT NULL,
   name VARCHAR(500),
@@ -158,12 +158,12 @@ CREATE TABLE IF NOT EXISTS task (
   contact_id INT,
   deal_id INT,
   PRIMARY KEY (id),
-    FOREIGN KEY (responsible_user_id)
-    REFERENCES "user" (id)
+    FOREIGN KEY (responsible_users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (created_by_id)
-    REFERENCES "user" (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (task_type_id)
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS note (
   contact_id INT,
   PRIMARY KEY (id),
     FOREIGN KEY (created_by_id)
-    REFERENCES "user" (id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (deal_id)
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS attached_file (
 
 CREATE TABLE IF NOT EXISTS rights (
   id SERIAL NOT NULL,
-  user_id INT NOT NULL,
+  users_id INT NOT NULL,
   subject_type INT NOT NULL,
   subject_type_create BOOLEAN,
   subject_type_read BOOLEAN,
@@ -257,8 +257,8 @@ CREATE TABLE IF NOT EXISTS rights (
   subject_type_export BOOLEAN,
   deleted BOOLEAN,
   PRIMARY KEY (id),
-    FOREIGN KEY (user_id)
-    REFERENCES "user" (id)
+    FOREIGN KEY (users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -287,14 +287,14 @@ CREATE TABLE IF NOT EXISTS deal_contact (
 
 CREATE TABLE IF NOT EXISTS visit_history (
   id SERIAL NOT NULL,
-  user_id INT NOT NULL,
+  users_id INT NOT NULL,
   date_create TIMESTAMP NOT NULL,
   ip_address VARCHAR(45),
   browser VARCHAR(255),
   deleted BOOLEAN,
   PRIMARY KEY (id),
-    FOREIGN KEY (user_id)
-    REFERENCES "user" (id)
+    FOREIGN KEY (users_id)
+    REFERENCES users (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 

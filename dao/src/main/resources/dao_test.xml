@@ -8,15 +8,20 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <!--    Postgress test real DB-->
+    <!--    Postgress test real DB
     <import resource="classpath*:datasource_test.xml"/>
-
-    <!--
-    <jdbc:embedded-database id="dataSource" database-name="test" type="H2">
+    <bean id="quote" class="java.lang.String"><constructor-arg type="java.lang.String" value="&quot;"/></bean>
+    -->
+    <!---->
+    <jdbc:embedded-database id="dataSource" database-name="test" type="HSQL" >
         <jdbc:script location="test-schema.sql"/>
         <jdbc:script location="test-data.sql"/>
     </jdbc:embedded-database>
--->
+
+
+
+
+
     <context:annotation-config/>
     <context:component-scan
             base-package="com.becomejavasenior.jdbc.impl,
@@ -31,6 +36,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
     <beans profile="plainJDBC">
         <bean id="companyDao" class="com.becomejavasenior.jdbc.impl.CompanyDAOImpl" autowire="byType"/>
         <bean id="contactDao" class="com.becomejavasenior.jdbc.impl.ContactDAOImpl" autowire="byType"/>
+        <bean id="dealDao" class="com.becomejavasenior.jdbc.impl.DealDAOImpl" autowire="byType"/>
     </beans>
 
     <beans profile="JdbcTemplate">

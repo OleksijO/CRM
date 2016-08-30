@@ -29,10 +29,6 @@ abstract class AbstractDAO<T> implements GenericDAO<T> {
     @Autowired
     private DataSource dataSource;
 
-    protected AbstractDAO() {
-
-    }
-
     @Override
     abstract public int insert(T o);
 
