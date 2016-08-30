@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS contact (
   id SERIAL NOT NULL,
   name VARCHAR(300) NOT NULL,
   responsible_users_id INT NOT NULL,
-  position VARCHAR(100),
+  pos VARCHAR(100),
   type_of_phone INT NOT NULL,
   company_id INT,
   phone VARCHAR(45),
