@@ -5,12 +5,12 @@ import com.becomejavasenior.entity.Tag;
 import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.CompanyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
@@ -19,7 +19,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
-@Repository("companyDaoJdbcTemplate")
+//@Repository("companyDaoJdbcTemplate")
 public class CompanyDAOJDBCTemplateImpl extends AbstractDAOJDBCTemplate<Company> implements CompanyDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
@@ -60,7 +60,7 @@ public class CompanyDAOJDBCTemplateImpl extends AbstractDAOJDBCTemplate<Company>
         }
         PreparedStatementCreator preparedStatementCreator = connection -> {
             PreparedStatement ps =
-                    connection.prepareStatement(INSERT_SQL);
+                    connection.prepareStatement(INSERT_SQL, new String[]{"id"});
             ps.setString(1, company.getName());
             ps.setString(2, company.getPhone());
             ps.setString(3, company.getEmail());
@@ -74,7 +74,9 @@ public class CompanyDAOJDBCTemplateImpl extends AbstractDAOJDBCTemplate<Company>
         };
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(preparedStatementCreator, keyHolder);
-        return (int) keyHolder.getKey();
+        int id=(int) keyHolder.getKey().longValue();
+        company.setId(id);
+        return id;
     }
 
     @Override
@@ -109,8 +111,14 @@ public class CompanyDAOJDBCTemplateImpl extends AbstractDAOJDBCTemplate<Company>
 
     @Override
     public Company getById(int id) {
-
-        return jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", ROW_MAPPER_COMPANY, id);
+        Company company = null;
+        try {
+            company = jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", ROW_MAPPER_COMPANY, id);
+        } catch (EmptyResultDataAccessException ignored) {
+            // to return null if there is no object in DB with specified id. For tests.
+            return null;
+        }
+        return company;
     }
 
     @Override

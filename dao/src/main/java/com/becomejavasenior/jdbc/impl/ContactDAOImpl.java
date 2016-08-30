@@ -5,7 +5,6 @@ import com.becomejavasenior.jdbc.entity.ContactDAO;
 import com.becomejavasenior.jdbc.entity.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.List;
 
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
-@Repository("contactDao")
+//@Repository("contactDao")
 public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

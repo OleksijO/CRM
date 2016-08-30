@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:dao_test.xml")
-@ActiveProfiles("plainJDBC")
+@ActiveProfiles("JdbcTemplate")
 abstract public class SpringDaoTests {
     @Autowired
     private DataSource dataSource;

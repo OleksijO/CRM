@@ -6,7 +6,6 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.CompanyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
-@Repository("companyDaoPlain")
+//@Repository("companyDaoPlain")
 public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());

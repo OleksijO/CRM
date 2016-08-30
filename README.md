@@ -1,4 +1,6 @@
 # spring-framework
+
+
 Task 1.
 
 1) DataSource должен инициализироваться с помощью Spring в отдельном файле конфигурации -- \spring-framework\controller\src\main\webapp\WEB-INF\datasource.xml
@@ -10,6 +12,7 @@ Task 1.
 Also here added method protected getConnection(){return dataSource.getConnection();}. 
 
 4) Использовать конфигурацию одновременно c помощью XML и аннотации  --\spring-framework\controller\src\main\webapp\WEB-INF\services.xml
+
 
 Task 2.
 
@@ -23,7 +26,8 @@ Task 3. -- \spring-framework\controller\src\main\webapp\WEB-INF\services.xml
 
 3) Для двух Service Beans реализовать отложенную инициализацию --xml + annotations
 
-Task 4. 
+
+Task 4.
 
 1) Реализовать один бин с scope="singleton" -- companyService
 
@@ -34,6 +38,7 @@ Task 4.
 Task 5. 
 
 Добавить Spring DI в Controller слой -- SpringBeanAutowiringSupport used.
+
 
 Task 7.
 
@@ -50,8 +55,20 @@ Interfaces UserDaoUser and LanguageDaoUser were added to implement appropriate s
 
 5) Связать два бина с помощью аннотаций Qualifier("name") -- dealService
 
+
 Task 9.
+
 Разбить Spring XML Context на несколько файлов
 Сделать импорт всех файлов в главный файл конфигурации
 --- импорт по цепочке datasorce->dao->service-> application-context <-model
 
+
+Task 13. Перевести CompanyDAOImpl на JdbcTemplate --готово
+
+
+Task 14. Переписать Unit тесты на SpringJUnit4ClassRunner.class
+
+--готово. Переведено на реальную тестовую базу.
+
+
+Task 12. Перевести ContactDAOImpl на JdbcTemplate -- готово
