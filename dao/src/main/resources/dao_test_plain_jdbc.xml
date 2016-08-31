@@ -29,36 +29,23 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
     -->
 
 
-
     <context:annotation-config/>
     <context:component-scan
-            base-package="com.becomejavasenior.jdbc.impl,
-                        com.becomejavasenior.jdbc.implJdbcTemplate"/>
+            base-package="com.becomejavasenior.jdbc.impl"/>
 
 
-
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="companyDao"
+          class="com.becomejavasenior.jdbc.impl.CompanyDAOImpl"
+          autowire="byType"/>
+    <bean id="contactDao"
+          class="com.becomejavasenior.jdbc.impl.ContactDAOImpl"
+          autowire="default">
     </bean>
-
-    <beans profile="plainJDBC">
-        <bean id="companyDao" class="com.becomejavasenior.jdbc.impl.CompanyDAOImpl" autowire="byType"/>
-        <bean id="contactDao" class="com.becomejavasenior.jdbc.impl.ContactDAOImpl" autowire="byType"/>
-        <bean id="dealDao" class="com.becomejavasenior.jdbc.impl.DealDAOImpl" autowire="byType"/>
-    </beans>
-
-    <beans profile="JdbcTemplate">
-        <bean id="companyDao"
-              class="com.becomejavasenior.jdbc.implJdbcTemplate.CompanyDaoJdbcTemplateImpl"
-              autowire="byType"/>
-        <bean id="contactDao"
-              class="com.becomejavasenior.jdbc.implJdbcTemplate.ContactDaoJdbcTemplateImpl"
-              autowire="byType"/>
-        <bean id="dealDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.DealDaoJdbcTemplateImpl"
-              autowire="default"/>
-    </beans>
-
-
+    <bean id="dealDao" class="com.becomejavasenior.jdbc.impl.DealDAOImpl"
+          autowire="default"/>
+    <bean id="tagDao"
+          class="com.becomejavasenior.jdbc.impl.TagDAOImpl"
+          autowire="byType"/>
 </beans>
 
 

@@ -1,7 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Stage;
-import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.StageDAO;
 import org.junit.After;
 import org.junit.Assert;

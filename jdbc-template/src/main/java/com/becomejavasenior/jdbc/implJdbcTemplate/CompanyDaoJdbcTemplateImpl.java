@@ -32,7 +32,7 @@ public class CompanyDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Company>
             " created_by_id, date_create\nFROM company WHERE NOT deleted";
     private final String INSERT_COMPANY_TAG_SQL = "INSERT INTO contact_company_tag (tag_id, company_id) VALUES (?, ?)";
 
-    private final RowMapper<Company> ROW_MAPPER_COMPANY = (resultSet, i) -> {
+    private static final RowMapper<Company> ROW_MAPPER_COMPANY = (resultSet, i) -> {
         Company company = new Company();
         User responsibleUser = new User();
         User creator = new User();

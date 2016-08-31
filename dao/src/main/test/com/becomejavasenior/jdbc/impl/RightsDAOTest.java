@@ -3,7 +3,6 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Rights;
 import com.becomejavasenior.entity.SubjectType;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.RightsDAO;
 import com.becomejavasenior.jdbc.entity.UserDAO;
 import org.junit.After;

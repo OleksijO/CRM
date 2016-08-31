@@ -1,5 +1,6 @@
 package com.becomejavasenior.jdbc.implJdbcTemplate;
 
+import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -62,7 +63,7 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
             "  JOIN contact ON deal.primary_contact_id = contact.id\n" +
             "  JOIN company ON contact.company_id = company.id\n";
 
-    private final RowMapper<Deal> ROW_MAPPER_DEAL_FOR_LIST= (resultSet, i) -> {
+    private static final RowMapper<Deal> ROW_MAPPER_DEAL_FOR_LIST = (resultSet, i) -> {
         Deal deal = new Deal();
         Contact contact = new Contact();
         Company company = new Company();
@@ -79,7 +80,7 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
         deal.setPrimaryContact(contact);
         return deal;
     };
-    private final RowMapper<Deal> ROW_MAPPER_DEAL_FOR_STAGE= (resultSet, i) -> {
+    private static final RowMapper<Deal> ROW_MAPPER_DEAL_FOR_STAGE = (resultSet, i) -> {
         Deal deal = new Deal();
         Company company = new Company();
         deal.setId(resultSet.getInt("id"));
@@ -90,19 +91,19 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
         deal.setCompany(company);
         return deal;
     };
-    private final RowMapper<Contact> ROW_MAPPER_CONTACT_FOR_DEAL_NAME= (resultSet, i) -> {
+    private static final RowMapper<Contact> ROW_MAPPER_CONTACT_FOR_DEAL_NAME = (resultSet, i) -> {
         Contact contact = new Contact();
         contact.setId(resultSet.getInt("id"));
         contact.setName(resultSet.getString("name"));
         return contact;
     };
-    private final RowMapper<Stage> ROW_MAPPER_STAGE= (resultSet, i) -> {
+    private static final RowMapper<Stage> ROW_MAPPER_STAGE = (resultSet, i) -> {
         Stage stage = new Stage();
         stage.setId(resultSet.getInt("id"));
         stage.setName(resultSet.getString("name"));
         return stage;
     };
-    private final RowMapper<Deal> ROW_MAPPER_DEAL= (resultSet, i) -> {
+    private static final RowMapper<Deal> ROW_MAPPER_DEAL = (resultSet, i) -> {
         Deal deal = new Deal();
         User responsibleUser = new User();
         User creator = new User();

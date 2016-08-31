@@ -2,7 +2,6 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.LanguageDAO;
 import com.becomejavasenior.jdbc.entity.UserDAO;
 import org.junit.After;

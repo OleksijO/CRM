@@ -5,7 +5,6 @@ import com.becomejavasenior.entity.VisitHistory;
 import com.becomejavasenior.jdbc.entity.UserDAO;
 import com.becomejavasenior.jdbc.entity.VisitHistoryDAO;
 
-import com.becomejavasenior.jdbc.SpringDaoTests;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

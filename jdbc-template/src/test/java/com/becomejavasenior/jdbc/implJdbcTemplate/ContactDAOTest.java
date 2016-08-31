@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.impl;
+package com.becomejavasenior.jdbc.implJdbcTemplate;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;

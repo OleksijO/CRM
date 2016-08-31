@@ -5,13 +5,12 @@ import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Tag;
 import com.becomejavasenior.jdbc.entity.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("tagDao")
+//@Repository("tagDao")
 public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
 
     private static final String INSERT_SQL = "INSERT INTO tag (name, deleted) VALUES (?, FALSE)";

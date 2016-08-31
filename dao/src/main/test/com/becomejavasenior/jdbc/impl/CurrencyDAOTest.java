@@ -1,7 +1,6 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Currency;
-import com.becomejavasenior.jdbc.SpringDaoTests;
 import com.becomejavasenior.jdbc.entity.CurrencyDAO;
 import org.junit.After;
 import org.junit.Assert;

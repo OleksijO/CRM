@@ -47,7 +47,7 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact>
     private static final String FIELD_COMPANY_NAME = "company_name";
     private final TagDAO tagDAO;
 
-    private final RowMapper<Contact> ROW_MAPPER_CONTACT = (resultSet, i) -> {
+    private static final RowMapper<Contact> ROW_MAPPER_CONTACT = (resultSet, i) -> {
         Contact contact = new Contact();
         User creator = new User();
 

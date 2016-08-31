@@ -1,4 +1,6 @@
-import com.becomejavasenior.jdbc.SpringDaoTests;
+package com.becomejavasenior.jdbc.impl.initDB;
+
+import com.becomejavasenior.jdbc.impl.SpringDaoTests;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
