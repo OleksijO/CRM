@@ -9,15 +9,9 @@ http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <aop:aspectj-autoproxy/>
-    <bean id="aop-dao-success" class="com.becomejavasenior.aspects.dao.SuccessfullLog">
-        <property name="path" value="d:/logs/dao_success.log"/>
-    </bean>
-    <bean id="aop-dao-throwed" class="com.becomejavasenior.aspects.dao.ThrowedLog">
-        <property name="path" value="d:/logs/dao_error.log"/>
-    </bean>
+    <bean id="aop-dao-success" class="com.becomejavasenior.aspects.dao.SuccessfullLog"/>
+    <bean id="aop-dao-throwed" class="com.becomejavasenior.aspects.dao.ThrowedLog"/>
 
 
 </beans>
-
-
 

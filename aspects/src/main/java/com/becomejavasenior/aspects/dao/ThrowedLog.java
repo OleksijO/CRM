@@ -7,9 +7,13 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class ThrowedLog extends DaoLog {
 
+
+    public ThrowedLog() {
+        super("dao_thrown_log");
+    }
+
     @AfterThrowing(value = "execution(* com.becomejavasenior.jdbc.*.*.*(..))",throwing = "e")
     public void logSuccessDaoOperation(JoinPoint jp, Exception e) {
-        log("DAO:\t"+parseJointPoint(jp)+"\t EXCEPTION: "+e.getClass()+" : "+e.getMessage());
-        //System.out.println("DAO:\t"+parseJointPoint(jp)+"\t EXCEPTION: "+e.getClass()+" : "+e.getMessage());
+        logger.info("DAO:\t"+parseJointPoint(jp)+"\t EXCEPTION: "+e.getClass()+" : "+e.getMessage());
     }
 }
