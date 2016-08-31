@@ -1,6 +1,5 @@
 package com.becomejavasenior.jdbc.implJdbcTemplate;
 
-import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.dao.EmptyResultDataAccessException;

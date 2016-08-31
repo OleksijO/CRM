@@ -91,4 +91,25 @@ Task 10. Кофигурация Spring JdbcTemplate
         <jdbc:script location="test-data.sql"/>
     </jdbc:embedded-database>
 
-Убедить что база данных успешно создаться и наполняется тестовыми данными -----не получилось
+Убедить что база данных успешно создаться и наполняется тестовыми данными --наполняется, но тесты валятся
+
+TO DO:
+
+21. Spring локализация
+#23 opened 3 days ago by becomejavasenior
+ 20. Подключение Spring transaction
+#22 opened 3 days ago by becomejavasenior
+ 19. REST для Сделок на Spring MVC
+#21 opened 3 days ago by becomejavasenior
+ 18. REST для Контактов на Spring MVC
+#20 opened 3 days ago by becomejavasenior
+ 17. Переписать на Spring MVC сервлеты по работе со Компанией и Контактами
+#19 opened 3 days ago by becomejavasenior
+ 16. Добавить аспекты
+#18 opened 5 days ago by MykolaBova
+ 8. Spring локализация
+#14 opened 10 days ago by becomejavasenior
+ 15. Написать DAO для управления правами пользователей на JdbcTemplate
+#3 opened 10 days ago by becomejavasenior
+ 6. Создать DAO для отображения информации для Dashboard
+#2 opened 10 days ago by becomejavasenior
