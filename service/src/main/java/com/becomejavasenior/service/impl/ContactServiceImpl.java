@@ -4,6 +4,7 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.service.ContactService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 //@Service("contactService")
 //@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Transactional
 public class ContactServiceImpl implements ContactService {
 
     private static final String STR_0 = "0";

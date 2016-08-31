@@ -7,14 +7,11 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class SuccessfullLog extends DaoLog {
 
-    public SuccessfullLog() {
-        super("dao_success_log");
-    }
-
     @AfterReturning("execution(* com.becomejavasenior.jdbc.*.*.*(..))")
     public void logSuccessDaoOperation(JoinPoint jp) {
-        logger.info("DAO:\t"+parseJointPoint(jp)+"\tSUCCESS");
-        //TODO comment next line
+        log("DAO:\t"+parseJointPoint(jp)+"\tSUCCESS");
+        //TODO comment next lines
         System.out.println("DAO:\t"+parseJointPoint(jp)+"\tSUCCESS");
+
     }
 }

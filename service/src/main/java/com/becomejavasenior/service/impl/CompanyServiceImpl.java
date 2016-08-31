@@ -3,6 +3,7 @@ package com.becomejavasenior.service.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.service.CompanyService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Map;
 //@Service("companyService")
 //@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 //@Lazy
+@Transactional
 public class CompanyServiceImpl implements CompanyService {
 //    @Autowired
     private CompanyDAO companyDAO;

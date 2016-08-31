@@ -35,7 +35,8 @@ Task 4.
 
 4) Для одного бина реализовать и сконфигурировать init и destroy методы -- dealService
 
-Task 5. 
+
+Task 5.
 
 Добавить Spring DI в Controller слой -- SpringBeanAutowiringSupport used.
 
@@ -99,10 +100,15 @@ Task 16. Добавить аспекты
 --done
 
 
-TO DO:
+Task 20. Подключение Spring transaction
 
- 20. Подключение Spring transaction
-#22 opened 3 days ago by becomejavasenior
+3) Объявить все Service класса транзакционными, --done
+
+в двух Service интерфейсах объявить все методы транзакционными --DealService, UserService
+
+
+
+TO DO:
 
  6. Создать DAO для отображения информации для Dashboard
 #2 opened 10 days ago by becomejavasenior

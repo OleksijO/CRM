@@ -5,6 +5,7 @@ import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.entity.Stage;
 import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.service.DealService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -12,6 +13,7 @@ import java.util.List;
 
 //@Service("dealService")
 //@Lazy
+@Transactional
 public class DealServiceImpl implements DealService {
     //@Autowired
     private DealDAO dealDao;

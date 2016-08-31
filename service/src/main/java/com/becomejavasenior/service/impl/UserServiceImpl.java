@@ -10,12 +10,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     @Qualifier("userDao")
@@ -25,6 +27,7 @@ public class UserServiceImpl implements UserService {
     private LanguageDAO languageDAO;
 
     @Override
+    @Transactional(readOnly = true)
     public Map<String, User> getUserMap() {
         List<User> userList = userDAO.getAll();
         Map<String, User> userMap = new HashMap<>();
@@ -35,6 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Language> getLanguageList() {
         return languageDAO.getAll();
     }
@@ -74,11 +78,9 @@ public class UserServiceImpl implements UserService {
         return new UserServiceImpl();
     }
 
-
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
-
 
     public void setLanguageDAO(LanguageDAO languageDAO) {
         this.languageDAO = languageDAO;
