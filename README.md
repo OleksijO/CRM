@@ -93,10 +93,13 @@ Task 10. Кофигурация Spring JdbcTemplate
 
 Убедить что база данных успешно создаться и наполняется тестовыми данными --наполняется, но тесты валятся
 
-TO DO:
 
- 16. Добавить аспекты
-#18 opened 5 days ago by MykolaBova
+Task 16. Добавить аспекты
+
+--done
+
+
+TO DO:
 
  20. Подключение Spring transaction
 #22 opened 3 days ago by becomejavasenior
@@ -121,6 +124,15 @@ TO DO:
 
  18. REST для Контактов на Spring MVC
 #20 opened 3 days ago by becomejavasenior
+
+24. Spring transaction, аттрибут Propagation
+#26 opened 5 minutes ago by MykolaBova
+
+ 23 Планировщик задач
+#25 opened 5 minutes ago by MykolaBova
+
+ 22 Validation
+#24 opened 6 minutes ago by MykolaBova
 
 
 

@@ -58,6 +58,7 @@
         <module>service</module>
         <module>jdbc-template</module>
         <module>dao-i</module>
+        <module>aspects</module>
     </modules>
 
     <name>CRM Maven Webapp</name>
@@ -142,5 +143,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>4.3.1.RELEASE</spring.version>
+        <acpectj.version>1.8.9</acpectj.version>
     </properties>
 </project>
