@@ -26,7 +26,6 @@ import java.util.*;
 @Controller
 @RequestMapping("/company")
 public class CompanyServlet {
-
     @Autowired
     private CompanyService companyService;
 
@@ -39,19 +38,12 @@ public class CompanyServlet {
         List<Contact> contactList = companyService.getContactList();
         contactList.sort((Contact contact1, Contact contact2) -> contact1.getName().compareTo(contact2.getName()));
         model.addAttribute("contactList", contactList);
-
         model.addAttribute("typeOfPhone", TypeOfPhone.values());
-
         model.addAttribute("typeOfPeriod", TypeOfPeriod.values());
-
         model.addAttribute("taskType", companyService.getTaskTypeList());
-
         model.addAttribute("stageDeals", companyService.getStageDealsList());
-
         model.addAttribute("timeListForTask", companyService.getTimeListForTask());
-
         model.addAttribute("addCompanyForm",new AddCompanyForm());
-
         return "newcompany";
     }
 

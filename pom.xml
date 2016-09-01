@@ -47,6 +47,7 @@
         <module>jdbc-template</module>
         <module>dao-i</module>
         <module>aspects</module>
+        <module>rest</module>
     </modules>
 
     <name>CRM Maven Webapp</name>

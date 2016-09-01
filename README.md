@@ -112,15 +112,13 @@ Task 6. Создать DAO для отображения информации д
 
 
 17. Переписать на Spring MVC сервлеты по работе со Компанией и Контактами
---сделал только компанию.
+--сделал только компанию.Добавил multipart.
 
 
+ 18. REST для Контактов на Spring MVC
+---done. Need to test.
 
 TO DO:
-
-
- 15. Написать DAO для управления правами пользователей на JdbcTemplate
-#3 opened 10 days ago by becomejavasenior
 
 
 
@@ -133,8 +131,7 @@ TO DO:
  19. REST для Сделок на Spring MVC
 #21 opened 3 days ago by becomejavasenior
 
- 18. REST для Контактов на Spring MVC
-#20 opened 3 days ago by becomejavasenior
+
 
 24. Spring transaction, аттрибут Propagation
 #26 opened 5 minutes ago by MykolaBova
@@ -144,6 +141,9 @@ TO DO:
 
  22 Validation
 #24 opened 6 minutes ago by MykolaBova
+
+ 15. Написать DAO для управления правами пользователей на JdbcTemplate
+#3 opened 10 days ago by becomejavasenior
 
 
 
