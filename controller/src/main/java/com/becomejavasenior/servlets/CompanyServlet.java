@@ -2,18 +2,17 @@ package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.service.CompanyService;
+import com.becomejavasenior.servlets.beans.AddCompanyForm;
 import com.google.common.base.Splitter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,45 +22,41 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.*;
 
-@WebServlet(name = "companyServlet", urlPatterns = "/company")
-@MultipartConfig
-public class CompanyServlet extends HttpServlet {
+@Controller
+@RequestMapping("/company")
+public class CompanyServlet {
 
     @Autowired
     private CompanyService companyService;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @RequestMapping(method = RequestMethod.GET)
+    public String doGet(Model model) {
         List<User> userList = companyService.getResponsibleUserList();
         userList.sort((User user1, User user2) -> user1.getName().compareTo(user2.getName()));
-        request.setAttribute("responsibleUsers", userList);
+        model.addAttribute("responsibleUsers", userList);
 
         List<Contact> contactList = companyService.getContactList();
         contactList.sort((Contact contact1, Contact contact2) -> contact1.getName().compareTo(contact2.getName()));
-        request.setAttribute("contactList", contactList);
+        model.addAttribute("contactList", contactList);
 
-        request.setAttribute("typeOfPhone", TypeOfPhone.values());
+        model.addAttribute("typeOfPhone", TypeOfPhone.values());
 
-        request.setAttribute("typeOfPeriod", TypeOfPeriod.values());
+        model.addAttribute("typeOfPeriod", TypeOfPeriod.values());
 
-        request.setAttribute("taskType", companyService.getTaskTypeList());
+        model.addAttribute("taskType", companyService.getTaskTypeList());
 
-        request.setAttribute("stageDeals", companyService.getStageDealsList());
+        model.addAttribute("stageDeals", companyService.getStageDealsList());
 
-        request.setAttribute("timeListForTask", companyService.getTimeListForTask());
+        model.addAttribute("timeListForTask", companyService.getTimeListForTask());
 
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/pages/newcompany.jsp");
-        requestDispatcher.forward(request, response);
+        model.addAttribute("addCompanyForm",new AddCompanyForm());
+
+        return "newcompany";
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @RequestMapping(method = RequestMethod.POST)
+    public void doPost(@ModelAttribute("addCompanyForm")AddCompanyForm addCompanyForm, HttpServletRequest request) throws ServletException, IOException {
+
         request.setCharacterEncoding("UTF-8");
         Deal deal = getDealFromRequest(request);
         Contact contact = getContactFromRequest(request);

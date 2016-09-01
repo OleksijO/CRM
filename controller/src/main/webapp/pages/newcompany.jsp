@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
@@ -18,8 +19,8 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <form class="form-horizontal" role="form" method="post" action="/company" id="companyForm"
-              enctype="multipart/form-data">
+        <form:form class="form-horizontal" method="POST" action="/company" id="companyForm"
+               modelAttribute = "addCompanyForm">
             <div class="col-md-3"></div>
             <div class="col-md-4">
                 <div class="company" align="center">
@@ -30,7 +31,7 @@
                         <label class="control-label col-md-5" for="companyName"><h4>Название:</h4></label>
                         <div class="col-md-7">
                             <input type="text" class="form-control" id="companyName" name="companyName"
-                                   placeholder="Название компании">
+                                   placeholder="Название компании" path="companyName"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,10 +89,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12" align="right">
+                            <!--
                             <label class="btn btn-primary" for="companyFile">
                                 <input id="companyFile" name="companyFile" type="file" style="display:none;">
                                 Добавить файлы
                             </label>
+                            -->
                         </div>
                     </div>
                     <div class="form-group">
@@ -254,7 +257,8 @@
                 </div>
             </div>
             <div class="col-md-1"></div>
-        </form>
+            <input type="submit" value="Save">
+        </form:form>
     </div>
 </div>
 </body>

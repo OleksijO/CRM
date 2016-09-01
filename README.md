@@ -110,6 +110,11 @@ Task 20. Подключение Spring transaction
 Task 6. Создать DAO для отображения информации для Dashboard
 -- done, test also added.
 
+
+17. Переписать на Spring MVC сервлеты по работе со Компанией и Контактами ---
+#19 opened 3 days ago by becomejavasenior
+
+
 TO DO:
 
 
@@ -117,8 +122,7 @@ TO DO:
  15. Написать DAO для управления правами пользователей на JdbcTemplate
 #3 opened 10 days ago by becomejavasenior
 
- 17. Переписать на Spring MVC сервлеты по работе со Компанией и Контактами
-#19 opened 3 days ago by becomejavasenior
+
 
  21. Spring локализация
 #23 opened 3 days ago by becomejavasenior

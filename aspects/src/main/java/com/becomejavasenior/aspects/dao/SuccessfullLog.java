@@ -14,7 +14,5 @@ public class SuccessfullLog extends DaoLog {
     @AfterReturning("execution(* com.becomejavasenior.jdbc.*.*.*(..))")
     public void logSuccessDaoOperation(JoinPoint jp) {
         logger.info("DAO:\t"+parseJointPoint(jp)+"\tSUCCESS");
-        //TODO comment next line
-        System.out.println("DAO:\t"+parseJointPoint(jp)+"\tSUCCESS");
     }
 }
