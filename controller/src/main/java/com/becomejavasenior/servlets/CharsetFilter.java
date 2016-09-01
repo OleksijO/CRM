@@ -1,13 +1,12 @@
 package com.becomejavasenior.servlets;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
  *  Changes encoding to correct use with java.lang.String
  */
-@WebFilter(filterName = "CharsetFilter")
+//@WebFilter(filterName = "CharsetFilter", urlPatterns = "/*")
 public class CharsetFilter implements Filter {
     private FilterConfig config;
     private static final String CONTENT_TYPE="text/html; charset=UTF-8";

@@ -111,12 +111,21 @@ Task 6. Создать DAO для отображения информации д
 -- done, test also added.
 
 
-17. Переписать на Spring MVC сервлеты по работе со Компанией и Контактами
+Task 17. Переписать на Spring MVC сервлеты по работе со Компанией и Контактами
 --сделал только компанию.Добавил multipart.
 
 
- 18. REST для Контактов на Spring MVC
+Task 18. REST для Контактов на Spring MVC
 ---done. Tested. Authentification switched off.
+
+
+Task 8, 21. Spring локализация
+
+---пока только company --- в работе(добавлено, заполнить EN для company, разобраться с кодировкой)
+
+
+
+
 
 TO DO:
 

@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Сообщение:</title>
+    <title><spring:message code="message"/>:</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="/resources/css/bootstrap-datetimepicker.min.css"/>
@@ -18,10 +19,14 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row">
-
+    <div class="row" align="center">
+        <div class="row">
+            <a class="hyperlink" href="?language=en">English</a> |
+            <a class="hyperlink" href="?language=ru_RU">Русский</a>
+        </div>
         <br>
-        <h3>Результат операции:</h3>
+        <br>
+        <h3><spring:message code="operationResult"/>:</h3>
         <br>
         <h2>${message}</h2>
 

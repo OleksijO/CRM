@@ -61,21 +61,21 @@ public class CompanyServlet {
             Contact contact = getContactFromForm(addCompanyForm);
             Task task = getTaskFromForm(addCompanyForm);
             company = getCompanyFromForm(addCompanyForm);
-            //getFileFromForm(addCompanyForm); // TODO implement file upload
-            File attachedFile = new File();    // TODO implement file upload
-            attachedFile.setFile(bytes); // TODO implement file upload
+            File attachedFile = new File();
+            attachedFile.setFile(bytes);
             companyService.createNewCompany(company, contact, deal, task, attachedFile);
         } catch(Exception e) {
             error = e;
         }
         String message;
+        ResourceBundle bundle=ResourceBundle.getBundle("localization.messages.message", Locale.getDefault());
         if ((company!=null)&&company.getId()>0) {
-            message="Company with id="+company.getId()+" sucessfully added.";
+            message=String.format(bundle.getString("company.added"),company.getId());
         } else {
             if (error!=null) {
-                message = "Error. Can't create company because of: " + error.getMessage();
+                message = bundle.getString("company.cant.create.cause")+": " + error.getMessage();
             } else {
-                message = "Error. Can't create company becouse of unknown reasons......";
+                message = bundle.getString("company.cant.create");
             }
         }
         model.addAttribute("message", message);
