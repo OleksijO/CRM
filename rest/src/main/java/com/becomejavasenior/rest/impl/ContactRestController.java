@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@RestController("/rest")
+@RestController
+@RequestMapping//(path="/rest") //this root uri folder set by map in web.xml
 public class ContactRestController {
 
     @Autowired
     ContactService contactService;
 
-    @RequestMapping(path = "/contact", method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public List<Contact> getAll(HttpServletResponse response){
-        return contactService.getAll();
+        List<Contact> list= contactService.getAll();
+
+        return list;
     }
 
     @RequestMapping(path = "/contact/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public Contact get(@PathVariable int id){
         return contactService.getById(id);
     }
 
-    @RequestMapping(path = "/contact/{id}", method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(path = "/contact/{id}", method = RequestMethod.PUT)
     public Contact update(@PathVariable int id, @RequestBody Contact contact, HttpServletResponse response){
         contact.setId(id);
         contactService.update(contact);
@@ -35,27 +35,23 @@ public class ContactRestController {
     }
 
     @RequestMapping(path = "/contact/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
     public void delete(@PathVariable int id, HttpServletResponse response){
         contactService.delete(id);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
-    @RequestMapping(path = "/contact/{id}", method = RequestMethod.PUT)
-    @ResponseBody
+    @RequestMapping(path = "/contact", method = RequestMethod.POST)
     public Contact save(@RequestBody Contact contact, HttpServletResponse response){
         contact.setId(contactService.insert(contact));
         return contact;
     }
 
     @RequestMapping(path = "/contact", method = RequestMethod.HEAD)
-    @ResponseBody
     public void ping(HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
     @RequestMapping(path = "/contact", method = RequestMethod.OPTIONS)
-    @ResponseBody
     public void options(HttpServletResponse response){
         //TODO
         response.setStatus(HttpServletResponse.SC_OK);

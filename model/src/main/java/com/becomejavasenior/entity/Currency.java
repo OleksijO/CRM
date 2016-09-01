@@ -1,7 +1,8 @@
 package com.becomejavasenior.entity;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-
+@XmlRootElement
 public class Currency implements Serializable{
 
     private int id;

@@ -1,11 +1,12 @@
 package com.becomejavasenior.entity;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@XmlRootElement
 public class Deal implements Serializable {
 
     private int id;

@@ -1,8 +1,10 @@
 package com.becomejavasenior.entity;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.List;
 
+@XmlRootElement
 public class User implements Serializable{
 
     private int id;
