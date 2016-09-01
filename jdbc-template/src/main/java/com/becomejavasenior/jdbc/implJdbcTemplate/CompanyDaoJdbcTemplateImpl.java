@@ -106,7 +106,6 @@ public class CompanyDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Company>
 
     @Override
     public List<Company> getAll() {
-        System.out.println("CompanyDAO: getAll");
         return jdbcTemplate.query(SELECT_ALL_SQL, ROW_MAPPER_COMPANY);
     }
 

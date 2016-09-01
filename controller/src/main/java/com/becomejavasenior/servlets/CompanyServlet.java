@@ -17,7 +17,6 @@ import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.*;
@@ -55,36 +54,51 @@ public class CompanyServlet {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void doPost(@ModelAttribute("addCompanyForm")AddCompanyForm addCompanyForm, HttpServletRequest request) throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
-        Deal deal = getDealFromRequest(request);
-        Contact contact = getContactFromRequest(request);
-        Task task = getTaskFromRequest(request);
-        Company company = getCompanyFromRequest(request);
-        File attachedFile = getFileFromRequest(request);
-        companyService.createNewCompany(company, contact, deal, task, attachedFile);
+    public String doPost(@ModelAttribute("addCompanyForm")AddCompanyForm addCompanyForm, Model model) {
+        Exception error=null;
+        Company company=null;
+        try {
+            Deal deal = getDealFromForm(addCompanyForm);
+            Contact contact = getContactFromForm(addCompanyForm);
+            Task task = getTaskFromForm(addCompanyForm);
+            company = getCompanyFromForm(addCompanyForm);
+            //getFileFromForm(addCompanyForm); // TODO implement file upload
+            File attachedFile = new File();    // TODO implement file upload
+            attachedFile.setFile(new byte[0]); // TODO implement file upload
+            companyService.createNewCompany(company, contact, deal, task, attachedFile);
+        } catch(Exception e) {
+            error = e;
+        }
+        String message;
+        if ((company!=null)&&company.getId()>0) {
+            message="Company with id="+company.getId()+" sucessfully added.";
+        } else {
+            if (error!=null) {
+                message = "Error. Can't create company because of: " + error.getMessage();
+            } else {
+                message = "Error. Can't create company becouse of unknown reasons......";
+            }
+        }
+        model.addAttribute("message", message);
+        return "message";
     }
 
-    private Deal getDealFromRequest(HttpServletRequest request) {
+    private Deal getDealFromForm(AddCompanyForm form) {
         Deal deal = new Deal();
-        deal.setName(request.getParameter("dealName"));
+        deal.setName(form.getDealName());
         Stage stage = new Stage();
         /**
          * Obtain key stages of the deal by value
          */
         Map<Integer, String> dealStages = companyService.getStageDealsList();
         for (Map.Entry entry : dealStages.entrySet()) {
-            if (entry.getValue().equals(request.getParameter("dealStage"))) {
+            if (entry.getValue().equals(form.getDealStage())) {
                 stage.setId((Integer) entry.getKey());
             }
         }
-        stage.setName(request.getParameter("dealStage"));
+        stage.setName(form.getDealStage());
         deal.setStage(stage);
-
-        if (!request.getParameter("dealBudget").isEmpty()) {
-            deal.setAmount(new BigDecimal(request.getParameter("dealBudget")));
-        }
+        deal.setAmount(form.getDealBudget());
         deal.setDelete(false);
         deal.setDateCreate(new Date());
         User creator = new User();
@@ -94,20 +108,20 @@ public class CompanyServlet {
         return deal;
     }
 
-    private Contact getContactFromRequest(HttpServletRequest request) {
+    private Contact getContactFromForm(AddCompanyForm form) {
         Contact contact = new Contact();
-        contact.setName(request.getParameter("contactName"));
+        contact.setName(form.getContactName());
 
-        if (!request.getParameter("contactPosition").isEmpty()) {
-            contact.setPosition(request.getParameter("contactPosition"));
+        if (!form.getContactPosition().isEmpty()) {
+            contact.setPosition(form.getContactPosition());
         }
-        contact.setTypeOfPhone(TypeOfPhone.valueOf(request.getParameter("typePhone")));
-        contact.setPhone(request.getParameter("contactPhone"));
-        if (!request.getParameter("contactEmail").isEmpty()) {
-            contact.setEmail(request.getParameter("contactEmail"));
+        contact.setTypeOfPhone(TypeOfPhone.valueOf(form.getTypePhone()));
+        contact.setPhone(form.getContactPhone());
+        if (!form.getContactEmail().isEmpty()) {
+            contact.setEmail(form.getContactEmail());
         }
-        if (!request.getParameter("contactSkype").isEmpty()) {
-            contact.setSkype(request.getParameter("contactSkype"));
+        if (!form.getContactSkype().isEmpty()) {
+            contact.setSkype(form.getContactSkype());
         }
         contact.setDelete(false);
         contact.setDateCreate(new Date());
@@ -118,21 +132,22 @@ public class CompanyServlet {
         return contact;
     }
 
-    private Task getTaskFromRequest(HttpServletRequest request) {
+    private Task getTaskFromForm(AddCompanyForm form) {
         Task task = new Task();
-        task.setPeriod(TypeOfPeriod.valueOf(request.getParameter("period")));
+        task.setPeriod(TypeOfPeriod.valueOf(form.getPeriod()));
         /**
          * We are looking for a user by name
          */
         List<User> userList = companyService.getResponsibleUserList();
-        Optional<User> responsibleUser = userList.stream().filter(u -> u.getName().equals(request.getParameter("taskResponsibleUser"))).findFirst();
+        Optional<User> responsibleUser =
+                userList.stream().filter(u -> u.getName().equals(form.getTaskResponsibleUser())).findFirst();
         task.setResponsibleUser(responsibleUser.get());
         /**
          * Obtain key task types by value
          */
         Map<Integer, String> taskTypes = companyService.getTaskTypeList();
         for (Map.Entry entry : taskTypes.entrySet()) {
-            if (entry.getValue().equals(request.getParameter("taskType"))) {
+            if (entry.getValue().equals(form.getTaskType())) {
                 task.setTaskType(String.valueOf(entry.getKey()));
             }
         }
@@ -142,11 +157,11 @@ public class CompanyServlet {
         task.setStatus("1"); // TODO: Where can I take if the task does not have a field for status
         task.setDelete(false);
         task.setDateCreate(new Date());
-        task.setTimeTask(request.getParameter("taskTime")); // TODO: check how its work after merge dao changes!!!!
+        task.setTimeTask(form.getTaskTime()); // TODO: check how its work after merge dao changes!!!!
         /**
          * Parsing date from String to Date()
          */
-        String dateString = request.getParameter("dateTask");
+        String dateString = form.getDateTask();
         if (!dateString.isEmpty()) {
             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
             try {
@@ -159,14 +174,14 @@ public class CompanyServlet {
         return task;
     }
 
-    private Company getCompanyFromRequest(HttpServletRequest request) {
+    private Company getCompanyFromForm(AddCompanyForm form) {
         Company company = new Company();
-        company.setName(request.getParameter("companyName"));
+        company.setName(form.getCompanyName());
         /**
          *  Parse tags with Google Guava library
          */
         Splitter splitter = Splitter.on("#").omitEmptyStrings().trimResults();
-        Iterable<String> tokens = splitter.split(request.getParameter("companyTag"));
+        Iterable<String> tokens = splitter.split(form.getCompanyTag());
         List<Tag> tags = new ArrayList<>();
         for (String token : tokens) {
             Tag tag = new Tag();
@@ -177,17 +192,17 @@ public class CompanyServlet {
         company.setTags(tags);
 
         List<User> userList = companyService.getResponsibleUserList();
-        Optional<User> responsibleUser = userList.stream().filter(u -> u.getName().equals(request.getParameter("taskResponsibleUser"))).findFirst();
+        Optional<User> responsibleUser = userList.stream().filter(u -> u.getName().equals(form.getCompanyResponsibleUser())).findFirst();
         company.setResponsibleUser(responsibleUser.get());
-        company.setPhone(request.getParameter("companyPhone"));
-        company.setEmail(request.getParameter("companyEmail"));
-        company.setWeb(request.getParameter("companyWeb"));
-        company.setAddress(request.getParameter("companyAddress"));
-        String noteContent = request.getParameter("companyNote");
+        company.setPhone(form.getCompanyPhone());
+        company.setEmail(form.getCompanyEmail());
+        company.setWeb(form.getCompanyWeb());
+        company.setAddress(form.getCompanyAddress());
+        String noteContent = form.getCompanyNote();
         if (!noteContent.isEmpty()) {
             List<Note> noteList = new ArrayList<>();
             Note note = new Note();
-            note.setNote(request.getParameter("companyNote"));
+            note.setNote(form.getCompanyNote());
             note.setDateCreate(new Date());
             note.setDelete(false);
             User creator = new User();
@@ -203,7 +218,7 @@ public class CompanyServlet {
          * We are looking for a contact by name
          */
         List<Contact> contactList = companyService.getContactList();
-        Optional<Contact> companyContact = contactList.stream().filter(c -> c.getName().equals(request.getParameter("companyContact"))).findFirst();
+        Optional<Contact> companyContact = contactList.stream().filter(c -> c.getName().equals(form.getCompanyContact())).findFirst();
         List<Contact> contacts = new ArrayList<>();
         contacts.add(companyContact.get());
         company.setContacts(contacts);
@@ -215,7 +230,7 @@ public class CompanyServlet {
         return company;
     }
 
-    private File getFileFromRequest(HttpServletRequest request) throws IOException, ServletException {
+    private File getFileFromForm(HttpServletRequest request) throws IOException, ServletException {
         File attachedFile = new File();
         /**
          * reading file bytes into byte[]

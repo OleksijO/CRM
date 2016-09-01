@@ -15,12 +15,14 @@ public class AddCompanyForm {
     private String contactEmail;
     private String contactSkype;
 
-    private String taskPeriod;
+    private String period;
     private String taskResponsibleUser;
     private String taskType;
     private String taskTime;
     private String dateTask;
+
     private String companyName;
+    private String companyResponsibleUser;
     private String companyTag;
     private String companyPhone;
     private String companyEmail;
@@ -65,8 +67,8 @@ public class AddCompanyForm {
         return contactSkype;
     }
 
-    public String getTaskPeriod() {
-        return taskPeriod;
+    public String getPeriod() {
+        return period;
     }
 
     public String getTaskResponsibleUser() {
@@ -153,8 +155,8 @@ public class AddCompanyForm {
         this.contactSkype = contactSkype;
     }
 
-    public void setTaskPeriod(String taskPeriod) {
-        this.taskPeriod = taskPeriod;
+    public void setPeriod(String period) {
+        this.period = period;
     }
 
     public void setTaskResponsibleUser(String taskResponsibleUser) {
@@ -203,5 +205,14 @@ public class AddCompanyForm {
 
     public void setCompanyContact(String companyContact) {
         this.companyContact = companyContact;
+    }
+
+    public void setCompanyResponsibleUser(String companyResponsibleUser) {
+        this.companyResponsibleUser = companyResponsibleUser;
+    }
+
+    public String getCompanyResponsibleUser() {
+
+        return companyResponsibleUser;
     }
 }
