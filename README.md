@@ -116,7 +116,7 @@ Task 6. Создать DAO для отображения информации д
 
 
  18. REST для Контактов на Spring MVC
----done. Need to test.
+---done. Tested. Authentification switched off.
 
 TO DO:
 

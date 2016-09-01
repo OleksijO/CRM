@@ -9,7 +9,6 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-
     <filter>
         <filter-name>CharsetFilter</filter-name>
         <filter-class>com.becomejavasenior.servlets.CharsetFilter</filter-class>
@@ -44,6 +43,7 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/company</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>rest</servlet-name>
         <url-pattern>/rest/*</url-pattern>
