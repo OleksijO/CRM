@@ -20,6 +20,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
                 <value>localization.messages.message</value>
             </list>
         </property>
+        <property name="defaultEncoding" value="UTF8"/>
     </bean>
 
     <mvc:interceptors>
