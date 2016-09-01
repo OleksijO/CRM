@@ -27,12 +27,11 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
           p:password=""
           />
     -->
-    <import resource="classpath*:aspects.xml"/>
 
     <context:annotation-config/>
     <context:component-scan
             base-package="com.becomejavasenior.jdbc.impl"/>
-
+    <import resource="classpath*:aspects.xml"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
@@ -51,6 +50,9 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
           autowire="default"/>
 
     <bean id="tagDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.TagDaoJdbcTemplateImpl"
+          autowire="default"/>
+
+    <bean id="dashboardDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.DashboardDaoJdbcTemplate"
           autowire="default"/>
 
 

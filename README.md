@@ -107,11 +107,12 @@ Task 20. Подключение Spring transaction
 в двух Service интерфейсах объявить все методы транзакционными --DealService, UserService
 
 
+Task 6. Создать DAO для отображения информации для Dashboard
+-- done, test also added.
 
 TO DO:
 
- 6. Создать DAO для отображения информации для Dashboard
-#2 opened 10 days ago by becomejavasenior
+
 
  15. Написать DAO для управления правами пользователей на JdbcTemplate
 #3 opened 10 days ago by becomejavasenior
