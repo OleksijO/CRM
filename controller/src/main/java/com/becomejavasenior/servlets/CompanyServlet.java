@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,17 +56,22 @@ public class CompanyServlet {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String doPost(@ModelAttribute("addCompanyForm")AddCompanyForm addCompanyForm, Model model) {
+    public String doPost(@ModelAttribute("addCompanyForm")AddCompanyForm addCompanyForm,
+                         Model model,
+                         @RequestParam("companyFile") MultipartFile file) {
         Exception error=null;
         Company company=null;
         try {
+            byte[] bytes=new byte[0];
+            if (!file.isEmpty()) {
+                bytes = file.getBytes();}
             Deal deal = getDealFromForm(addCompanyForm);
             Contact contact = getContactFromForm(addCompanyForm);
             Task task = getTaskFromForm(addCompanyForm);
             company = getCompanyFromForm(addCompanyForm);
             //getFileFromForm(addCompanyForm); // TODO implement file upload
             File attachedFile = new File();    // TODO implement file upload
-            attachedFile.setFile(new byte[0]); // TODO implement file upload
+            attachedFile.setFile(bytes); // TODO implement file upload
             companyService.createNewCompany(company, contact, deal, task, attachedFile);
         } catch(Exception e) {
             error = e;

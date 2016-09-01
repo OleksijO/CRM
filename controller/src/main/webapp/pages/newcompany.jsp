@@ -20,7 +20,7 @@
 <div class="container-fluid">
     <div class="row">
         <form:form class="form-horizontal" method="POST" action="/company" id="companyForm"
-               modelAttribute = "addCompanyForm">
+                   enctype="multipart/form-data"   modelAttribute = "addCompanyForm">
             <div class="col-md-3"></div>
             <div class="col-md-4">
                 <div class="company" align="center">
@@ -89,12 +89,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12" align="right">
-                            <!--
+
                             <label class="btn btn-primary" for="companyFile">
                                 <input id="companyFile" name="companyFile" type="file" style="display:none;">
                                 Добавить файлы
                             </label>
-                            -->
+
                         </div>
                     </div>
                     <div class="form-group">
