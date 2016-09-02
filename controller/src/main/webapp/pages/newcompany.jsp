@@ -6,11 +6,12 @@
 <html>
 <head>
     <title><spring:message code="addcompany.title"/></title>
+
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="/resources/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="/resources/css/company.css"/>
-    <!--
+<!--
     <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/js/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
@@ -24,7 +25,8 @@
     <div class="row">
         <form:form class="form-horizontal" method="POST" action="/company" id="companyForm"
                    enctype="multipart/form-data"
-                   commandName="addCompanyForm">
+                   commandName="addCompanyForm"
+                   modelAttribute="addCompanyForm">
             <div class="col-md-3">
                 <div class="row">
                     <a class="hyperlink" href="?language=en">English</a> |

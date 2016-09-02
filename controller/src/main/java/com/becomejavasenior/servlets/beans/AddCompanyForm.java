@@ -24,27 +24,31 @@ public class AddCompanyForm {
     private String taskTime;
     private String dateTask;
     @NotNull(message = "{notnull.company.name}")
-    @Size (min=3, max=50, message = "{size.company.name}")
+    @Size (min=3, max=100, message = "{size.company.name}")
     private String companyName;
-    @NotNull
+    @NotNull(message="{notnull.company.responsibleUser}")
     private String companyResponsibleUser;
-    @NotNull
-    @Size (min=2, max=20)
+    @NotNull(message="{notnull.company.tag}")
+    @Size (min=2, max=50, message="{size.company.tag}")
     private String companyTag;
-    @NotNull
-    @Pattern(regexp = "^(?:(?:\\+?1\\s*(?:[.-]\\s*)?)?(?:\\(\\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\\s*\\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\\s*(?:[.-]\\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\\s*(?:[.-]\\s*)?([0-9]{4})(?:\\s*(?:#|x\\.?|ext\\.?|extension)\\s*(\\d+))?$")
+    @NotNull(message="{notnull.company.phone}")
+    @Pattern(regexp = "[+0-9()]{5,15}",
+            message="{pattern.company.phone}"
+    )
     private String companyPhone;
-    @NotNull
-    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
+    @NotNull(message="{notnull.company.email}")
+    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$",
+            message="{pattern.company.email}")
     private String companyEmail;
-    @NotNull
-    @Pattern(regexp = "^((http[s]?|ftp):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$")
+    @NotNull(message="{notnull.company.www}")
+    @Pattern(regexp = "[\\-A-za-z0-9._/]{1,100}",
+            message="{pattern.company.www}")
     private String companyWeb;
-    @NotNull
-    @Size (min=2, max=100)
+    @NotNull(message="{notnull.company.address}")
+    @Size (min=2, max=100,message="{size.company.address}")
     private String companyAddress;
-    @NotNull
-    @Size (min=2, max=100)
+    @NotNull(message="{notnull.company.note}")
+    @Size (min=2, max=100,message="{size.company.note}")
     private String companyNote;
     private String companyContact;
 
