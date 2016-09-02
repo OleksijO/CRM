@@ -124,7 +124,7 @@ Task 8, 21. Spring локализация
 ---пока только company --- в работе(добавлено, заполнить EN для company, разобраться с кодировкой)
 
 Task 22 Validation
---validation added, but only for company
+--validation added, but only for company. some fixes.
 
 
 
