@@ -123,19 +123,14 @@ Task 8, 21. Spring локализация
 
 ---пока только company --- в работе(добавлено, заполнить EN для company, разобраться с кодировкой)
 
-
+Task 22 Validation
+--validation added, but only for company
 
 
 
 TO DO:
 
 
-
- 21. Spring локализация
-#23 opened 3 days ago by becomejavasenior
-
- 8. Spring локализация
-#14 opened 10 days ago by becomejavasenior
 
  19. REST для Сделок на Spring MVC
 #21 opened 3 days ago by becomejavasenior
@@ -148,8 +143,7 @@ TO DO:
  23 Планировщик задач
 #25 opened 5 minutes ago by MykolaBova
 
- 22 Validation
-#24 opened 6 minutes ago by MykolaBova
+
 
  15. Написать DAO для управления правами пользователей на JdbcTemplate
 #3 opened 10 days ago by becomejavasenior

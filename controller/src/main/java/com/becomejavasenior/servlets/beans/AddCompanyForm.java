@@ -1,5 +1,8 @@
 package com.becomejavasenior.servlets.beans;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class AddCompanyForm {
@@ -20,14 +23,28 @@ public class AddCompanyForm {
     private String taskType;
     private String taskTime;
     private String dateTask;
-
+    @NotNull(message = "{notnull.company.name}")
+    @Size (min=3, max=50, message = "{size.company.name}")
     private String companyName;
+    @NotNull
     private String companyResponsibleUser;
+    @NotNull
+    @Size (min=2, max=20)
     private String companyTag;
+    @NotNull
+    @Pattern(regexp = "^(?:(?:\\+?1\\s*(?:[.-]\\s*)?)?(?:\\(\\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\\s*\\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\\s*(?:[.-]\\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\\s*(?:[.-]\\s*)?([0-9]{4})(?:\\s*(?:#|x\\.?|ext\\.?|extension)\\s*(\\d+))?$")
     private String companyPhone;
+    @NotNull
+    @Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
     private String companyEmail;
+    @NotNull
+    @Pattern(regexp = "^((http[s]?|ftp):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$")
     private String companyWeb;
+    @NotNull
+    @Size (min=2, max=100)
     private String companyAddress;
+    @NotNull
+    @Size (min=2, max=100)
     private String companyNote;
     private String companyContact;
 

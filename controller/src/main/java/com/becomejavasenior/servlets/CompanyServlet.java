@@ -5,9 +5,10 @@ import com.becomejavasenior.service.CompanyService;
 import com.becomejavasenior.servlets.beans.AddCompanyForm;
 import com.google.common.base.Splitter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.*;
@@ -48,9 +51,15 @@ public class CompanyServlet {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String doPost(@ModelAttribute("addCompanyForm")AddCompanyForm addCompanyForm,
+    public String doPost(//@ModelAttribute("addCompanyForm")AddCompanyForm addCompanyForm,
+                         @Valid AddCompanyForm addCompanyForm,
+                         BindingResult validationResult,
                          Model model,
-                         @RequestParam("companyFile") MultipartFile file) {
+                         @RequestParam("companyFile") MultipartFile file) throws UnsupportedEncodingException {
+        if (validationResult.hasErrors()&&isGroupValidationPassed()){
+            return "newcompany";
+        }
+
         Exception error=null;
         Company company=null;
         try {
@@ -68,7 +77,8 @@ public class CompanyServlet {
             error = e;
         }
         String message;
-        ResourceBundle bundle=ResourceBundle.getBundle("localization.messages.message", Locale.getDefault());
+
+        ResourceBundle bundle=ResourceBundle.getBundle("localization.messages.message", LocaleContextHolder.getLocale());
         if ((company!=null)&&company.getId()>0) {
             message=String.format(bundle.getString("company.added"),company.getId());
         } else {
@@ -80,6 +90,12 @@ public class CompanyServlet {
         }
         model.addAttribute("message", message);
         return "message";
+    }
+
+    private boolean isGroupValidationPassed() {
+        //TODO Add group validation for deal and contact and task
+        // (if one of group !=null validate group)
+        return true;
     }
 
     private Deal getDealFromForm(AddCompanyForm form) {
@@ -191,8 +207,19 @@ public class CompanyServlet {
         company.setTags(tags);
 
         List<User> userList = companyService.getResponsibleUserList();
-        Optional<User> responsibleUser = userList.stream().filter(u -> u.getName().equals(form.getCompanyResponsibleUser())).findFirst();
-        company.setResponsibleUser(responsibleUser.get());
+        //Optional<User> responsibleUser = userList.stream().filter(u -> u.getName().equals(form.getCompanyResponsibleUser())).findFirst();
+        User responsibleUser=null;
+        for (User user:userList){
+            if (form.getCompanyResponsibleUser().equals(user.getName())){
+                responsibleUser=user;
+                break;
+            }
+        }
+        if (responsibleUser==null) {
+            throw new RuntimeException("Can't find mentioned company responsible user in database.");
+        } else {
+            company.setResponsibleUser(responsibleUser);
+        }
         company.setPhone(form.getCompanyPhone());
         company.setEmail(form.getCompanyEmail());
         company.setWeb(form.getCompanyWeb());
@@ -217,9 +244,14 @@ public class CompanyServlet {
          * We are looking for a contact by name
          */
         List<Contact> contactList = companyService.getContactList();
-        Optional<Contact> companyContact = contactList.stream().filter(c -> c.getName().equals(form.getCompanyContact())).findFirst();
+        //Contact companyContact = contactList.stream().filter(c -> c.getName().equals(form.getCompanyContact())).findFirst();
         List<Contact> contacts = new ArrayList<>();
-        contacts.add(companyContact.get());
+        for (Contact contact:contactList){
+            if (form.getCompanyContact().equals(contact.getName())){
+                contacts.add(contact);
+            }
+        }
+        //contacts.add(companyContact.get());
         company.setContacts(contacts);
         company.setDelete(false);
         User creator = new User();

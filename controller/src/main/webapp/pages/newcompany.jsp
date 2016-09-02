@@ -10,18 +10,21 @@
     <link rel="stylesheet" href="/resources/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="/resources/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="/resources/css/company.css"/>
+    <!--
     <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/js/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrapValidator.min.js"></script>
     <script type="text/javascript" src="/resources/js/company.js"></script>
+-->
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
         <form:form class="form-horizontal" method="POST" action="/company" id="companyForm"
-                   enctype="multipart/form-data"   modelAttribute = "addCompanyForm">
+                   enctype="multipart/form-data"
+                   commandName="addCompanyForm">
             <div class="col-md-3">
                 <div class="row">
                     <a class="hyperlink" href="?language=en">English</a> |
@@ -33,6 +36,9 @@
                     <br>
                     <h3><spring:message code="addcompany.title"/></h3>
                     <br>
+                    <div class="form-group">
+                        <font color="red"><form:errors path="*" /></font>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-md-5" for="companyName"><h4><spring:message code="addcompany.name"/></h4></label>
                         <div class="col-md-7">
