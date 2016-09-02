@@ -40,6 +40,11 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
         <property name="companyDAO" ref="companyDao"/>
     </bean>
 
+    <bean id="reportService" class="com.becomejavasenior.service.impl.ReportServiceImpl">
+        <property name="reportDAO" ref="reportDao"/>
+    </bean>
+
+
 </beans>
 
 

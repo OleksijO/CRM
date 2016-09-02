@@ -235,7 +235,6 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
             PreparedStatementSetter preparedStatementSetter = preparedStatement -> {
                 preparedStatement.setInt(1, deal.getId());
                 preparedStatement.setInt(2, contact.getId());
-                preparedStatement.executeUpdate();
             };
             jdbcTemplate.update(INSERT_DEAL_CONTACT_SQL,preparedStatementSetter);
         }

@@ -20,6 +20,14 @@ DROP TABLE company IF EXISTS ;
 DROP TABLE users IF EXISTS ;
 DROP TABLE language IF EXISTS ;
 DROP TABLE stage_deals IF EXISTS ;
+DROP TABLE stage_deals IF EXISTS ;
+
+
+CREATE TABLE  report (
+  id IDENTITY NOT NULL,
+  date TIMESTAMP NOT NULL,
+  hour_amount DECIMAL(20,2)
+  PRIMARY KEY (id));
 
 
 CREATE TABLE stage_deals (

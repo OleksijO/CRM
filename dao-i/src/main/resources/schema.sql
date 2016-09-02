@@ -1,28 +1,15 @@
 -- #development #IDEA
 -- Make sure your connection now
 -- is to database "crm-crius" !
+DROP SCHEMA IF EXISTS public CASCADE;
+CREATE SCHEMA IF NOT EXISTS public;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO public;
 
-DROP TABLE currency IF EXISTS ;
-DROP TABLE deal_tag IF EXISTS ;
-DROP TABLE contact_company_tag IF EXISTS ;
-DROP TABLE tag IF EXISTS ;
-DROP TABLE visit_history IF EXISTS ;
-DROP TABLE deal_contact IF EXISTS ;
-DROP TABLE rights IF EXISTS ;
-DROP TABLE attached_file IF EXISTS ;
-DROP TABLE note IF EXISTS ;
-DROP TABLE task  IF EXISTS ;
-DROP TABLE task_status IF EXISTS ;
-DROP TABLE task_type IF EXISTS ;
-DROP TABLE deal IF EXISTS ;
-DROP TABLE contact IF EXISTS ;
-DROP TABLE company IF EXISTS ;
-DROP TABLE users IF EXISTS ;
-DROP TABLE language IF EXISTS ;
-DROP TABLE stage_deals IF EXISTS ;
+SET SEARCH_PATH TO public;
 
 
-CREATE TABLE stage_deals (
+CREATE TABLE IF NOT EXISTS stage_deals (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
   deleted BOOLEAN,
@@ -30,7 +17,7 @@ CREATE TABLE stage_deals (
 
 
 
-CREATE TABLE language (
+CREATE TABLE IF NOT EXISTS language (
   id INT NOT NULL,
   name VARCHAR(45) NOT NULL,
   code CHAR(2) NOT NULL,
@@ -39,19 +26,20 @@ CREATE TABLE language (
 
 
 
-CREATE TABLE users (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL NOT NULL,
   name VARCHAR(100) NOT NULL,
-  email VARCHAR(320) NOT NULL,
+  email VARCHAR(320) NOT NULL UNIQUE,
   password VARCHAR(32) NOT NULL,
   is_admin BOOLEAN,
   phone VARCHAR(45),
   mobile_phone VARCHAR(45),
   note VARCHAR(300),
   deleted BOOLEAN,
-  image VARBINARY(256000),
+  image BYTEA,
   url VARCHAR(255),
   language_id INT NOT NULL,
+  PRIMARY KEY (id),
     FOREIGN KEY (language_id)
     REFERENCES language (id)
     ON DELETE NO ACTION
@@ -59,8 +47,8 @@ CREATE TABLE users (
 
 
 
-CREATE TABLE company (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS company (
+  id SERIAL NOT NULL,
   name VARCHAR(200) NOT NULL,
   phone VARCHAR(45) NOT NULL,
   email VARCHAR(320) NOT NULL,
@@ -70,6 +58,7 @@ CREATE TABLE company (
   deleted BOOLEAN,
   created_by_id INT NOT NULL,
   date_create TIMESTAMP,
+  PRIMARY KEY (id),
     FOREIGN KEY (responsible_users_id)
     REFERENCES users (id)
     ON DELETE NO ACTION
@@ -81,8 +70,8 @@ CREATE TABLE company (
 
 
 
-CREATE TABLE contact (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS contact (
+  id SERIAL NOT NULL,
   name VARCHAR(300) NOT NULL,
   responsible_users_id INT NOT NULL,
   pos VARCHAR(100),
@@ -94,6 +83,7 @@ CREATE TABLE contact (
   deleted BOOLEAN,
   date_create TIMESTAMP,
   created_by_id INT NOT NULL,
+  PRIMARY KEY (id),
     FOREIGN KEY (responsible_users_id)
     REFERENCES users (id)
     ON DELETE NO ACTION
@@ -109,8 +99,8 @@ CREATE TABLE contact (
 
 
 
-CREATE TABLE deal (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS deal (
+  id SERIAL NOT NULL,
   name VARCHAR(200) NOT NULL,
   stage_id INT NOT NULL,
   responsible_users_id INT,
@@ -119,6 +109,7 @@ CREATE TABLE deal (
   deleted BOOLEAN,
   date_create TIMESTAMP,
   created_by_id INT NOT NULL,
+  PRIMARY KEY (id),
     FOREIGN KEY (stage_id)
     REFERENCES stage_deals (id)
     ON DELETE NO ACTION
@@ -138,7 +129,7 @@ CREATE TABLE deal (
 
 
 
-CREATE TABLE task_type (
+CREATE TABLE IF NOT EXISTS task_type (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
   deleted BOOLEAN,
@@ -146,7 +137,7 @@ CREATE TABLE task_type (
 
 
 
-CREATE TABLE task_status (
+CREATE TABLE IF NOT EXISTS task_status (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
   deleted BOOLEAN,
@@ -154,8 +145,8 @@ CREATE TABLE task_status (
 
 
 
-CREATE TABLE task (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS task (
+  id SERIAL NOT NULL,
   period INT NOT NULL,
   responsible_users_id INT NOT NULL,
   task_type_id INT NOT NULL,
@@ -167,6 +158,7 @@ CREATE TABLE task (
   company_id INT,
   contact_id INT,
   deal_id INT,
+  PRIMARY KEY (id),
     FOREIGN KEY (responsible_users_id)
     REFERENCES users (id)
     ON DELETE NO ACTION
@@ -198,8 +190,8 @@ CREATE TABLE task (
 
 
 
-CREATE TABLE note (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS note (
+  id SERIAL NOT NULL,
   note VARCHAR(500),
   created_by_id INT NOT NULL,
   date_create TIMESTAMP NOT NULL,
@@ -207,6 +199,7 @@ CREATE TABLE note (
   deal_id INT,
   company_id INT,
   contact_id INT,
+  PRIMARY KEY (id),
     FOREIGN KEY (created_by_id)
     REFERENCES users (id)
     ON DELETE NO ACTION
@@ -226,18 +219,19 @@ CREATE TABLE note (
 
 
 
-CREATE TABLE attached_file (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS attached_file (
+  id SERIAL NOT NULL,
   created_by_id INT NOT NULL,
   date_create TIMESTAMP NOT NULL,
   filename VARCHAR(100),
   filesize INT,
   deleted BOOLEAN,
   url_file VARCHAR(255) NULL,
-  file VARBINARY(20480000),
+  file BYTEA,
   contact_id INT,
   company_id INT,
   deal_id INT,
+  PRIMARY KEY (id),
     FOREIGN KEY (contact_id)
     REFERENCES contact (id)
     ON DELETE NO ACTION
@@ -253,8 +247,8 @@ CREATE TABLE attached_file (
 
 
 
-CREATE TABLE rights (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS rights (
+  id SERIAL NOT NULL,
   users_id INT NOT NULL,
   subject_type INT NOT NULL,
   subject_type_create BOOLEAN,
@@ -263,6 +257,7 @@ CREATE TABLE rights (
   subject_type_change BOOLEAN,
   subject_type_export BOOLEAN,
   deleted BOOLEAN,
+  PRIMARY KEY (id),
     FOREIGN KEY (users_id)
     REFERENCES users (id)
     ON DELETE NO ACTION
@@ -276,7 +271,7 @@ CREATE TABLE rights (
 
 
 
-CREATE TABLE deal_contact (
+CREATE TABLE IF NOT EXISTS deal_contact (
   deal_id INT NOT NULL,
   contact_id INT NOT NULL,
   PRIMARY KEY (deal_id, contact_id),
@@ -291,13 +286,14 @@ CREATE TABLE deal_contact (
 
 
 
-CREATE TABLE visit_history (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS visit_history (
+  id SERIAL NOT NULL,
   users_id INT NOT NULL,
   date_create TIMESTAMP NOT NULL,
   ip_address VARCHAR(45),
   browser VARCHAR(255),
   deleted BOOLEAN,
+  PRIMARY KEY (id),
     FOREIGN KEY (users_id)
     REFERENCES users (id)
     ON DELETE NO ACTION
@@ -305,20 +301,21 @@ CREATE TABLE visit_history (
 
 
 
-CREATE TABLE tag (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS tag (
+  id SERIAL NOT NULL,
   name VARCHAR(1000) NOT NULL,
-  deleted BOOLEAN
-  );
+  deleted BOOLEAN,
+  PRIMARY KEY (id));
 
 
 
-CREATE TABLE contact_company_tag (
-  id IDENTITY NOT NULL,
+CREATE TABLE IF NOT EXISTS contact_company_tag (
+  id SERIAL NOT NULL,
   contact_id INT,
   tag_id INT NOT NULL,
   company_id INT,
   deleted BOOLEAN,
+  PRIMARY KEY (id),
     FOREIGN KEY (contact_id)
     REFERENCES contact (id)
     ON DELETE NO ACTION
@@ -334,7 +331,7 @@ CREATE TABLE contact_company_tag (
 
 
 
-CREATE TABLE deal_tag (
+CREATE TABLE IF NOT EXISTS deal_tag (
   deal_id INT NOT NULL,
   tag_id INT NOT NULL,
   PRIMARY KEY (deal_id, tag_id),
@@ -349,10 +346,19 @@ CREATE TABLE deal_tag (
 
 
 
-CREATE TABLE currency (
+CREATE TABLE IF NOT EXISTS currency (
   id INT NOT NULL,
   name VARCHAR(45) NOT NULL,
   active BOOLEAN,
   deleted BOOLEAN,
   PRIMARY KEY (id));
 
+
+CREATE TABLE IF NOT EXISTS report (
+  id          SERIAL    NOT NULL,
+  date        TIMESTAMP NOT NULL,
+  hour_amount DECIMAL(20, 2),
+  company_id  INT NOT NULL,
+  FOREIGN KEY (company_id)
+  REFERENCES company (id)
+);

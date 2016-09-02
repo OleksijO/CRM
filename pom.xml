@@ -43,11 +43,13 @@
         <module>controller</module>
         <module>dao</module>
         <module>model</module>
-        <module>service</module>
         <module>jdbc-template</module>
         <module>dao-i</module>
         <module>aspects</module>
         <module>rest</module>
+        <module>service</module>
+        <module>schedule</module>
+        <module>tasks</module>
     </modules>
 
     <name>CRM Maven Webapp</name>

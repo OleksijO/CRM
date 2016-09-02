@@ -68,7 +68,6 @@ public class TagDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Tag> impleme
             preparedStatement.setString(1, tag.getName());
             preparedStatement.setBoolean(2, tag.isDelete());
             preparedStatement.setInt(3, tag.getId());
-            preparedStatement.executeUpdate();
         };
         jdbcTemplate.update(UPDATE_SQL,preparedStatementSetter);
     }
@@ -122,7 +121,6 @@ public class TagDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Tag> impleme
                 preparedStatement.setInt(1, finalId);
                 preparedStatement.setObject(2, finalFieldId == 2 ? finalObjectId : null, Types.INTEGER); //contact_id
                 preparedStatement.setObject(3, finalFieldId == 3 ? finalObjectId : null, Types.INTEGER); //company_id
-                preparedStatement.executeUpdate();
             };
             jdbcTemplate.update(INSERT_FOR_CONTACT_COMPANY_SQL,preparedStatementSetter);
         } else {

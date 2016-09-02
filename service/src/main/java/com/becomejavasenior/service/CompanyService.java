@@ -17,4 +17,6 @@ public interface CompanyService {
     Map<Integer, String> getStageDealsList();
     int createNewCompany(Company company, Contact contact, Deal deal, Task task, File file);
     List<String> getTimeListForTask();
+
+    void setCompanyDAO(com.becomejavasenior.jdbc.entity.CompanyDAO companyDAO);
 }

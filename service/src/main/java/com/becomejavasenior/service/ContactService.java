@@ -25,4 +25,6 @@ public interface ContactService extends GenericService<Contact> {
     List<Tag> getTagList();
 
     boolean createByParameters(Map<String, String[]> parameterMap, Part filePart);
+
+    void setCompanyDAO(com.becomejavasenior.jdbc.entity.CompanyDAO companyDAO);
 }
