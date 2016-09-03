@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.sql.Types;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,7 +121,7 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
         deal.setName(resultSet.getString(FIELD_NAME));
         deal.setAmount(resultSet.getBigDecimal("amount"));
         deal.setDelete(false);
-        deal.setDateCreate(resultSet.getTimestamp("date_create"));
+        deal.setDateCreate(new Date(resultSet.getTimestamp("date_create").getTime()));
         stage.setId(resultSet.getInt("stage_id"));
         deal.setStage(stage);
         if (resultSet.getObject("primary_contact_id") != null) {

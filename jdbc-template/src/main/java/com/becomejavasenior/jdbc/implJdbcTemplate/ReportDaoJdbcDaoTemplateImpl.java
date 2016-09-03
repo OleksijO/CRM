@@ -15,6 +15,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
             "  report.id, \n" +
             "  date, \n" +
             "  hour_amount, \n" +
-            "  company.id AS comany_id, \n" +
+            "  company.id AS company_id, \n" +
             "  company.name AS company_name, \n" +
             "  users.id AS users_id, \n" +
             "  users.name AS users_name\n" +
@@ -39,9 +40,9 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
             "LEFT JOIN company ON company.id=report.company_id\n" +
             "LEFT JOIN users ON company.responsible_users_id=users.id";
 
-    private static final String FIELD_DATE = "date";
+    private static final String FIELD_DATE = "date_create";
     private static final String FIELD_AMOUNT = "hour_amount";
-    private static final String FIELD_COMPANY_ID = "company_id";
+    private static final String FIELD_COMPANY_ID = "id";
     private static final String FIELD_CONPANY_NAME = "company_name";
     private static final String FIELD_CONPANY_RESPONSIBLE_USER_ID = "users_id";
     private static final String FIELD_CONPANY_RESPONSIBLE_NAME = "users_name";
@@ -50,6 +51,21 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
     private final String className = getClass().getSimpleName().concat(": ");
 
     private static final RowMapper<Report> ROW_MAPPER_REPORT = (resultSet, i) -> {
+        User responsibleUser = new User();
+        responsibleUser.setId(resultSet.getInt(FIELD_CONPANY_RESPONSIBLE_USER_ID));
+        responsibleUser.setName(resultSet.getString(FIELD_CONPANY_RESPONSIBLE_NAME));
+        Company company = new Company();
+        company.setId(resultSet.getInt(FIELD_COMPANY_ID));
+        company.setName(resultSet.getString(FIELD_CONPANY_NAME));
+        company.setResponsibleUser(responsibleUser);
+        Report report = new Report();
+        report.setId(resultSet.getInt(FIELD_ID));
+        report.setHourAmount(resultSet.getBigDecimal(FIELD_AMOUNT));
+        report.setCompany(company);
+        return report;
+    };
+
+    private static final RowMapper<Report> ROW_MAPPER_REPORT_BY_ID = (resultSet, i) -> {
         User responsibleUser = new User();
         responsibleUser.setId(resultSet.getInt(FIELD_CONPANY_RESPONSIBLE_USER_ID));
         responsibleUser.setName(resultSet.getString(FIELD_CONPANY_RESPONSIBLE_NAME));
@@ -74,7 +90,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
 
         PreparedStatementCreator preparedStatementCreator = connection -> {
             PreparedStatement statement = connection.prepareStatement(INSERT_SQL, new String[]{"id"});
-            statement.setDate(1, (java.sql.Date) DateUtils.truncate(report.getDate(), Calendar.HOUR));
+            statement.setTimestamp(1, toTimeStamp(DateUtils.truncate(report.getDate(), Calendar.HOUR)));
             statement.setBigDecimal(2, report.getHourAmount());
             return statement;
         };
@@ -93,7 +109,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
         }
 
         PreparedStatementSetter preparedStatementSetter = preparedStatement -> {
-            preparedStatement.setDate(1, (java.sql.Date) DateUtils.truncate(report.getDate(), Calendar.HOUR));
+            preparedStatement.setTimestamp(1, toTimeStamp(DateUtils.truncate(report.getDate(), Calendar.HOUR)));
             preparedStatement.setBigDecimal(2, report.getHourAmount());
             preparedStatement.setInt(3, report.getId());
         };
@@ -126,7 +142,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
     @Override
     public List<Report> getByDateAndCompany(Date date, Company company) {
         PreparedStatementSetter preparedStatementSetter = preparedStatement -> {
-            preparedStatement.setDate(1, (java.sql.Date) DateUtils.truncate(date, Calendar.HOUR));
+            preparedStatement.setTimestamp(1, toTimeStamp(DateUtils.truncate(date, Calendar.HOUR)));
             preparedStatement.setInt(2, company.getId());
 
         };
@@ -138,7 +154,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
     @Override
     public List<Report> getByDate(Date date) {
         PreparedStatementSetter preparedStatementSetter = preparedStatement -> {
-            preparedStatement.setDate(1, (java.sql.Date) DateUtils.truncate(date, Calendar.HOUR));
+            preparedStatement.setTimestamp(1, toTimeStamp(DateUtils.truncate(date, Calendar.HOUR)));
         };
         return getJdbcTemplate().query(SELECT_SQL + " WHERE date = ?",
                 preparedStatementSetter,
@@ -158,25 +174,34 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
 
     @Override
     public List<Report> getDealsAmountForPreviousHour() {
-        Date date= new Date(System.currentTimeMillis()-1000*1800);
-        java.sql.Date start =(java.sql.Date)DateUtils.truncate(date,Calendar.HOUR);
-        java.sql.Date finish =(java.sql.Date)DateUtils.ceiling(date,Calendar.HOUR);
+        Date date = new Date(System.currentTimeMillis());
+        Date finish = DateUtils.truncate(date, Calendar.HOUR);
+        Date start = DateUtils.truncate(new Date(finish.getTime() - 1000 * 1800), Calendar.HOUR);
         PreparedStatementSetter preparedStatementSetter = preparedStatement -> {
-            preparedStatement.setDate(1, start);
-            preparedStatement.setDate(2, finish);
+            preparedStatement.setTimestamp(1, new Timestamp(start.getTime()));
+            preparedStatement.setTimestamp(2, new Timestamp(finish.getTime()));
         };
-
-        return getJdbcTemplate().query("SELECT\n" +
-                "  SUM(deal.amount) AS hour_amount,\n" +
-                "  company.id AS comany_id,\n" +
+        List<Report> reportList = getJdbcTemplate().query(" SELECT SUM(deal.amount) AS hour_amount,\n" +
+                "  company.id,\n" +
                 "  company.name AS company_name,\n" +
                 "  users.id AS users_id,\n" +
                 "  users.name AS users_name\n" +
+                "  " +
                 "FROM deal\n" +
                 "LEFT JOIN company ON company.id=deal.company_id\n" +
                 "LEFT JOIN users ON company.responsible_users_id=users.id\n" +
-                "WHERE deal.date_create >= ? AND deal.date_create < ? \n" +
-                "GROUP BY comany_id, company_name, users_id,users_name", preparedStatementSetter, ROW_MAPPER_REPORT);
+                "WHERE deal.date_create >= ? AND deal.date_create < ?\n" +
+                "GROUP BY company.id, company_name, users_id, users_name", preparedStatementSetter, ROW_MAPPER_REPORT);
+        for(Report report:reportList){
+            report.setDate(new Date(finish.getTime()));
+
+        }
+        return reportList;
     }
+
+    private Timestamp toTimeStamp(Date date) {
+        return new Timestamp(date.getTime());
+    }
+
 }
 

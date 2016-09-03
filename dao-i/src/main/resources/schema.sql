@@ -359,6 +359,7 @@ CREATE TABLE IF NOT EXISTS report (
   date        TIMESTAMP NOT NULL,
   hour_amount DECIMAL(20, 2),
   company_id  INT NOT NULL,
+  PRIMARY KEY (id),
   FOREIGN KEY (company_id)
   REFERENCES company (id)
 );
