@@ -49,7 +49,9 @@ public class Report {
         Report report = (Report) o;
 
         if (id != report.id) return false;
-        return date != null ? date.equals(report.date) : report.date == null;
+        if (date != null ? !date.equals(report.date) : report.date != null) return false;
+        if (hourAmount != null ? !hourAmount.equals(report.hourAmount) : report.hourAmount != null) return false;
+        return company != null ? company.equals(report.company) : report.company == null;
 
     }
 
@@ -57,6 +59,8 @@ public class Report {
     public int hashCode() {
         int result = id;
         result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (hourAmount != null ? hourAmount.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
         return result;
     }
 

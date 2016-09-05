@@ -20,12 +20,9 @@ import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+
 //@Repository("contactDaoJdbcTemplate")
 public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact> implements ContactDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO contact (name, responsible_users_id, pos, type_of_phone, phone," +
             " skype, email, deleted, date_create, created_by_id, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

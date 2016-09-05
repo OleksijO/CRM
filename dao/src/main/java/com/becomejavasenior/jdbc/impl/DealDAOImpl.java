@@ -5,6 +5,7 @@ import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -399,5 +400,11 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
             throw new DatabaseException(ex);
         }
         return stageDeals;
+    }
+
+    @Override
+    public Map<Company, BigDecimal> getDealAmountsForCompaniesForPeriod(java.util.Date start, java.util.Date finish) {
+        //TODO implement method
+        throw new RuntimeException("Operation is not supported by this implementation yet. Use another one, please.");
     }
 }

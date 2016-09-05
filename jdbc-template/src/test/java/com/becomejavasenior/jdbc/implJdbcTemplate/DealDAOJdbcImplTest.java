@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class DealDAOTest extends SpringDaoTests {
+public class DealDAOJdbcImplTest extends SpringDaoJdbcImplTests {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());
@@ -38,15 +39,16 @@ public class DealDAOTest extends SpringDaoTests {
     private int dealTestId;
 
     @PostConstruct
-    public void init() {
+    public void init() throws IOException {
         userForDealTest = userDAO.getById(1);
         stageForDealTest = stageDAO.getById(1);
         companyForDealTest = companyDAO.getById(1);
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         dealTestId = 0;
+
     }
 
     @After
@@ -125,7 +127,9 @@ public class DealDAOTest extends SpringDaoTests {
         Deal updatedDeal = dealDAO.getById(dealTestId);
         Assert.assertNotNull("Deal after update is null", updatedDeal);
         Assert.assertEquals("Deal name update failed", updatedName, updatedDeal.getName());
-        Assert.assertEquals("Date of deal creation update failed", updatedCreateDate, updatedDeal.getDateCreate());
+        Assert.assertEquals("Date of deal creation update failed",
+                updatedCreateDate.getTime(),
+                updatedDeal.getDateCreate().getTime());
         Assert.assertEquals("Deal creator update failed", updatedUser.getId(), updatedDeal.getCreator().getId());
         Assert.assertEquals("Deal responsible user update failed", updatedUser.getId(), updatedDeal.getResponsibleUser().getId());
         Assert.assertEquals("Deal link to Company update failed", updatedCompany.getId(), updatedDeal.getCompany().getId());

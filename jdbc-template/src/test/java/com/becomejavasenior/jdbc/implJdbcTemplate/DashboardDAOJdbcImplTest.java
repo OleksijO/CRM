@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 
-public class DashboardDAOTest extends SpringDaoTests {
+public class DashboardDAOJdbcImplTest extends SpringDaoJdbcImplTests {
     @Autowired
     private DashboardDAO dashboardDAO;
 

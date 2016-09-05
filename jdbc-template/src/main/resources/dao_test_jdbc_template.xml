@@ -8,24 +8,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <!--    Postgress test real DB-->
+    <!--    Postgresql real test DB-->
     <import resource="classpath*:datasource_test.xml"/>
 
+    <!--     Embedded test DB-->
     <!--
-    <jdbc:embedded-database id="dataSource" database-name="test" type="H2" >
-        <jdbc:script location="test-schema.sql"/>
-        <jdbc:script location="test-data.sql"/>
-    </jdbc:embedded-database>
-    -->
-    <!--
-    <bean id="dataSource"
-          class="org.apache.commons.dbcp2.BasicDataSource"
-          destroy-method="close"
-          p:driverClassName="org.hsqldb.jdbcDriver"
-          p:url="url:jdbc:hsqldb:mem:test"
-          p:username="SA"
-          p:password=""
-          />
+    <import resource="classpath*:embedded_datasource_test.xml"/>
     -->
 
     <context:annotation-config/>
@@ -34,7 +22,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
     <import resource="classpath*:aspects.xml"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="testDataSource"/>
     </bean>
 
     <bean id="companyDao"
@@ -56,8 +44,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
           autowire="default"/>
 
     <bean id="reportDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.ReportDaoJdbcDaoTemplateImpl"
-          p:dataSource-ref="dataSource"/>
-
+          p:dataSource-ref="testDataSource"/>
 
 </beans>
 

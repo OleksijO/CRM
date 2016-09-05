@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +20,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class CompanyDAOTest extends SpringDaoTests {
+public class CompanyDAOJdbcImplTest extends SpringDaoJdbcImplTests {
 
     @Autowired
     @Qualifier("companyDao")
@@ -35,12 +36,12 @@ public class CompanyDAOTest extends SpringDaoTests {
     private int companyTestId;
 
     @PostConstruct
-    public void init(){
+    public void init() throws IOException {
         userForCompanyTest = userDAO.getById(1);
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         companyTestId = 0;
     }
 

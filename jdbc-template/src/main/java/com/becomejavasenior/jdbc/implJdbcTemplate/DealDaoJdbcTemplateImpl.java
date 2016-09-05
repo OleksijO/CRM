@@ -10,7 +10,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.Date;
@@ -251,5 +253,45 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
             return stageDeals;
         });
 
+    }
+
+    @Override
+    public Map<Company,BigDecimal> getDealAmountsForCompaniesForPeriod(Date start, Date finish) {
+        PreparedStatementSetter preparedStatementSetter = preparedStatement -> {
+            preparedStatement.setTimestamp(1, new Timestamp(start.getTime()));
+            preparedStatement.setTimestamp(2, new Timestamp(finish.getTime()));
+        };
+
+        return  jdbcTemplate.query(
+                " SELECT SUM(deal.amount) AS hour_amount,\n" +
+                        "  company.id,\n" +
+                        "  company.name AS company_name,\n" +
+                        "  users.id AS users_id,\n" +
+                        "  users.name AS users_name\n" +
+                        "  " +
+                        "FROM deal\n" +
+                        "LEFT JOIN company ON company.id=deal.company_id\n" +
+                        "LEFT JOIN users ON company.responsible_users_id=users.id\n" +
+                        "WHERE deal.date_create >= ? AND deal.date_create < ?\n" +
+                        "GROUP BY company.id, company_name, users_id, users_name" ,
+
+                rs -> {
+                    Map<Company,BigDecimal> map = new HashMap<>();
+                    try {
+                        while (rs.next()) {
+                            User responsibleUser = new User();
+                            responsibleUser.setId(rs.getInt("users_id"));
+                            responsibleUser.setName(rs.getString("users_name"));
+                            Company company = new Company();
+                            company.setId(rs.getInt("company_id"));
+                            company.setName(rs.getString("company_name"));
+                            company.setResponsibleUser(responsibleUser);
+                            map.put(company,rs.getBigDecimal("hour_amount") );
+                        }
+                    } catch (SQLException e) {
+                        throw new DatabaseException(e);
+                    }
+                    return map;
+                });
     }
 }

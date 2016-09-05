@@ -12,7 +12,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void makeHourDealAmountReports() {
         System.out.println(this.getClass()+" prepare to obtain list :");
-        List<Report> list = reportDAO.getDealsAmountForPreviousHour();
+        List<Report> list = reportDAO.makeReportsWithDealsAmountForPreviousHour();
         System.out.println(this.getClass()+" list obtained :"+list);
         for (Report report : list) {
             reportDAO.insert(report);

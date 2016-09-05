@@ -22,7 +22,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class ContactDAOTest extends SpringDaoTests {
+public class ContactDAOJdbcImplTest extends SpringDaoJdbcImplTests {
     @Autowired
     private ContactDAO contactDAO;
     @Autowired

@@ -1,6 +1,7 @@
 package com.becomejavasenior.rest.impl;
 
 import com.becomejavasenior.entity.Contact;
+import com.becomejavasenior.rest.impl.wrapper.ContactWrapper;
 import com.becomejavasenior.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,9 @@ public class ContactRestController {
     ContactService contactService;
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
-    public List<Contact> getAll(HttpServletResponse response){
-        List<Contact> list= contactService.getAll();
-
+    public ContactWrapper getAll(){
+        List<Contact> contactList=contactService.getAll();
+        ContactWrapper list=new ContactWrapper(contactList);
         return list;
     }
 

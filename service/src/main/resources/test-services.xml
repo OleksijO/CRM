@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="classpath*:dao_test_jdbc_template.xml"/>
+
+    <bean id="dealService" class="com.becomejavasenior.service.impl.DealServiceImpl"
+          factory-method="createInstance"
+          lazy-init="true"
+          init-method="afterPropertiesSet"
+          destroy-method="destroy"
+          autowire="byName"
+    />
+
+    <bean id="userService" class="com.becomejavasenior.service.impl.UserServiceImpl"
+          factory-method="createInstance" >
+        <property name="userDAO" ref="userDao"/>
+        <property name="languageDAO" ref="languageDao"/>
+    </bean>
+
+    <!-- Factory service bean -->
+    <bean id="serviceFactory" class="com.becomejavasenior.service.impl.ServiceFactoryImpl"/>
+
+    <bean id="companyService" factory-bean="serviceFactory" factory-method="createCompanyServiceInstance"
+          scope="singleton"
+          lazy-init="true"
+          autowire="byType">
+        <property name="companyDAO" ref="companyDao"/>
+    </bean>
+
+    <bean id="contactService" factory-bean="serviceFactory" factory-method="createContactServiceInstance"
+          scope="prototype"
+          autowire="byType"
+    >
+        <property name="companyDAO" ref="companyDao"/>
+    </bean>
+
+    <bean id="reportService" class="com.becomejavasenior.service.impl.ReportServiceImpl">
+        <property name="reportDAO" ref="reportDao"/>
+    </bean>
+
+
+</beans>
+
+
+

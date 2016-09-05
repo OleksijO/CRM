@@ -126,17 +126,18 @@ Task 8, 21. Spring локализация
 Task 22 Validation
 --validation added, but only for company. some fixes.
 
-
+NOW: -----------------------------------------------------------
 
 23 Планировщик задач
 1 - Добавить таймерную задачу, которая запускается каждый час, подсчитывает для каждой компаниии сумму сделок за последний час и записывает эту информацию в отдельную таблицу Report
 
---task edded. ReportDao need to test somthing is wrong.
+--task edded. ReportDao Works. need to check and test CRUD. ReportService has NPE
 
 2 - Добавить таймерную задачу, которая проверяет все незавершённые задания и отправляет каждому ответственному письмо со списком назначенных на него и невыполненных [этим ответственным] заданий
 Задача запускаетсья каждые сутки в 00:00
 
-
+Проверить стирание формы
+model.addAttribute("addContactForm", new AddContactForm());
 
 TO DO:
 

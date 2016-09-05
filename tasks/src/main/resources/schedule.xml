@@ -11,6 +11,8 @@
     <task:scheduler id="myScheduler" pool-size="17"/>
 
 
+    <import resource="classpath*:services.xml"/>
+
     <bean id="schedulerFactoryBean"
           class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">

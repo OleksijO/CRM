@@ -7,19 +7,22 @@ import java.util.Date;
 import java.util.List;
 
 public interface ReportDAO extends GenericDAO<Report> {
+    /**
+     * Returns NULL if there is no Report with specified id.
+     * Use method getReportById(int id) instead.
+     */
+    @Deprecated
+    Report getById(int id);
 
     /**
-     *
-     * @param date    - must be date with exact number hours to get report for previous full hour
-     * @return        - returns report for hour before specified date,
-     *                  i.e. date=2000-04-27 12:00:00 report has deals' amount from 11:00:00.000 to 11:59:59.999.
-     *                  date=2000-04-27 12:59:59 will give the same result //TODO
+     * Throws EmptyResultDataAccessException if there is no Report with specified id.
      */
-    List<Report> getByDateAndCompany(Date date, Company company);
+    Report getReportById(int id);
+
+    List<Report> getByCompanyAndPeriod(Company company, Date start, Date end);
+
+    List<Report> getByPeriod(Date start, Date end);
 
     List<Report> getByCompany(Company company);
 
-    List<Report> getByDate(Date date);
-
-    List<Report> getDealsAmountForPreviousHour();
 }
