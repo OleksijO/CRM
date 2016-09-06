@@ -11,23 +11,6 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
     <!--    Postgress test real DB-->
     <import resource="classpath*:datasource_test.xml"/>
 
-    <!--
-    <jdbc:embedded-database id="dataSource" database-name="test" type="H2" >
-        <jdbc:script location="test-schema.sql"/>
-        <jdbc:script location="test-data.sql"/>
-    </jdbc:embedded-database>
-    -->
-    <!--
-    <bean id="dataSource"
-          class="org.apache.commons.dbcp2.BasicDataSource"
-          destroy-method="close"
-          p:driverClassName="org.hsqldb.jdbcDriver"
-          p:url="url:jdbc:hsqldb:mem:test"
-          p:username="SA"
-          p:password=""
-          />
-    -->
-
     <context:annotation-config/>
     <context:component-scan
             base-package="com.becomejavasenior.jdbc.impl"/>
@@ -40,7 +23,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
           class="com.becomejavasenior.jdbc.impl.ContactDAOImpl"
           autowire="default">
     </bean>
-    <bean id="dealDao" class="com.becomejavasenior.jdbc.impl.DealDAOImpl"
+    <bean id="dealDAO" class="com.becomejavasenior.jdbc.impl.DealDAOImpl"
           autowire="default"/>
     <bean id="tagDao"
           class="com.becomejavasenior.jdbc.impl.TagDAOImpl"

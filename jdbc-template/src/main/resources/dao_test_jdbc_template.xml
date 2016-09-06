@@ -34,7 +34,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
         <constructor-arg ref="tagDao"/>
     </bean>
 
-    <bean id="dealDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.DealDaoJdbcTemplateImpl"
+    <bean id="dealDAO" class="com.becomejavasenior.jdbc.implJdbcTemplate.DealDaoJdbcTemplateImpl"
           autowire="default"/>
 
     <bean id="tagDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.TagDaoJdbcTemplateImpl"

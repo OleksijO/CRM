@@ -2,10 +2,8 @@ package com.becomejavasenior.jdbc.implJdbcTemplate;
 
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
@@ -24,22 +22,14 @@ import static com.becomejavasenior.jdbc.implJdbcTemplate.SpringDaoJdbcImplTests.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(APPLICATION_CONTEXT_FILE)
 
-abstract public class SpringDaoJdbcImplTests implements ApplicationContextAware {
+abstract public class SpringDaoJdbcImplTests{
     public static final String APPLICATION_CONTEXT_FILE = "classpath:dao_test_jdbc_template.xml";
 
     @Autowired
     private DataSource dataSource;
-    @Autowired
-    private ApplicationContext context;
 
     protected Connection getConnection() throws SQLException {
         return dataSource.getConnection();
-    }
-
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        context = applicationContext;
     }
 
     @BeforeClass
@@ -65,6 +55,10 @@ abstract public class SpringDaoJdbcImplTests implements ApplicationContextAware 
             System.out.println(script.getFilename() + " " + script.exists() + " " + script.contentLength());
             ScriptUtils.executeSqlScript(connection, script);
         }
+        System.out.println();
+        System.out.println("===========================================");
         System.out.println("Database has been reset to test conditions.");
+        System.out.println("===========================================");
+        System.out.println();
     }
 }

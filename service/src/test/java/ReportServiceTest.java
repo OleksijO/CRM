@@ -72,10 +72,10 @@ public class ReportServiceTest {
             System.out.println("Added: " + company.toString());
             companyList.add(company);
         }
+        Date date = DateUtils.truncate(new Date(System.currentTimeMillis()), Calendar.HOUR);
         for (int i = 0; i < maxDeals; i++) {
             Deal deal = dealDAO.getById(1);
             deal.setId(0);
-            Date date = DateUtils.truncate(new Date(System.currentTimeMillis()), Calendar.HOUR);
             deal.setDateCreate(new Date(date.getTime() - 1000 * 60 * (i + 1)));
             deal.setAmount(new BigDecimal((Math.pow(10, i % 3) + i) * i));
             deal.setCompany(companyList.get(i % 3));
@@ -88,7 +88,7 @@ public class ReportServiceTest {
         System.out.println(">>>>>>>>>>  SET UP  >>>>> DONE !  ");
         //get test data
         int totalNumberOfReports=reportDAO.getAll().size();
-        List<Report> listReport=reportDAO.makeReportsWithDealsAmountForPreviousHour();
+        List<Report> listReport=reportDAO.getByPeriod(new Date(date.getTime()-1000*3600),date);
         int numberOfTestReports=listReport.size();
         reportService.makeHourDealAmountReports();
         int newTotalNumberOfTestReports=listReport.size();

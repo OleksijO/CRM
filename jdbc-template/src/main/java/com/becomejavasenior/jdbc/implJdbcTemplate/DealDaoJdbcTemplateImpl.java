@@ -261,20 +261,20 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
             preparedStatement.setTimestamp(1, new Timestamp(start.getTime()));
             preparedStatement.setTimestamp(2, new Timestamp(finish.getTime()));
         };
-
+        System.out.println(new Timestamp(start.getTime())+" "+new Timestamp(finish.getTime()));
         return  jdbcTemplate.query(
                 " SELECT SUM(deal.amount) AS hour_amount,\n" +
-                        "  company.id,\n" +
+                        "  company.id AS company_id,\n" +
                         "  company.name AS company_name,\n" +
                         "  users.id AS users_id,\n" +
                         "  users.name AS users_name\n" +
                         "  " +
                         "FROM deal\n" +
                         "LEFT JOIN company ON company.id=deal.company_id\n" +
-                        "LEFT JOIN users ON company.responsible_users_id=users.id\n" +
-                        "WHERE deal.date_create >= ? AND deal.date_create < ?\n" +
+                        "LEFT JOIN users ON company.responsible_users_id=users.id \n" +
+                        "WHERE deal.date_create >= ? AND deal.date_create < ? \n" +
                         "GROUP BY company.id, company_name, users_id, users_name" ,
-
+                preparedStatementSetter,
                 rs -> {
                     Map<Company,BigDecimal> map = new HashMap<>();
                     try {

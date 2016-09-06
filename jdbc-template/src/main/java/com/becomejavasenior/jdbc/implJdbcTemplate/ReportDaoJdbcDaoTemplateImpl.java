@@ -29,7 +29,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
     private static final String UPDATE_SQL = "UPDATE report SET date = ?, hour_amount = ? WHERE id = ?";
     private static final String SELECT_SQL = "SELECT \n" +
             "  report.id, \n" +
-            "  date_create, \n" +
+            "  report.date, \n" +
             "  hour_amount, \n" +
             "  company.id AS company_id, \n" +
             "  company.name AS company_name, \n" +
@@ -40,7 +40,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
             "LEFT JOIN company ON company.id=report.company_id\n" +
             "LEFT JOIN users ON company.responsible_users_id=users.id";
 
-    private static final String FIELD_DATE = "date_create";
+    private static final String FIELD_DATE = "date";
     private static final String FIELD_AMOUNT = "hour_amount";
     private static final String FIELD_COMPANY_ID = "company_id";
     private static final String FIELD_CONPANY_NAME = "company_name";
@@ -60,7 +60,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
         company.setResponsibleUser(responsibleUser);
         Report report = new Report();
         report.setId(resultSet.getInt(FIELD_ID));
-        report.setDate(resultSet.getDate(FIELD_DATE));
+        report.setDate(new Date(resultSet.getTimestamp(FIELD_DATE).getTime()));
         report.setHourAmount(resultSet.getBigDecimal(FIELD_AMOUNT));
         report.setCompany(company);
         return report;
@@ -76,13 +76,13 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
         if (0 != (reportDate.getTime() - DateUtils.truncate(reportDate, Calendar.HOUR).getTime())) {
             throw new DatabaseException("Report date must be truncated to hour of the begin of report period!");
         }
-        if (reportDate.equals(DateUtils.truncate(System.currentTimeMillis(), Calendar.HOUR))) {
+        if (reportDate.equals(DateUtils.truncate(new Date(System.currentTimeMillis()), Calendar.HOUR))) {
             throw new DatabaseException("Report period begin date must not be in present hour!");
         }
 
         PreparedStatementCreator preparedStatementCreator = connection -> {
             PreparedStatement statement = connection.prepareStatement(INSERT_SQL, new String[]{"id"});
-            statement.setTimestamp(1, toTimestamp(DateUtils.truncate(report.getDate(), Calendar.HOUR)));
+            statement.setTimestamp(1, toTimestamp(report.getDate()));
             statement.setBigDecimal(2, report.getHourAmount());
             statement.setInt(3, report.getCompany().getId());
             return statement;

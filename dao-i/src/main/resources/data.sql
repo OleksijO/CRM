@@ -94,3 +94,8 @@ INSERT INTO contact_company_tag VALUES
 INSERT INTO deal_contact VALUES
   (1, 1),
   (1, 2);
+
+INSERT INTO report VALUES
+  (DEFAULT, '2016-02-11 10:00:00.000000', 15000.25, 1),
+  (DEFAULT, '2016-03-11 00:00:00.000000', 15330, 2);
+

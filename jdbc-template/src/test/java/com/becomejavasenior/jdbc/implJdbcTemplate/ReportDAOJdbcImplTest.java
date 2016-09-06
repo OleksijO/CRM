@@ -9,15 +9,21 @@ import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.jdbc.entity.ReportDAO;
 import com.becomejavasenior.jdbc.entity.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,8 +45,6 @@ public class ReportDAOJdbcImplTest extends SpringDaoJdbcImplTests {
     private List<Deal> dealList = new ArrayList<>();
     private List<Company> companyList = new ArrayList<>();
 
-
-
     @PostConstruct
     public void init() throws IOException {
         companyForTest = companyDAO.getById(1);
@@ -49,46 +53,44 @@ public class ReportDAOJdbcImplTest extends SpringDaoJdbcImplTests {
 
     }
 
-    /*@Test
-    public void testGetDealsAmountForPreviousHour() {
-        final int maxCompanies = 3;  // DO NOT CHANGE VALUE. MUST BE = 3.
-        UtilsForDaoTests utilsForDaoTests = new UtilsForDaoTests();
-        BigDecimal[] controlAmounts =
-                utilsForDaoTests.setUpDatabaseForReportDaoTestGetDealsAmountForPreviousHour(maxCompanies, dealDAO, companyDAO);
-
-        List<Report> listTest = reportDAO.makeReportsWithDealsAmountForPreviousHour();
-
-        utilsForDaoTests.tearDownForReportDaoTestGetDealsAmountForPreviousHour(maxCompanies, dealDAO, companyDAO);
-
-        Assert.assertEquals("Quantity of companies in reports: ", 3, listTest.size());
-        BigDecimal testAmount[] = new BigDecimal[3];
-        testAmount[0] = new BigDecimal(0);
-        testAmount[1] = new BigDecimal(0);
-        testAmount[2] = new BigDecimal(0);
-        for (Report report : listTest) {
-            final String name = report.getCompany().getName();
-            final BigDecimal amount1 = report.getHourAmount();
-            System.out.println(report);
-            switch (name) {
-                case "Company 0":
-                    testAmount[0].add(amount1);
-                    break;
-                case "Company 1":
-                    testAmount[1].add(amount1);
-                    break;
-                case "Company 2":
-                    testAmount[2].add(amount1);
-                    break;
-                default:
-                    throw new RuntimeException("Can't be !");
-            }
-        }
-        Assert.assertArrayEquals(controlAmounts, testAmount);
-    }*/
-
+       @Test
+    public void testGetAll() {
+        Assert.assertEquals("Must be 2 reports: ", 2, reportDAO.getAll().size());
+    }
 
     @Test
-    public void testCreate() {
+    public void testGetByCompany(){
+        Company company1=new Company();
+        company1.setId(1);
+        Company company2=new Company();
+        company2.setId(2);
+        Assert.assertEquals(1,reportDAO.getByCompany(company1).size());
+        Assert.assertEquals(1,reportDAO.getByCompany(company2).size());
+    }
+
+    @Test
+    public void testGetByCompanyAndPeriod() throws ParseException {
+        Company company1=new Company();
+        company1.setId(1);
+        Date start1= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-11 10:00:00");
+        Date start2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-11 11:00:00");
+        Date finish= new Date();
+        Assert.assertEquals(1,reportDAO.getByCompanyAndPeriod(company1,start1,finish).size());
+        Assert.assertEquals(0,reportDAO.getByCompanyAndPeriod(company1,start2,finish).size());
+    }
+
+    @Test
+    public void testGetPeriod() throws ParseException {
+        Date start1= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-11 10:00:00");
+        Date start2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-11 11:00:00");
+        Date finish= new Date();
+        Assert.assertEquals(2,reportDAO.getByPeriod(start1,finish).size());
+        Assert.assertEquals(1,reportDAO.getByPeriod(start2,finish).size());
+        Assert.assertEquals(0,reportDAO.getByPeriod(new Date (finish.getTime()-1000*3600*24),finish).size());
+    }
+
+    @Test
+    public void testCreate() throws SQLException {
         Report reportTest = new Report();
         Assert.assertTrue("Report ID before creation must be '0'", reportTest.getId() == 0);
         int reportTestId = 0;
@@ -107,6 +109,15 @@ public class ReportDAOJdbcImplTest extends SpringDaoJdbcImplTests {
         reportTest.setHourAmount(amountTest);
 
         int idTest = 0;
+        try {
+            reportDAO.insert(reportTest);
+            Assert.assertTrue("Must be trown Exception that report must be truncated", false);
+        } catch (Exception e) {
+            Assert.assertTrue(
+                    "Must be trown Exception that report must be trancated",
+                    e instanceof DatabaseException);
+        }
+        dateTest = DateUtils.truncate(dateTest, Calendar.HOUR);
         try {
             reportDAO.insert(reportTest);
             Assert.assertTrue("Must be trown Exception that report begin date is this hour, not previos", false);
@@ -133,104 +144,59 @@ public class ReportDAOJdbcImplTest extends SpringDaoJdbcImplTests {
         Assert.assertTrue("Report ID after creation must be not '0'", idTest > 0);
     }
 
-
     @Test
-    public void testGetByPK() {
-        Report reportTest = new Report();
-        Assert.assertTrue("Report ID before creation must be '0'", reportTest.getId() == 0);
-        int reportTestId = 0;
-        Date dateTest = new Date(System.currentTimeMillis());
-        BigDecimal amountTest = new BigDecimal(Math.pow(10, 17) - 0.1);
-        reportTest.setCompany(companyForTest);
-        reportTest.setDate(dateTest);
-        reportTest.setHourAmount(amountTest);
-        reportTestId = reportDAO.insert(reportTest);
-        System.out.println("Report of id must be id=" + reportTestId);
-        Report reportFromDB = reportDAO.getById(reportTestId);
-        try {
-            //restore DB
-            reportDAO.delete(reportTestId);
-            // DB restored
-        } catch (Exception e) {
-            // Probably DB not restored
-            System.out.println("Error whhile deleting test report from DB.\n" +
-                    ">>>> Next error ignored by test!");
-            e.printStackTrace();
-        }
-        Assert.assertEquals("Report read by PK not equels to test one", reportTest, reportFromDB);
+    public void testDelete() throws ParseException {
+        Report report=createTestReport();
+        report.setId(0);
+        int id=reportDAO.insert(report);
+        Assert.assertEquals("Database in non consistent mode. Must by 3 reports", 3, reportDAO.getAll().size());
+        reportDAO.delete(id);
+        Assert.assertEquals("Report has not been deleted", 2, reportDAO.getAll().size());
     }
 
     @Test
-    public void testGetReportByPK() {
-        //TODO compare new report and from database
-        //TODO check exceprion if not exist
-    }
-/*
-    @Test
-    public void testUpdate() throws SQLException {
-        String updatedName = "Updated Name";
-        Timestamp updatedCreateDate = new Timestamp(1L << 41);
-        User updatedUser = userDAO.getById(2);
-        Company updatedCompany = companyDAO.getById(2);
-        Stage updatedStage = stageDAO.getById(2);
-        Contact updatedContact = contactDAO.getById(2);
-
-        Report reportTest = new Report();
-        reportTest.setName(DEFAULT_NAME);
-        reportTest.setDateCreate(DEFAULT_DATE);
-        reportTest.setCreator(userForReportTest);
-        reportTest.setCompany(companyForReportTest);
-        reportTest.setStage(stageForReportTest);
-        reportTestId = reportDAO.insert(reportTest);
-        Assert.assertNotNull("Report before update must not be null", reportTest);
-
-        reportTest.setName(updatedName);
-        reportTest.setDateCreate(updatedCreateDate);
-        reportTest.setCreator(updatedUser);
-        reportTest.setResponsibleUser(updatedUser);
-        reportTest.setCompany(updatedCompany);
-        reportTest.setStage(updatedStage);
-        reportTest.setAmount(BigDecimal.valueOf(500.55));
-        reportTest.setPrimaryContact(updatedContact);
-
+    public void testUpdate() throws ParseException {
+        Report reportTest = createTestReport();
+        reportTest.setId(0);
+        int testId = reportDAO.insert(reportTest);
+        Assert.assertEquals("Preparing for test failed.", reportTest, reportDAO.getReportById(testId));
+        BigDecimal newAmount = new BigDecimal(12);
+        reportTest.setHourAmount(newAmount);
         reportDAO.update(reportTest);
-
-        Report updatedReport = reportDAO.getById(reportTestId);
-        Assert.assertNotNull("Report after update is null", updatedReport);
-        Assert.assertEquals("Report name update failed", updatedName, updatedReport.getName());
-        Assert.assertEquals("Date of report creation update failed", updatedCreateDate, updatedReport.getDateCreate());
-        Assert.assertEquals("Report creator update failed", updatedUser.getId(), updatedReport.getCreator().getId());
-        Assert.assertEquals("Report responsible user update failed", updatedUser.getId(), updatedReport.getResponsibleUser().getId());
-        Assert.assertEquals("Report link to Company update failed", updatedCompany.getId(), updatedReport.getCompany().getId());
-        Assert.assertEquals("Report link to Stage update failed", updatedStage.getId(), updatedReport.getStage().getId());
-        Assert.assertEquals("getAmount: ", BigDecimal.valueOf(500.55), updatedReport.getAmount());
-        Assert.assertEquals("Report link to Primary Contact update failed", updatedContact.getId(), updatedReport.getPrimaryContact().getId());
+        Assert.assertEquals("Report has not been updated", newAmount, new BigDecimal(reportDAO.getReportById(testId).getHourAmount().doubleValue()));
     }
 
+    @SuppressWarnings("deprecation")
     @Test
-    public void testDelete() {
+    public void testGetByPK() throws ParseException {
+        Report reportTest = createTestReport();
+        assertEquals(reportTest, reportDAO.getById(1));
+        Assert.assertNull("Report doesn't exist, Must bu null", reportDAO.getById(10));
+    }
+
+    @Test(expected = EmptyResultDataAccessException.class)
+    public void testGetReportByPK() throws ParseException {
+        Report reportTest = createTestReport();
+        assertEquals(reportTest, reportDAO.getReportById(1));
+        reportDAO.getReportById(10);
+    }
+
+    private void assertEquals(Report repTest, Report repFromDB) {
+        Assert.assertEquals("Report read by PK not equals to test one", repTest.getId(), repFromDB.getId());
+        Assert.assertEquals("Report read by PK not equals to test one", repTest.getDate(), repFromDB.getDate());
+        Assert.assertEquals("Report read by PK not equals to test one", repTest.getHourAmount(), repFromDB.getHourAmount());
+        Assert.assertEquals("Report read by PK not equals to test one", repTest.getCompany().getId(), repFromDB.getCompany().getId());
+        Assert.assertEquals("Report read by PK not equals to test one", repTest.getCompany().getName(), repFromDB.getCompany().getName());
+        Assert.assertEquals("Report read by PK not equals to test one", repTest.getCompany().getResponsibleUser().getId(), repFromDB.getCompany().getResponsibleUser().getId());
+        Assert.assertEquals("Report read by PK not equals to test one", repTest.getCompany().getResponsibleUser().getName(), repFromDB.getCompany().getResponsibleUser().getName());
+    }
+
+    private Report createTestReport() throws ParseException {
         Report reportTest = new Report();
-        reportTest.setName(DEFAULT_NAME);
-        reportTest.setDateCreate(DEFAULT_DATE);
-        reportTest.setCreator(userForReportTest);
-        reportTest.setCompany(companyForReportTest);
-        reportTest.setStage(stageForReportTest);
-        reportTestId = reportDAO.insert(reportTest);
-
-        List reportList = reportDAO.getAll();
-        int oldListSize = reportList.size();
-        Assert.assertTrue("Report list must not be empty", oldListSize > 0);
-
-        reportDAO.delete(reportTestId);
-        reportList = reportDAO.getAll();
-        Assert.assertEquals("Report delete test failed", 1, oldListSize - reportList.size());
-        Assert.assertNull("Report delete test failed", reportDAO.getById(reportTestId));
+        reportTest.setCompany(companyForTest);
+        reportTest.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-11 10:00:00"));
+        reportTest.setHourAmount(new BigDecimal(15000.25));
+        reportTest.setId(1);
+        return reportTest;
     }
-
-    @Test
-    public void testGetAll() {
-        List reportList = reportDAO.getAll();
-        Assert.assertNotNull("Report list must not be null", reportList);
-        Assert.assertTrue("Report list must not be empty", reportList.size() > 0);
-    }*/
 }
