@@ -36,6 +36,7 @@ public class ReportServiceImpl implements ReportService {
         this.reportDAO = reportDao;
     }
 
+    @Override
     public void setDealDAO(DealDAO dealDAO) {
         this.dealDAO = dealDAO;
     }

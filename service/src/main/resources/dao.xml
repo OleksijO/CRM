@@ -15,8 +15,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
 
     <context:annotation-config/>
     <context:component-scan
-            base-package="com.becomejavasenior.jdbc.impl,
-                        com.becomejavasenior.jdbc.impl"/>
+            base-package="com.becomejavasenior.jdbc.impl"/>
 
     <jee:jndi-lookup id="dataSource"
                      jndi-name="java:comp/env/jdbc/postgres"/>
@@ -36,7 +35,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
         <constructor-arg ref="tagDao"/>
     </bean>
 
-    <bean id="dealDAO" class="com.becomejavasenior.jdbc.implJdbcTemplate.DealDaoJdbcTemplateImpl"
+    <bean id="dealDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.DealDaoJdbcTemplateImpl"
           autowire="default"/>
 
     <bean id="tagDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.TagDaoJdbcTemplateImpl"

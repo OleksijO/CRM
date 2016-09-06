@@ -1,16 +1,24 @@
 package com.becomejavasenior.schedule;
 
 import com.becomejavasenior.service.ReportService;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
-//@Service
-public class HourDealAmountReportJob extends QuartzJobBean {
-    //@Autowired
+@Service
+public class HourDealAmountReportJob  {
+    @Autowired
     ReportService reportService;
-    protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+
+    @Scheduled(cron = "0/5 * * * * ?")
+    protected void executeInternal() {
         reportService.makeHourDealAmountReports();
         System.out.println("Hour Company Deal Amount Report is done.");
     }
+
+    /*protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+        reportService.makeHourDealAmountReports();
+        System.out.println("Hour Company Deal Amount Report is done.");
+    }*/
+
 }

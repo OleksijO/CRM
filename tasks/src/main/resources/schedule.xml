@@ -2,40 +2,59 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+
+<context:component-scan base-package="com.becomejavasenior.schedule"/>
     <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
     <task:executor id="myExecutor" pool-size="17"/>
     <task:scheduler id="myScheduler" pool-size="17"/>
 
-
+<!--
     <import resource="classpath*:services.xml"/>
 
-    <bean id="schedulerFactoryBean"
-          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <ref bean="reportTrigger"/>
-            </list>
-        </property>
-    </bean>
+        <bean id="schedulerFactoryBean"
+              class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+            <property name="triggers">
+                <list>
+                    <ref bean="reportTrigger"/>
+                    <ref bean="dailyDealReminderTrigger"/>
+                </list>
+            </property>
+        </bean>
 
-    <bean id="reportJob"
-          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-        <property name="jobClass" value="com.becomejavasenior.schedule.HourDealAmountReportJob"/>
-    </bean>
+        <bean id="reportJob"
+              class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+            <property name="jobClass" value="com.becomejavasenior.schedule.HourDealAmountReportJob"/>
+        </bean>
 
-    <bean id="reportTrigger"
-          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="reportJob"/>
-        <property name="cronExpression" value="0 0 0/1 1/1 * ? *"/> <!-- every hour   0 0 0/1 1/1 * ? *     -->
+        <bean id="dailyDealReminding"
+              class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+            <property name="jobClass" value="com.becomejavasenior.schedule.DailyUnfinishedDealReminding"/>
+        </bean>
 
-    </bean>
+        <bean id="reportTrigger"
+              class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+            <property name="jobDetail" ref="reportJob"/>
+            <property name="cronExpression" value="0/5 * * * * ?"/>
+        </bean>
 
+        <bean id="dailyDealReminderTrigger"
+              class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+            <property name="jobDetail" ref="dailyDealReminding"/>
+            <property name="cronExpression" value="0/1 * * * * ?"/>
+
+        </bean>
+-->
 
 </beans>
+
+
+        <!-- every hour   0 0 0/1 1/1 * ? *     -->
+        <!-- every second   0/1 0 0 * ? *     -->
 
 
 

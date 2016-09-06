@@ -261,7 +261,6 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> imple
             preparedStatement.setTimestamp(1, new Timestamp(start.getTime()));
             preparedStatement.setTimestamp(2, new Timestamp(finish.getTime()));
         };
-        System.out.println(new Timestamp(start.getTime())+" "+new Timestamp(finish.getTime()));
         return  jdbcTemplate.query(
                 " SELECT SUM(deal.amount) AS hour_amount,\n" +
                         "  company.id AS company_id,\n" +
