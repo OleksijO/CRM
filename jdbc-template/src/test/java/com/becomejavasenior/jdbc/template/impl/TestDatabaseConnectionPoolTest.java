@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.implJdbcTemplate;
+package com.becomejavasenior.jdbc.template.impl;
 
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.junit.Assert;

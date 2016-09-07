@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.implJdbcTemplate;
+package com.becomejavasenior.jdbc.template.impl;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Report;
@@ -19,8 +19,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import static com.becomejavasenior.jdbc.implJdbcTemplate.AbstractDaoJdbcTemplate.*;
 
 //@Repository("ReportDao")
 public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements ReportDAO {
@@ -59,7 +57,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
         company.setName(resultSet.getString(FIELD_CONPANY_NAME));
         company.setResponsibleUser(responsibleUser);
         Report report = new Report();
-        report.setId(resultSet.getInt(FIELD_ID));
+        report.setId(resultSet.getInt(AbstractDaoJdbcTemplate.FIELD_ID));
         report.setDate(new Date(resultSet.getTimestamp(FIELD_DATE).getTime()));
         report.setHourAmount(resultSet.getBigDecimal(FIELD_AMOUNT));
         report.setCompany(company);
@@ -70,7 +68,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
     public int insert(Report report) {
 
         if (report.getId() != 0) {
-            throw new DatabaseException(className + ERROR_ID_MUST_BE_FROM_DBMS + TABLE_NAME + ERROR_GIVEN_ID + report.getId());
+            throw new DatabaseException(className + AbstractDaoJdbcTemplate.ERROR_ID_MUST_BE_FROM_DBMS + TABLE_NAME + AbstractDaoJdbcTemplate.ERROR_GIVEN_ID + report.getId());
         }
         Date reportDate = report.getDate();
         if (0 != (reportDate.getTime() - DateUtils.truncate(reportDate, Calendar.HOUR).getTime())) {

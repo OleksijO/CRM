@@ -48,7 +48,6 @@
         <module>aspects</module>
         <module>rest</module>
         <module>service</module>
-        <module>schedule</module>
         <module>tasks</module>
     </modules>
 

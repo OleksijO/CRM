@@ -1,6 +1,7 @@
 package com.becomejavasenior.service;
 
 import com.becomejavasenior.entity.*;
+import com.becomejavasenior.jdbc.entity.*;
 
 import java.util.List;
 import java.util.Map;
@@ -19,4 +20,18 @@ public interface CompanyService {
     List<String> getTimeListForTask();
 
     void setCompanyDAO(com.becomejavasenior.jdbc.entity.CompanyDAO companyDAO);
+
+    void setUserDAO(UserDAO userDAO);
+
+    void setContactDAO(ContactDAO contactDAO);
+
+    void setTaskDAO(TaskDAO taskDAO);
+
+    void setDealDAO(DealDAO dealDAO);
+
+    void setNoteDAO(NoteDAO noteDAO);
+
+    void setTagDAO(TagDAO tagDAO);
+
+    void setFileDAO(FileDAO fileDAO);
 }

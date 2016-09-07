@@ -85,4 +85,9 @@ public class UserServiceImpl implements UserService {
     public void setLanguageDAO(LanguageDAO languageDAO) {
         this.languageDAO = languageDAO;
     }
+
+    @Override
+    public User getById(int id){
+        return userDAO.getById(id);
+    }
 }

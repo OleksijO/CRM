@@ -6,14 +6,20 @@ import com.becomejavasenior.jdbc.entity.DealDAO;
 import com.becomejavasenior.jdbc.entity.ReportDAO;
 import com.becomejavasenior.service.ReportService;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
-
+@Service
+@Transactional
 public class ReportServiceImpl implements ReportService {
+    @Autowired
     private ReportDAO reportDAO;
+    @Autowired
     private DealDAO dealDAO;
 
     @Override
@@ -40,4 +46,5 @@ public class ReportServiceImpl implements ReportService {
     public void setDealDAO(DealDAO dealDAO) {
         this.dealDAO = dealDAO;
     }
+
 }

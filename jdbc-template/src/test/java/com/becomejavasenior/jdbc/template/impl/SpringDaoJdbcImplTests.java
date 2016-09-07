@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.implJdbcTemplate;
+package com.becomejavasenior.jdbc.template.impl;
 
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.becomejavasenior.jdbc.implJdbcTemplate.SpringDaoJdbcImplTests.APPLICATION_CONTEXT_FILE;
+import static com.becomejavasenior.jdbc.template.impl.SpringDaoJdbcImplTests.APPLICATION_CONTEXT_FILE;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(APPLICATION_CONTEXT_FILE)

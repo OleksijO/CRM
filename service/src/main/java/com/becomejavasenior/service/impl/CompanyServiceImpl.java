@@ -3,6 +3,8 @@ package com.becomejavasenior.service.impl;
 import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -10,26 +12,24 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-//@Service("companyService")
-//@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-//@Lazy
+@Service("companyService")
 @Transactional
 public class CompanyServiceImpl implements CompanyService {
-//    @Autowired
+    @Autowired
     private CompanyDAO companyDAO;
-//    @Autowired
+    @Autowired
     private UserDAO userDAO;
-//    @Autowired
+    @Autowired
     private ContactDAO contactDAO;
-//    @Autowired
+    @Autowired
     private TaskDAO taskDAO;
-//    @Autowired
+    @Autowired
     private DealDAO dealDAO;
-//    @Autowired
+    @Autowired
     private NoteDAO noteDAO;
-//    @Autowired
+    @Autowired
     private TagDAO tagDAO;
-//    @Autowired
+    @Autowired
     private FileDAO fileDAO;
 
     @Override
@@ -164,35 +164,35 @@ public class CompanyServiceImpl implements CompanyService {
         }
         return timeList;
     }
-
+    @Override
     public void setCompanyDAO(CompanyDAO companyDAO) {
         this.companyDAO = companyDAO;
     }
-
+    @Override
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
-
+    @Override
     public void setContactDAO(ContactDAO contactDAO) {
         this.contactDAO = contactDAO;
     }
-
+    @Override
     public void setTaskDAO(TaskDAO taskDAO) {
         this.taskDAO = taskDAO;
     }
-
+    @Override
     public void setDealDAO(DealDAO dealDAO) {
         this.dealDAO = dealDAO;
     }
-
+    @Override
     public void setNoteDAO(NoteDAO noteDAO) {
         this.noteDAO = noteDAO;
     }
-
+    @Override
     public void setTagDAO(TagDAO tagDAO) {
         this.tagDAO = tagDAO;
     }
-
+    @Override
     public void setFileDAO(FileDAO fileDAO) {
         this.fileDAO = fileDAO;
     }

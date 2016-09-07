@@ -10,8 +10,8 @@ public class HourDealAmountReportJob  {
     @Autowired
     ReportService reportService;
 
-    @Scheduled(cron = "0/5 * * * * ?")
-    protected void executeInternal() {
+    @Scheduled(cron = "0 0 0/1 1/1 * ?")
+        protected void executeInternal() {
         reportService.makeHourDealAmountReports();
         System.out.println("Hour Company Deal Amount Report is done.");
     }

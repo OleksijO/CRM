@@ -16,4 +16,5 @@ public interface UserService  {
     @Transactional(readOnly = true)
     List<Language> getLanguageList();
 
+    User getById(int id);
 }

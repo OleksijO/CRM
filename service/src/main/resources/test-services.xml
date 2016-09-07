@@ -9,42 +9,26 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
 
     <import resource="classpath*:dao_test_jdbc_template.xml"/>
 
-    <bean id="dealService" class="com.becomejavasenior.service.impl.DealServiceImpl"
-          factory-method="createInstance"
-          lazy-init="true"
-          init-method="afterPropertiesSet"
-          destroy-method="destroy"
-          autowire="byName"
-    />
+    <context:component-scan base-package="com.becomejavasenior.service.impl"/>
 
-    <bean id="userService" class="com.becomejavasenior.service.impl.UserServiceImpl"
-          factory-method="createInstance" >
-        <property name="userDAO" ref="userDao"/>
-        <property name="languageDAO" ref="languageDao"/>
+    <context:property-placeholder location="classpath*:email-service.properties"
+                                  ignore-resource-not-found="true"
+                                  ignore-unresolvable="true"
+                                  order="2"/>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+                <prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+                <prop key="mail.smtp.port">${mail.smtp.port}</prop>
+            </props>
+        </property>
+        <property name="host" value="${mail.smtp.host}" />
+        <property name="username" value="${mail.smtp.username}" />
+        <property name="password" value="${mail.smtp.password}" />
+
     </bean>
-
-    <!-- Factory service bean -->
-    <bean id="serviceFactory" class="com.becomejavasenior.service.impl.ServiceFactoryImpl"/>
-
-    <bean id="companyService" factory-bean="serviceFactory" factory-method="createCompanyServiceInstance"
-          scope="singleton"
-          lazy-init="true"
-          autowire="byType">
-        <property name="companyDAO" ref="companyDao"/>
-    </bean>
-
-    <bean id="contactService" factory-bean="serviceFactory" factory-method="createContactServiceInstance"
-          scope="prototype"
-          autowire="byType"
-    >
-        <property name="companyDAO" ref="companyDao"/>
-    </bean>
-
-    <bean id="reportService" class="com.becomejavasenior.service.impl.ReportServiceImpl">
-        <property name="reportDAO" ref="reportDao"/>
-        <property name="dealDAO" ref="dealDAO"/>
-    </bean>
-
 
 </beans>
 

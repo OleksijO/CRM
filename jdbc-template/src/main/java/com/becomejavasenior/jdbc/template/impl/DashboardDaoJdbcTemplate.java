@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.implJdbcTemplate;
+package com.becomejavasenior.jdbc.template.impl;
 
 import com.becomejavasenior.jdbc.entity.DashboardDAO;
 import org.springframework.beans.factory.annotation.Autowired;

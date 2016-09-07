@@ -26,24 +26,24 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
     </bean>
 
     <bean id="companyDao"
-          class="com.becomejavasenior.jdbc.implJdbcTemplate.CompanyDaoJdbcTemplateImpl"
+          class="com.becomejavasenior.jdbc.template.impl.CompanyDaoJdbcTemplateImpl"
           autowire="byType"/>
 
     <bean id="contactDao"
-          class="com.becomejavasenior.jdbc.implJdbcTemplate.ContactDaoJdbcTemplateImpl">
+          class="com.becomejavasenior.jdbc.template.impl.ContactDaoJdbcTemplateImpl">
         <constructor-arg ref="tagDao"/>
     </bean>
 
-    <bean id="dealDAO" class="com.becomejavasenior.jdbc.implJdbcTemplate.DealDaoJdbcTemplateImpl"
+    <bean id="dealDAO" class="com.becomejavasenior.jdbc.template.impl.DealDaoJdbcTemplateImpl"
           autowire="default"/>
 
-    <bean id="tagDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.TagDaoJdbcTemplateImpl"
+    <bean id="tagDao" class="com.becomejavasenior.jdbc.template.impl.TagDaoJdbcTemplateImpl"
           autowire="default"/>
 
-    <bean id="dashboardDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.DashboardDaoJdbcTemplate"
+    <bean id="dashboardDao" class="com.becomejavasenior.jdbc.template.impl.DashboardDaoJdbcTemplate"
           autowire="default"/>
 
-    <bean id="reportDao" class="com.becomejavasenior.jdbc.implJdbcTemplate.ReportDaoJdbcDaoTemplateImpl"
+    <bean id="reportDao" class="com.becomejavasenior.jdbc.template.impl.ReportDaoJdbcDaoTemplateImpl"
           p:dataSource-ref="testDataSource"/>
 
 </beans>

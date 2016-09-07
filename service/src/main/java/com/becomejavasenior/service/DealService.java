@@ -3,6 +3,7 @@ package com.becomejavasenior.service;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.entity.Stage;
+import com.becomejavasenior.jdbc.entity.DealDAO;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,4 +38,6 @@ public interface DealService extends DisposableBean, InitializingBean {
 
     @Transactional(readOnly = true)
     public List<Deal> getDealsForList();
+
+    void setDealDao(DealDAO dealDao);
 }

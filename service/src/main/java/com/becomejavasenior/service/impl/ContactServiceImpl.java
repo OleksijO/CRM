@@ -4,6 +4,8 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.service.ContactService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Part;
@@ -16,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//@Service("contactService")
-//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Service("contactService")
 @Transactional
 public class ContactServiceImpl implements ContactService {
 
@@ -52,25 +53,24 @@ public class ContactServiceImpl implements ContactService {
     private static final String TASK_TEXT = "task_text";
     private static final String TASK_STATUS_NEW = "В работе";
 
-//    @Autowired
+    @Autowired
     private ContactDAO contactDAO;
-
     private User currentUser;
-//    @Autowired
+    @Autowired
     private UserDAO userDAO;
-//    @Autowired
+    @Autowired
     private CompanyDAO companyDAO;
-//    @Autowired
+    @Autowired
     private StageDAO stageDAO;
-//    @Autowired
+    @Autowired
     private TaskDAO taskDAO;
-//    @Autowired
+    @Autowired
     private DealDAO dealDAO;
-//    @Autowired
+    @Autowired
     private TagDAO tagDAO;
-//    @Autowired
+    @Autowired
     private NoteDAO noteDAO;
-//    @Autowired
+    @Autowired
     private FileDAO fileDAO;
 
     @Override
@@ -337,39 +337,39 @@ public class ContactServiceImpl implements ContactService {
         }
         return outputStream.toByteArray();
     }
-
+    @Override
     public void setContactDAO(ContactDAO contactDAO) {
         this.contactDAO = contactDAO;
     }
-
+    @Override
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
-
+    @Override
     public void setCompanyDAO(CompanyDAO companyDAO) {
         this.companyDAO = companyDAO;
     }
-
+    @Override
     public void setStageDAO(StageDAO stageDAO) {
         this.stageDAO = stageDAO;
     }
-
+    @Override
     public void setTaskDAO(TaskDAO taskDAO) {
         this.taskDAO = taskDAO;
     }
-
+    @Override
     public void setDealDAO(DealDAO dealDAO) {
         this.dealDAO = dealDAO;
     }
-
+    @Override
     public void setTagDAO(TagDAO tagDAO) {
         this.tagDAO = tagDAO;
     }
-
+    @Override
     public void setNoteDAO(NoteDAO noteDAO) {
         this.noteDAO = noteDAO;
     }
-
+    @Override
     public void setFileDAO(FileDAO fileDAO) {
         this.fileDAO = fileDAO;
     }
