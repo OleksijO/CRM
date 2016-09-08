@@ -27,7 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class ReportDAOJdbcImplTest extends SpringDaoJdbcImplTests {
+public class ReportDAOJdbcDaoTemplateImplTest extends SpringDaoJdbcTemplateImplTests {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());
@@ -164,6 +164,7 @@ public class ReportDAOJdbcImplTest extends SpringDaoJdbcImplTests {
         reportTest.setHourAmount(newAmount);
         reportDAO.update(reportTest);
         Assert.assertEquals("Report has not been updated", newAmount, new BigDecimal(reportDAO.getReportById(testId).getHourAmount().doubleValue()));
+        reportDAO.delete(testId);
     }
 
     @SuppressWarnings("deprecation")

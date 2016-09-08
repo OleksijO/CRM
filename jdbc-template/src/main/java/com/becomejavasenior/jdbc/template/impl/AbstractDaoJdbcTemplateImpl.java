@@ -10,7 +10,7 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 @Component
-abstract class AbstractDaoJdbcTemplate<T> implements GenericDAO<T> {
+abstract class AbstractDaoJdbcTemplateImpl<T> implements GenericDAO<T> {
 
     static final String ERROR_PARSE_RESULT_SET = "error while parsing result set for ";
     static final String ERROR_PREPARING_INSERT = "error while preparing INSERT statement for ";
@@ -25,7 +25,7 @@ abstract class AbstractDaoJdbcTemplate<T> implements GenericDAO<T> {
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
-    protected AbstractDaoJdbcTemplate() {
+    protected AbstractDaoJdbcTemplateImpl() {
     }
 
     @Override
@@ -43,6 +43,4 @@ abstract class AbstractDaoJdbcTemplate<T> implements GenericDAO<T> {
     public void delete(int id, String tableName /*, Logger logger*/) {
         jdbcTemplate.update("UPDATE " + tableName + " SET deleted = TRUE WHERE id = " + id);
     }
-
-
 }

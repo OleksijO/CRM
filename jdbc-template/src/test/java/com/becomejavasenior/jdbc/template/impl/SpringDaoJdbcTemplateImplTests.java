@@ -17,12 +17,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.becomejavasenior.jdbc.template.impl.SpringDaoJdbcImplTests.APPLICATION_CONTEXT_FILE;
+import static com.becomejavasenior.jdbc.template.impl.SpringDaoJdbcTemplateImplTests.APPLICATION_CONTEXT_FILE;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(APPLICATION_CONTEXT_FILE)
 
-abstract public class SpringDaoJdbcImplTests{
+abstract public class SpringDaoJdbcTemplateImplTests {
     public static final String APPLICATION_CONTEXT_FILE = "classpath:dao_test_jdbc_template.xml";
 
     @Autowired

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 @XmlRootElement
 public class Deal implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private String name;

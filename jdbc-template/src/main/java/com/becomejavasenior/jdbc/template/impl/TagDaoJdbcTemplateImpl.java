@@ -17,7 +17,7 @@ import java.sql.Types;
 import java.util.List;
 
 //@Repository("tagDao")
-public class TagDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Tag> implements TagDAO {
+public class TagDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Tag> implements TagDAO {
 
     private static final String INSERT_SQL = "INSERT INTO tag (name, deleted) VALUES (?, FALSE)";
     private static final String UPDATE_SQL = "UPDATE tag SET name = ?, deleted = ? WHERE id = ?";

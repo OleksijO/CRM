@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 @XmlRootElement
 public class Company implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private String name;

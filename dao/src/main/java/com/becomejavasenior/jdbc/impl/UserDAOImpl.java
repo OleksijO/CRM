@@ -5,19 +5,14 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.entity.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
-import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-@Repository("userDao")
+
+//@Repository("userDao")
 public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
-
     private static final String INSERT_SQL = "INSERT INTO users (name, email, password, is_admin, phone, " +
             "mobile_phone, note, deleted, url, image, language_id) VALUES (?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?, ?)";
     private static final String UPDATE_SQL = "UPDATE users SET name = ?, email = ?, password = ?, is_admin = ?, phone = ?," +
@@ -158,5 +153,13 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
             userList.add(user);
         }
         return userList;
+    }
+
+
+    @Override
+    public User getUserById(int id) {
+        //TODO implement method
+        throw new RuntimeException("Operation is not supported by this implementation yet. Use another one, please.");
+
     }
 }

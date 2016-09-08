@@ -22,7 +22,7 @@ import java.util.List;
 
 
 //@Repository("contactDaoJdbcTemplate")
-public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Contact> implements ContactDAO {
+public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Contact> implements ContactDAO {
 
     private static final String INSERT_SQL = "INSERT INTO contact (name, responsible_users_id, pos, type_of_phone, phone," +
             " skype, email, deleted, date_create, created_by_id, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

@@ -57,7 +57,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
         company.setName(resultSet.getString(FIELD_CONPANY_NAME));
         company.setResponsibleUser(responsibleUser);
         Report report = new Report();
-        report.setId(resultSet.getInt(AbstractDaoJdbcTemplate.FIELD_ID));
+        report.setId(resultSet.getInt(AbstractDaoJdbcTemplateImpl.FIELD_ID));
         report.setDate(new Date(resultSet.getTimestamp(FIELD_DATE).getTime()));
         report.setHourAmount(resultSet.getBigDecimal(FIELD_AMOUNT));
         report.setCompany(company);
@@ -68,14 +68,14 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
     public int insert(Report report) {
 
         if (report.getId() != 0) {
-            throw new DatabaseException(className + AbstractDaoJdbcTemplate.ERROR_ID_MUST_BE_FROM_DBMS + TABLE_NAME + AbstractDaoJdbcTemplate.ERROR_GIVEN_ID + report.getId());
+            throw new DatabaseException(className + AbstractDaoJdbcTemplateImpl.ERROR_ID_MUST_BE_FROM_DBMS + TABLE_NAME + AbstractDaoJdbcTemplateImpl.ERROR_GIVEN_ID + report.getId());
         }
         Date reportDate = report.getDate();
         if (0 != (reportDate.getTime() - DateUtils.truncate(reportDate, Calendar.HOUR).getTime())) {
-            throw new DatabaseException("Report date must be truncated to hour of the begin of report period!");
+            throw new DatabaseException(className+" Report date must be truncated to hour of the begin of report period!");
         }
         if (reportDate.equals(DateUtils.truncate(new Date(System.currentTimeMillis()), Calendar.HOUR))) {
-            throw new DatabaseException("Report period begin date must not be in present hour!");
+            throw new DatabaseException(className+" Report period begin date must not be in present hour!");
         }
 
         PreparedStatementCreator preparedStatementCreator = connection -> {

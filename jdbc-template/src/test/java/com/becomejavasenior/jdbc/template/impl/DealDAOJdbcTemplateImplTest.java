@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class DealDAOJdbcImplTest extends SpringDaoJdbcImplTests {
+public class DealDAOJdbcTemplateImplTest extends SpringDaoJdbcTemplateImplTests {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());

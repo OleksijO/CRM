@@ -128,11 +128,15 @@ Task 22 Validation
 
 Task 23 Планировщик задач ---done
 
+================================================================
+
 NOW: -----------------------------------------------------------
 
---
 
+24. Spring transaction, аттрибут Propagation
+#26 opened 5 minutes ago by MykolaBova
 
+================================================================
 
 TO DO:
 
@@ -143,14 +147,6 @@ model.addAttribute("addContactForm", new AddContactForm());
 
  19. REST для Сделок на Spring MVC
 #21 opened 3 days ago by becomejavasenior
-
-
-
-24. Spring transaction, аттрибут Propagation
-#26 opened 5 minutes ago by MykolaBova
-
-
-
 
 
  15. Написать DAO для управления правами пользователей на JdbcTemplate

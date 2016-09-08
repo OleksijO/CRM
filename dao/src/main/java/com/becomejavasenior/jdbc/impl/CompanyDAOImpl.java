@@ -10,13 +10,10 @@ import org.apache.commons.dbcp2.Utils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 
-//@Repository("companyDaoPlain")
+
+//@Repository("companyDao")
 public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO company (name, phone, email, address, responsible_users_id," +
             " web, deleted, created_by_id, date_create) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

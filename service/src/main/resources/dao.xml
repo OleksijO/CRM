@@ -10,15 +10,22 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
     <!-- datasource from xml & properties
     <import resource="classpath*:datasource.xml"/>
     -->
-
+<!--
     <import resource="classpath*:aspects.xml"/>
-
+-->
     <context:annotation-config/>
-    <context:component-scan
-            base-package="com.becomejavasenior.jdbc.impl"/>
+    <context:component-scan base-package="com.becomejavasenior.jdbc.impl"/>
+    <context:component-scan base-package="com.becomejavasenior.jdbc.template.impl"/>
 
     <jee:jndi-lookup id="dataSource"
-                     jndi-name="java:comp/env/jdbc/postgres"/>
+                     jndi-name="java:comp/env/jdbc/crm-postgres"/>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
@@ -43,14 +50,9 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.spri
           autowire="default"/>
 
     <bean id="reportDao" class="com.becomejavasenior.jdbc.template.impl.ReportDaoJdbcDaoTemplateImpl"
-        p:dataSource-ref="dataSource"/>
+          p:dataSource-ref="dataSource"/>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
 
 
 </beans>

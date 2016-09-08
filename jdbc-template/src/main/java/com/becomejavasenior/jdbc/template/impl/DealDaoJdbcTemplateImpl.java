@@ -23,7 +23,7 @@ import java.util.Map;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 //@Repository("dealDao")
-public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplate<Deal> implements DealDAO {
+public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Deal> implements DealDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
