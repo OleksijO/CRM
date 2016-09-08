@@ -51,7 +51,7 @@ public class AuditDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Audit>
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public int insert(Audit audit) {
         if (audit.getId() != 0) {
             throw new DatabaseException(className + AbstractDaoJdbcTemplateImpl.ERROR_ID_MUST_BE_FROM_DBMS + TABLE_NAME + AbstractDaoJdbcTemplateImpl.ERROR_GIVEN_ID + audit.getId());

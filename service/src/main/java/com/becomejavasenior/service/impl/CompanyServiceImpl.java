@@ -69,12 +69,6 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Map<Integer, String> getTaskTypeList() {
-        //TODO testing transactional - delete after
-        try{
-            userDAO.getUserById(1);
-            userDAO.getUserById(123456);
-        }catch(Exception ignored){}
-        //TODO testing transactional - delete before
         return taskDAO.getTaskTypeList();
     }
 
