@@ -24,7 +24,6 @@ import static com.becomejavasenior.service.SpringServiceTests.APPLICATION_CONTEX
 
 abstract public class SpringServiceTests {
     public static final String APPLICATION_CONTEXT_FILE = "classpath:test-services.xml";
-
     @Autowired
     private DataSource dataSource;
 
