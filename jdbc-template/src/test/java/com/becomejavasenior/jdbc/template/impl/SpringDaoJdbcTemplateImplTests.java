@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.becomejavasenior.jdbc.template.impl.SpringDaoJdbcTemplateImplTests.APPLICATION_CONTEXT_FILE;
 
@@ -46,6 +47,7 @@ abstract public class SpringDaoJdbcTemplateImplTests {
         }
         if (connection == null) throw new RuntimeException(
                 "Test database is not initialized. Check connection or run database_test.sql");
+        System.out.println("-------- Locale: "+Locale.getDefault());
         List<Resource> scripts = new ArrayList<>();
         scripts.add(ctx.getResource("classpath:schema.sql"));
         scripts.add(ctx.getResource("classpath:data.sql"));
