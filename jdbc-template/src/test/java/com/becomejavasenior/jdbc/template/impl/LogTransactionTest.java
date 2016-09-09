@@ -5,7 +5,7 @@ import com.becomejavasenior.jdbc.entity.UserDAO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Commit;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class LogTransactionTest extends SpringDaoJdbcTemplateImplTests {
@@ -23,12 +23,11 @@ public class LogTransactionTest extends SpringDaoJdbcTemplateImplTests {
 
     @Test
     @Transactional
-    @Commit
     public void testLogOperationWithThrowing() {
         int testAuditsNumber = auditDAO.getAll().size();
-
-        userDAO.getUserById(11246); /// throwable caught by try-catch and returned null.
-
+        try {
+            userDAO.getUserById(11246); /// throwable caught by try-catch and returned null.
+        }catch(EmptyResultDataAccessException ignored){}
         Assert.assertEquals("Must be 1 more records", 1, auditDAO.getAll().size() - testAuditsNumber);
     }
 }

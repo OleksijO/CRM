@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
@@ -140,13 +139,13 @@ public class UserDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<User> i
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+
     public User getUserById(int id) {
-        logTransaction("getUserById method", id, " was called", false);
+        this.logTransaction("getUserById method", id, " was called", false);
         return jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", ROW_MAPPER_USER, id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+
     public void logTransaction(String methodName, int targetId, String message, boolean isError) {
         auditDAO.insert(new Audit(targetId, this.getClass() + " " + methodName + " " + message, isError, new Date()));
     }

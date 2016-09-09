@@ -126,15 +126,17 @@ Task 8, 21. Spring локализация
 Task 22 Validation
 --validation added, but only for company. some fixes.
 
+
 Task 23 Планировщик задач ---done
+
+
+Task 24. Spring transaction, аттрибут Propagation  -- done
 
 ================================================================
 
 NOW: -----------------------------------------------------------
 
 
-24. Spring transaction, аттрибут Propagation
-#26 opened 5 minutes ago by MykolaBova
 
 ================================================================
 
