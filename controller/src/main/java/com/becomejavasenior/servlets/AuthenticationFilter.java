@@ -3,11 +3,12 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.entity.User;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebFilter(filterName = "AuthenticationFilter", urlPatterns = "/*")
+@WebFilter(filterName = "AuthenticationFilter", urlPatterns = "/*")
 public class AuthenticationFilter implements Filter {
 
     private static final String LOGIN_PAGE = "/login";
@@ -28,6 +29,12 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = ((HttpServletRequest) request).getSession(false);
         String requestURI = ((HttpServletRequest) request).getRequestURI();
+
+        // turning off authorization for rest service for the task implementation
+        if(requestURI.toLowerCase().contains("/rest/")){
+            chain.doFilter(request, response);
+        }
+
         User user = null;
 
         if (session != null) {
