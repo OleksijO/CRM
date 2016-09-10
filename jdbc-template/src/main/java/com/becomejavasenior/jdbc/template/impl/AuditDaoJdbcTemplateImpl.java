@@ -18,8 +18,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-@Repository
-@Transactional
+@Repository("auditDao")
+@Transactional          //Task 24 Transactional / Propagation
 public class AuditDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Audit> implements AuditDAO {
     private static final String INSERT_SQL = "INSERT INTO audit (target_id ,message, is_error, date_create)" +
             " VALUES (?, ?, ?, ?)";

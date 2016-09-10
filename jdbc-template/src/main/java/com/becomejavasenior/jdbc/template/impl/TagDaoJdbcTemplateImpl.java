@@ -11,12 +11,13 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Types;
 import java.util.List;
 
-//@Repository("tagDao")
+@Repository("tagDao")
 public class TagDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Tag> implements TagDAO {
 
     private static final String INSERT_SQL = "INSERT INTO tag (name, deleted) VALUES (?, FALSE)";

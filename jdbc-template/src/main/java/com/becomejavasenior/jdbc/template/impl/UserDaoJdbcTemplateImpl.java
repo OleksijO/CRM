@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository("userDao")
-@Transactional
+@Transactional          // Task 24 Transaction/Propagation
 public class UserDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<User> implements UserDAO {
     private static final String INSERT_SQL = "INSERT INTO users (name, email, password, is_admin, phone, " +
             "mobile_phone, note, deleted, url, image, language_id) VALUES (?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?, ?)";

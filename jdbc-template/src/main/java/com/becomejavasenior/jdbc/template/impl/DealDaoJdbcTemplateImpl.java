@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -20,13 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//@Repository("dealDao")
+
+@Repository("dealDao")
 public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Deal> implements DealDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
-
     private static final String INSERT_SQL = "INSERT INTO deal (stage_id, responsible_users_id, company_id, created_by_id, " +
             "name, amount, deleted, date_create, primary_contact_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_SQL = "UPDATE deal SET stage_id = ?, responsible_users_id = ?, company_id = ?, created_by_id = ?, name = ?," +

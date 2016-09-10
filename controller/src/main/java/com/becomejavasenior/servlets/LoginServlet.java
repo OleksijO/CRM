@@ -5,6 +5,7 @@ import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -18,6 +19,13 @@ public class LoginServlet extends AbstractSpringAutowiredSupport {
     @Autowired
     private UserService userService;
     private Map<String, User> userMap;
+
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        userMap = userService.getUserMap();
+    }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

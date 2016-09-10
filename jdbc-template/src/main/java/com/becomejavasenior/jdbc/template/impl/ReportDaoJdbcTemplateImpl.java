@@ -10,9 +10,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
@@ -20,8 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-//@Repository("ReportDao")
-public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements ReportDAO {
+@Repository("reportDao")
+public class ReportDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Report> implements ReportDAO {
 
     private static final String INSERT_SQL = "INSERT INTO report (date, hour_amount, company_id) VALUES (?, ?, ?)";
     private static final String UPDATE_SQL = "UPDATE report SET date = ?, hour_amount = ? WHERE id = ?";
@@ -86,7 +86,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
             return statement;
         };
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        getJdbcTemplate().update(preparedStatementCreator, keyHolder);
+        jdbcTemplate.update(preparedStatementCreator, keyHolder);
         int id = (int) keyHolder.getKey();
         report.setId(id);
         return id;
@@ -104,17 +104,17 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
             preparedStatement.setBigDecimal(2, report.getHourAmount());
             preparedStatement.setInt(3, report.getId());
         };
-        getJdbcTemplate().update(UPDATE_SQL, preparedStatementSetter);
+        jdbcTemplate.update(UPDATE_SQL, preparedStatementSetter);
     }
 
     @Override
     public void delete(int id) {
-        getJdbcTemplate().update("DELETE FROM " + TABLE_NAME + " WHERE id = " + id);
+        jdbcTemplate.update("DELETE FROM " + TABLE_NAME + " WHERE id = " + id);
     }
 
     @Override
     public List<Report> getAll() {
-        return getJdbcTemplate().query(SELECT_SQL, ROW_MAPPER_REPORT);
+        return jdbcTemplate.query(SELECT_SQL, ROW_MAPPER_REPORT);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
 
     @Override
     public Report getReportById(int id) {
-        return getJdbcTemplate().queryForObject(SELECT_SQL + " WHERE report.id = ?", ROW_MAPPER_REPORT, id);
+        return jdbcTemplate.queryForObject(SELECT_SQL + " WHERE report.id = ?", ROW_MAPPER_REPORT, id);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
             preparedStatement.setTimestamp(2, toTimestamp(end));
             preparedStatement.setInt(3, company.getId());
         };
-        return getJdbcTemplate().query(SELECT_SQL + " WHERE date >= ? AND date < ? AND company.id = ?",
+        return jdbcTemplate.query(SELECT_SQL + " WHERE date >= ? AND date < ? AND company.id = ?",
                 preparedStatementSetter,
                 ROW_MAPPER_REPORT);
     }
@@ -150,7 +150,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
             preparedStatement.setTimestamp(1, toTimestamp(start));
             preparedStatement.setTimestamp(2, toTimestamp(end));
         };
-        return getJdbcTemplate().query(SELECT_SQL + " WHERE date >= ? AND date < ?",
+        return jdbcTemplate.query(SELECT_SQL + " WHERE date >= ? AND date < ?",
                 preparedStatementSetter,
                 ROW_MAPPER_REPORT);
     }
@@ -161,7 +161,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
             preparedStatement.setInt(1, company.getId());
 
         };
-        return getJdbcTemplate().query(SELECT_SQL + " WHERE company.id = ?",
+        return jdbcTemplate.query(SELECT_SQL + " WHERE company.id = ?",
                 preparedStatementSetter,
                 ROW_MAPPER_REPORT);
     }

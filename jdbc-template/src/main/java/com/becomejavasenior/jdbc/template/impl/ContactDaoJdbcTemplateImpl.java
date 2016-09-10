@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
@@ -21,7 +22,7 @@ import java.sql.Types;
 import java.util.List;
 
 
-//@Repository("contactDaoJdbcTemplate")
+@Repository("contactDao")
 public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Contact> implements ContactDAO {
 
     private static final String INSERT_SQL = "INSERT INTO contact (name, responsible_users_id, pos, type_of_phone, phone," +

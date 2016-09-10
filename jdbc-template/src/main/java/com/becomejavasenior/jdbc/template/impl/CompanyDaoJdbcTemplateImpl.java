@@ -11,15 +11,14 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 
-//@Repository("companyDaoJdbcTemplate")
+@Repository("companyDao")
 public class CompanyDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Company> implements CompanyDAO {
 
     //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
