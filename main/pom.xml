@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>crm</groupId>
-            <artifactId>tasks</artifactId>
+            <artifactId>schedule</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

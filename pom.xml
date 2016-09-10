@@ -65,7 +65,7 @@
         <module>aspects</module>
         <module>rest</module>
         <module>service</module>
-        <module>tasks</module>
+        <module>schedule</module>
         <module>main</module>
         <module>mvc</module>
     </modules>
