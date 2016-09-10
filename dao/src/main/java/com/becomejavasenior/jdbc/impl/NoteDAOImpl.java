@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.NoteDAO;
+import com.becomejavasenior.jdbc.NoteDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
 import org.springframework.stereotype.Repository;
@@ -67,7 +67,7 @@ public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
     public void update(Note note) {
 
         if (note.getId() == 0) {
-            throw new DatabaseException("note must be created before update");
+            throw new DatabaseException("note must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

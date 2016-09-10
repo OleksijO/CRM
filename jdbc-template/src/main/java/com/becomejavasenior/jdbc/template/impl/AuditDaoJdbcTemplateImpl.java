@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.template.impl;
 
 import com.becomejavasenior.entity.Audit;
-import com.becomejavasenior.jdbc.entity.AuditDAO;
+import com.becomejavasenior.jdbc.AuditDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -74,7 +74,7 @@ public class AuditDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Audit>
     @Override
     public void update(Audit audit) {
         if (audit.getId() == 0) {
-            throw new DatabaseException("audit must be created before update");
+            throw new DatabaseException("audit must be created before update (id = 0)");
         }
 
         PreparedStatementSetter preparedStatementSetter = statement -> {

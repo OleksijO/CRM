@@ -1,6 +1,6 @@
 package com.becomejavasenior.jdbc.template.impl;
 
-import com.becomejavasenior.jdbc.entity.DashboardDAO;
+import com.becomejavasenior.jdbc.DashboardDAO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

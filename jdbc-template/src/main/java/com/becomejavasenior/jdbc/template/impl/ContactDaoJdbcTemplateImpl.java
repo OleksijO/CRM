@@ -4,8 +4,8 @@ import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.TypeOfPhone;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.ContactDAO;
-import com.becomejavasenior.jdbc.entity.TagDAO;
+import com.becomejavasenior.jdbc.ContactDAO;
+import com.becomejavasenior.jdbc.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -118,7 +118,7 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Cont
     public void update(Contact contact) {
 
         if (contact.getId() == 0) {
-            throw new DatabaseException("contact must be created before update");
+            throw new DatabaseException("contact must be created before update (id = 0)");
         }
         PreparedStatementSetter preparedStatementSetter = statement -> {
                 statement.setString(1, contact.getName());

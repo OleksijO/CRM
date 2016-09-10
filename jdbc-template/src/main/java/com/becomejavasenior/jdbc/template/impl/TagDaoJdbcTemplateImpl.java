@@ -3,7 +3,7 @@ package com.becomejavasenior.jdbc.template.impl;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Tag;
-import com.becomejavasenior.jdbc.entity.TagDAO;
+import com.becomejavasenior.jdbc.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -61,7 +61,7 @@ public class TagDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Tag> imp
     public void update(Tag tag) {
 
         if (tag.getId() == 0) {
-            throw new DatabaseException("tag must be created before update");
+            throw new DatabaseException("Tag must be created before update (id = 0).");
         }
 
         PreparedStatementSetter preparedStatementSetter = preparedStatement -> {

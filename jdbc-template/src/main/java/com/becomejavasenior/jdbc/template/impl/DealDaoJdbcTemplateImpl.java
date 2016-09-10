@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.template.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.DealDAO;
+import com.becomejavasenior.jdbc.DealDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -195,7 +195,7 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Deal> i
     public void update(Deal deal) {
 
         if (deal.getId() == 0) {
-            throw new DatabaseException("deal must be created before update");
+            throw new DatabaseException("deal must be created before update (id = 0)");
         }
 
         PreparedStatementSetter preparedStatementSetter = preparedStatement -> {

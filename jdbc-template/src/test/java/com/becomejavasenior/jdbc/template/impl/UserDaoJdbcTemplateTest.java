@@ -2,8 +2,8 @@ package com.becomejavasenior.jdbc.template.impl;
 
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.LanguageDAO;
-import com.becomejavasenior.jdbc.entity.UserDAO;
+import com.becomejavasenior.jdbc.LanguageDAO;
+import com.becomejavasenior.jdbc.UserDAO;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

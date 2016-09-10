@@ -1,7 +1,7 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.*;
+import com.becomejavasenior.jdbc.*;
 import com.becomejavasenior.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

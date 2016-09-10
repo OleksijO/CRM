@@ -2,7 +2,7 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.User;
 import com.becomejavasenior.entity.VisitHistory;
-import com.becomejavasenior.jdbc.entity.VisitHistoryDAO;
+import com.becomejavasenior.jdbc.VisitHistoryDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.stereotype.Repository;
 
@@ -61,7 +61,7 @@ public class VisitHistoryDAOImpl extends AbstractDAO<VisitHistory> implements Vi
     public void update(VisitHistory visitHistory) {
 
         if (visitHistory.getId() == 0) {
-            throw new DatabaseException("VisitHistory must be created before update");
+            throw new DatabaseException("VisitHistory must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(UPDATE_SQL)) {

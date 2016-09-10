@@ -3,7 +3,7 @@ package com.becomejavasenior.jdbc.template.impl;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Report;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.ReportDAO;
+import com.becomejavasenior.jdbc.ReportDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -96,7 +96,7 @@ public class ReportDaoJdbcDaoTemplateImpl extends JdbcDaoSupport implements Repo
     public void update(Report report) {
 
         if (report.getId() == 0) {
-            throw new DatabaseException("report must be created before update");
+            throw new DatabaseException("report must be created before update (id = 0)");
         }
 
         PreparedStatementSetter preparedStatementSetter = preparedStatement -> {

@@ -3,7 +3,7 @@ package com.becomejavasenior.jdbc.template.impl;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Tag;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.CompanyDAO;
+import com.becomejavasenior.jdbc.CompanyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -87,7 +87,7 @@ public class CompanyDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Comp
     @Override
     public void update(Company company) {
         if (company.getId() == 0) {
-            throw new DatabaseException("company must be created before update");
+            throw new DatabaseException("company must be created before update (id = 0)");
         }
         PreparedStatementSetter preparedStatementSetter = ps -> {
             ps.setString(1, company.getName());

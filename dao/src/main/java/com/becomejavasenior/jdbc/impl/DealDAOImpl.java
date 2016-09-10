@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.DealDAO;
+import com.becomejavasenior.jdbc.DealDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
 
@@ -234,7 +234,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
     public void update(Deal deal) {
 
         if (deal.getId() == 0) {
-            throw new DatabaseException("deal must be created before update");
+            throw new DatabaseException("deal must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.*;
+import com.becomejavasenior.jdbc.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

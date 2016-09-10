@@ -1,4 +1,4 @@
-package com.becomejavasenior.jdbc.entity;
+package com.becomejavasenior.jdbc;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Tag;

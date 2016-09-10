@@ -2,7 +2,7 @@ package com.becomejavasenior.service.Mocks;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Report;
-import com.becomejavasenior.jdbc.entity.ReportDAO;
+import com.becomejavasenior.jdbc.ReportDAO;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Component;
 

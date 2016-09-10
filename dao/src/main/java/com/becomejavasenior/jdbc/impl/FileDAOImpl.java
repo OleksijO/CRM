@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.FileDAO;
+import com.becomejavasenior.jdbc.FileDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
 import org.springframework.stereotype.Repository;
@@ -70,7 +70,7 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
     public void update(File file) {
 
         if (file.getId() == 0) {
-            throw new DatabaseException("file must be created before update");
+            throw new DatabaseException("file must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

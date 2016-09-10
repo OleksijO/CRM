@@ -3,7 +3,7 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Rights;
 import com.becomejavasenior.entity.SubjectType;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.RightsDAO;
+import com.becomejavasenior.jdbc.RightsDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.stereotype.Repository;
 
@@ -71,7 +71,7 @@ public class RightsDAOImpl extends AbstractDAO<Rights> implements RightsDAO {
     public void update(Rights rights) {
 
         if (rights.getId() == 0) {
-            throw new DatabaseException("rights must be created before update");
+            throw new DatabaseException("rights must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(UPDATE_SQL)) {

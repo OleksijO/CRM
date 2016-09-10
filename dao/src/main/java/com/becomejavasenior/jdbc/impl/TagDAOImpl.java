@@ -3,7 +3,7 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Tag;
-import com.becomejavasenior.jdbc.entity.TagDAO;
+import com.becomejavasenior.jdbc.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 
 import java.sql.*;
@@ -53,7 +53,7 @@ public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
     public void update(Tag tag) {
 
         if (tag.getId() == 0) {
-            throw new DatabaseException("tag must be created before update");
+            throw new DatabaseException("tag must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(UPDATE_SQL)) {

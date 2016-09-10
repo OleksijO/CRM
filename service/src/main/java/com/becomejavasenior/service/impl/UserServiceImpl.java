@@ -2,8 +2,8 @@ package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.LanguageDAO;
-import com.becomejavasenior.jdbc.entity.UserDAO;
+import com.becomejavasenior.jdbc.LanguageDAO;
+import com.becomejavasenior.jdbc.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;

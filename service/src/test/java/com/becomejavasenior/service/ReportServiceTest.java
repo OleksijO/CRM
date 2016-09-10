@@ -1,6 +1,6 @@
 package com.becomejavasenior.service;
 
-import com.becomejavasenior.jdbc.entity.ReportDAO;
+import com.becomejavasenior.jdbc.ReportDAO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

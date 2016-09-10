@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Language;
-import com.becomejavasenior.jdbc.entity.LanguageDAO;
+import com.becomejavasenior.jdbc.LanguageDAO;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -2,8 +2,8 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.CompanyDAO;
-import com.becomejavasenior.jdbc.entity.UserDAO;
+import com.becomejavasenior.jdbc.CompanyDAO;
+import com.becomejavasenior.jdbc.UserDAO;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

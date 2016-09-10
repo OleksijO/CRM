@@ -2,8 +2,8 @@ package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Report;
-import com.becomejavasenior.jdbc.entity.DealDAO;
-import com.becomejavasenior.jdbc.entity.ReportDAO;
+import com.becomejavasenior.jdbc.DealDAO;
+import com.becomejavasenior.jdbc.ReportDAO;
 import com.becomejavasenior.service.ReportService;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;

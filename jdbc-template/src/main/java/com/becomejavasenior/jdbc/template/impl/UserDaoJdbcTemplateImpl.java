@@ -3,8 +3,8 @@ package com.becomejavasenior.jdbc.template.impl;
 import com.becomejavasenior.entity.Audit;
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.AuditDAO;
-import com.becomejavasenior.jdbc.entity.UserDAO;
+import com.becomejavasenior.jdbc.AuditDAO;
+import com.becomejavasenior.jdbc.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -58,7 +58,7 @@ public class UserDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<User> i
     public int insert(User user) {
 
         if (user.getId() != 0) {
-            throw new DatabaseException("user id must be obtained from DB");
+            throw new DatabaseException("User id must be obtained from DB. User id="+user.getId());
         }
 
         PreparedStatementCreator preparedStatementCreator = connection -> {
@@ -91,7 +91,7 @@ public class UserDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<User> i
     public void update(User user) {
 
         if (user.getId() == 0) {
-            throw new DatabaseException("user must be created before update");
+            throw new DatabaseException("user must be created before update (id=0).");
         }
         PreparedStatementSetter preparedStatementSetter = statement -> {
 

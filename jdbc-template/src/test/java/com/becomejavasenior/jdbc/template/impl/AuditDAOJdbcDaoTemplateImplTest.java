@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.template.impl;
 
 import com.becomejavasenior.entity.Audit;
-import com.becomejavasenior.jdbc.entity.AuditDAO;
+import com.becomejavasenior.jdbc.AuditDAO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

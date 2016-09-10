@@ -1,6 +1,6 @@
 package com.becomejavasenior.jdbc.template.impl;
 
-import com.becomejavasenior.jdbc.entity.DashboardDAO;
+import com.becomejavasenior.jdbc.DashboardDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

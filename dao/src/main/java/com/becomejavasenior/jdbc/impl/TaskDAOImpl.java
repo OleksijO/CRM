@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.TaskDAO;
+import com.becomejavasenior.jdbc.TaskDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
 import org.springframework.stereotype.Repository;
@@ -100,7 +100,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
     public void update(Task task) {
 
         if (task.getId() == 0) {
-            throw new DatabaseException("task must be created before update");
+            throw new DatabaseException("task must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

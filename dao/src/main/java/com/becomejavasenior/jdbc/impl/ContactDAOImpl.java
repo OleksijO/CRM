@@ -1,8 +1,8 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.ContactDAO;
-import com.becomejavasenior.jdbc.entity.TagDAO;
+import com.becomejavasenior.jdbc.ContactDAO;
+import com.becomejavasenior.jdbc.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 
 import java.sql.*;
@@ -91,7 +91,7 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
     public void update(Contact contact) {
 
         if (contact.getId() == 0) {
-            throw new DatabaseException("contact must be created before update");
+            throw new DatabaseException("contact must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

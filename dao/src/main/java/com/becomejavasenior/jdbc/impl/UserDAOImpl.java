@@ -2,7 +2,7 @@ package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Language;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.UserDAO;
+import com.becomejavasenior.jdbc.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
 
@@ -66,7 +66,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
     public void update(User user) {
 
         if (user.getId() == 0) {
-            throw new DatabaseException("user must be created before update");
+            throw new DatabaseException("user must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

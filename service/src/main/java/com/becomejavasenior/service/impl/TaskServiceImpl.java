@@ -1,7 +1,7 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.entity.Task;
-import com.becomejavasenior.jdbc.entity.TaskDAO;
+import com.becomejavasenior.jdbc.TaskDAO;
 import com.becomejavasenior.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

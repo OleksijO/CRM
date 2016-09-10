@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Stage;
-import com.becomejavasenior.jdbc.entity.StageDAO;
+import com.becomejavasenior.jdbc.StageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
 import org.springframework.stereotype.Repository;
@@ -57,7 +57,7 @@ public class StageDAOImpl extends AbstractDAO<Stage> implements StageDAO {
     public void update(Stage stage) {
 
         if (stage.getId() == 0) {
-            throw new DatabaseException("stage must be created before update");
+            throw new DatabaseException("stage must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

@@ -1,7 +1,7 @@
 package com.becomejavasenior.service.impl;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.*;
+import com.becomejavasenior.jdbc.*;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import com.becomejavasenior.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;

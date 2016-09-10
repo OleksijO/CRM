@@ -3,7 +3,7 @@ package com.becomejavasenior.service.impl;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.entity.Stage;
-import com.becomejavasenior.jdbc.entity.DealDAO;
+import com.becomejavasenior.jdbc.DealDAO;
 import com.becomejavasenior.service.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

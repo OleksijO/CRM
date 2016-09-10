@@ -4,7 +4,7 @@ import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.entity.Deal;
 import com.becomejavasenior.entity.Stage;
-import com.becomejavasenior.jdbc.entity.DealDAO;
+import com.becomejavasenior.jdbc.DealDAO;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Component;
 

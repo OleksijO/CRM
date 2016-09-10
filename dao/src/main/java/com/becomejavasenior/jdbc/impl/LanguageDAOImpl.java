@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Language;
-import com.becomejavasenior.jdbc.entity.LanguageDAO;
+import com.becomejavasenior.jdbc.LanguageDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.stereotype.Repository;
 
@@ -53,7 +53,7 @@ public class LanguageDAOImpl extends AbstractDAO<Language> implements LanguageDA
     public void update(Language language) {
 
         if (language.getId() == 0) {
-            throw new DatabaseException("language must be created before update");
+            throw new DatabaseException("language must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

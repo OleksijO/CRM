@@ -3,7 +3,7 @@ package com.becomejavasenior.jdbc.impl;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Tag;
 import com.becomejavasenior.entity.User;
-import com.becomejavasenior.jdbc.entity.CompanyDAO;
+import com.becomejavasenior.jdbc.CompanyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
 
@@ -69,7 +69,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
     public void update(Company company) {
 
         if (company.getId() == 0) {
-            throw new DatabaseException("company must be created before update");
+            throw new DatabaseException("company must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {

@@ -1,7 +1,7 @@
 package com.becomejavasenior.jdbc.impl;
 
 import com.becomejavasenior.entity.Currency;
-import com.becomejavasenior.jdbc.entity.CurrencyDAO;
+import com.becomejavasenior.jdbc.CurrencyDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.springframework.stereotype.Repository;
 
@@ -52,7 +52,7 @@ public class CurrencyDAOImpl extends AbstractDAO<Currency> implements CurrencyDA
     public void update(Currency currency) {
 
         if (currency.getId() == 0) {
-            throw new DatabaseException("contact must be created before update");
+            throw new DatabaseException("contact must be created before update (id = 0)");
         }
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
