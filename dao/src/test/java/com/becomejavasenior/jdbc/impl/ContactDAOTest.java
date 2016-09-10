@@ -28,7 +28,6 @@ public class ContactDAOTest extends SpringDaoTests {
     @Autowired
     private UserDAO userDAO;
     @Autowired
-    @Qualifier("companyDao")
     private CompanyDAO companyDAO;
     private User userForContactTest;
     private static final String DEFAULT_NAME = "Default Name";

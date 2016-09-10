@@ -22,7 +22,6 @@ import java.util.List;
 public class CompanyDAOTest extends SpringDaoTests {
 
     @Autowired
-    @Qualifier("companyDao")
     private CompanyDAO companyDAO;
     @Autowired
     private UserDAO userDAO;

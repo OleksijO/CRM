@@ -24,7 +24,7 @@ public class NoteDAOTest extends SpringDaoTests{
 
     @Autowired
     private UserDAO userDAO;
-    @Autowired @Qualifier("companyDao")
+    @Autowired
     private CompanyDAO companyDAO;
     @Autowired
     private ContactDAO contactDAO;

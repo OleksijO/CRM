@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -23,7 +22,6 @@ import java.util.List;
 public class CompanyDAOJdbcTemplateImplTest extends AbstractSpringDaoJdbcTemplateImplTest {
 
     @Autowired
-    @Qualifier("companyDao")
     private CompanyDAO companyDAO;
     @Autowired
     private UserDAO userDAO;

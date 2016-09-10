@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.PostConstruct;
 import java.sql.Connection;
@@ -30,7 +29,6 @@ public class TaskDAOTest extends SpringDaoTests{
     @Autowired
     private TaskDAO taskDAO;
     @Autowired
-    @Qualifier("companyDao")
     private CompanyDAO companyDAO;
     @Autowired
     private ContactDAO contactDAO;

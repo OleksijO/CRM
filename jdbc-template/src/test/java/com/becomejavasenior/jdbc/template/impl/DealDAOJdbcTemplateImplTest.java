@@ -29,7 +29,7 @@ public class DealDAOJdbcTemplateImplTest extends AbstractSpringDaoJdbcTemplateIm
     private UserDAO userDAO;
     @Autowired
     private StageDAO stageDAO;
-    @Autowired @Qualifier("companyDao")
+    @Autowired
     private CompanyDAO companyDAO;
     @Autowired
     private ContactDAO contactDAO;

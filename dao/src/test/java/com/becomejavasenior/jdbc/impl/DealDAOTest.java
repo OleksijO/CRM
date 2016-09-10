@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
@@ -28,7 +27,7 @@ public class DealDAOTest extends SpringDaoTests {
     private UserDAO userDAO;
     @Autowired
     private StageDAO stageDAO;
-    @Autowired @Qualifier("companyDao")
+    @Autowired
     private CompanyDAO companyDAO;
     @Autowired
     private ContactDAO contactDAO;
