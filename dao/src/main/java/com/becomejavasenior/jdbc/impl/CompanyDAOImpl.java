@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//@Repository("companyDao")
 public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
     private static final String INSERT_SQL = "INSERT INTO company (name, phone, email, address, responsible_users_id," +

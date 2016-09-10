@@ -92,5 +92,9 @@ public class DashboardDaoJdbcTemplate implements DashboardDAO {
     public int getTotalNumberOfCompanies() {
         return getCount("SELECT COUNT(company.id) FROM company;");
     }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 }
 

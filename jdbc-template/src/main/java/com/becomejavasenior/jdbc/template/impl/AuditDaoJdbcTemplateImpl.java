@@ -97,7 +97,7 @@ public class AuditDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Audit>
         try {
            return jdbcTemplate.queryForObject(SELECT_ALL_SQL + " WHERE id = ?", ROW_MAPPER_AUDIT, id);
         } catch (EmptyResultDataAccessException ignored) {
-            // to return null if there is no object in DB with specified id. For tests.
+            // for backward compatibility
             return null;
         }
     }

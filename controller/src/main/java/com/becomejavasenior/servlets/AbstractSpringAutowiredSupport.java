@@ -18,4 +18,8 @@ public class AbstractSpringAutowiredSupport extends HttpServlet {
         super.init(config);
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
 }

@@ -58,5 +58,7 @@ abstract class AbstractDAO<T> implements GenericDAO<T> {
         }
     }
 
-
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 }

@@ -299,4 +299,8 @@ public class AddCompany {
         }
         return null;
     }
+
+    public void setCompanyService(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 }

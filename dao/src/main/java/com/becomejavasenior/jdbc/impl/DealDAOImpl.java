@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@Repository("dealDao")
 public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
 
     private static final String INSERT_SQL = "INSERT INTO deal (stage_id, responsible_users_id, company_id, created_by_id, " +

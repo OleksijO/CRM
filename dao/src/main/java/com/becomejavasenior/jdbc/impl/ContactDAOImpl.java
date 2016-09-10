@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Repository("contactDao")
+
 public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
 
     private static final String INSERT_SQL = "INSERT INTO contact (name, responsible_users_id, pos, type_of_phone, phone," +

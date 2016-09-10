@@ -5,13 +5,13 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.jdbc.UserDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
 import org.apache.commons.dbcp2.Utils;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-//@Repository("userDao")
 public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
     private static final String INSERT_SQL = "INSERT INTO users (name, email, password, is_admin, phone, " +
             "mobile_phone, note, deleted, url, image, language_id) VALUES (?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?, ?)";
@@ -149,8 +149,10 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 
     @Override
     public User getUserById(int id) {
-        //TODO implement method
-        throw new RuntimeException("Operation is not supported by this implementation yet. Use another one, please.");
-
+        User user = getById(id);
+        if (user == null) {
+            throw new EmptyResultDataAccessException("User with id=" + id + " is not present in database.", 1);
+        }
+        return user;
     }
 }

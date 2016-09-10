@@ -40,4 +40,8 @@ public class ContactCompanyViewServlet extends AbstractSpringAutowiredSupport {
             logger.error("WEB: forward to contact/company view failed", e);
         }
     }
+
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
+    }
 }

@@ -10,7 +10,8 @@
 
     <mvc:annotation-driven />
 
-    <import resource="classpath*:localization.xml" />
+    <import resource="classpath:mvc.xml"/>
+    <import resource="classpath:localization.xml" />
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"

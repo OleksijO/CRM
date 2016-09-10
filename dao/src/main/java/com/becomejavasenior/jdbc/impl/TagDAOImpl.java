@@ -10,7 +10,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Repository("tagDao")
 public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
 
     private static final String INSERT_SQL = "INSERT INTO tag (name, deleted) VALUES (?, FALSE)";

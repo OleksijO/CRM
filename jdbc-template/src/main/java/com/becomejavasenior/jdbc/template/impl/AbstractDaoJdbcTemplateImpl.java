@@ -36,4 +36,8 @@ abstract class AbstractDaoJdbcTemplateImpl<T> implements GenericDAO<T> {
     public void delete(int id, String tableName) {
         jdbcTemplate.update("UPDATE " + tableName + " SET deleted = TRUE WHERE id = " + id);
     }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 }

@@ -122,7 +122,7 @@ public class ReportDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Repor
         try {
             return getReportById(id);
         } catch (EmptyResultDataAccessException ignored) {
-            // to return null if there is no object in DB with specified id. For tests.
+            // for backward compatibility
             return null;
         }
     }

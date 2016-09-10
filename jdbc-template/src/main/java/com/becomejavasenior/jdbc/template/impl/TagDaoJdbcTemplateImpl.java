@@ -91,7 +91,7 @@ public class TagDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Tag> imp
             tag = jdbcTemplate.queryForObject(SELECT_SQL + " AND id = ?", ROW_MAPPER_TAG, id);
         } catch (EmptyResultDataAccessException ignored) {
             return null;
-            // to return null if there is no object in DB with specified id. For tests.
+            // for backward compatibility
         }
         return tag;
     }

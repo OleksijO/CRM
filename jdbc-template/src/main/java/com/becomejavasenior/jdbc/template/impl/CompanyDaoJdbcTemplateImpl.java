@@ -112,7 +112,7 @@ public class CompanyDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Comp
         try {
             company = jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", ROW_MAPPER_COMPANY, id);
         } catch (EmptyResultDataAccessException ignored) {
-            // to return null if there is no object in DB with specified id. For tests.
+            // for backward compatibility
             return null;
         }
         return company;

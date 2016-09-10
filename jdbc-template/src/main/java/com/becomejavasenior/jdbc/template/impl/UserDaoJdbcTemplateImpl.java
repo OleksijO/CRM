@@ -132,7 +132,7 @@ public class UserDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<User> i
                     true
             );
             return null;
-            // to return null if there is no object in DB with specified id. For tests and backward compability.
+            // for backward compatibility.
         }
         logTransaction(methodName, id, " returned successfully.", false);
         return user;

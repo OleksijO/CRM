@@ -224,7 +224,7 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Deal> i
             deal = jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", ROW_MAPPER_DEAL, id);
         } catch (EmptyResultDataAccessException ignored) {
             return null;
-            // to return null if there is no object in DB with specified id. For tests.
+            // for backward compatibility
         }
         return deal;
     }

@@ -24,26 +24,23 @@ public class ContactRestController {
     }
 
     @RequestMapping(path = "/contact/{id}", method = RequestMethod.GET)
-    public Contact get(@PathVariable int id){
+    public Contact getById(@PathVariable int id){
         return contactService.getById(id);
     }
 
-    @RequestMapping(path = "/contact/{id}", method = RequestMethod.PUT)
-    public Contact update(@PathVariable int id, @RequestBody Contact contact, HttpServletResponse response){
-        contact.setId(id);
-        contactService.update(contact);
-        return contact;
-    }
-
     @RequestMapping(path = "/contact/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable int id, HttpServletResponse response){
+    public void deleteById(@PathVariable int id, HttpServletResponse response){
         contactService.delete(id);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
     @RequestMapping(path = "/contact", method = RequestMethod.POST)
-    public Contact save(@RequestBody Contact contact, HttpServletResponse response){
-        contact.setId(contactService.insert(contact));
+    public Contact create(@RequestBody Contact contact, HttpServletResponse response){
+        if (contact.getId()>0) {
+            contactService.update(contact);
+        } else {
+            contact.setId(contactService.insert(contact));
+        }
         return contact;
     }
 
@@ -58,8 +55,7 @@ public class ContactRestController {
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
-
-
-
-
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
+    }
 }

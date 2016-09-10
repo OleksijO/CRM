@@ -150,7 +150,7 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Cont
             contact = jdbcTemplate.queryForObject(SELECT_SQL + " AND contact.id = ?", ROW_MAPPER_CONTACT, id);
         } catch (EmptyResultDataAccessException ignored) {
             return null;
-            // to return null if there is no object in DB with specified id. For tests.
+            // for backward compatibility
         }
         return contact;
 

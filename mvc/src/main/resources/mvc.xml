@@ -7,7 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
 
 
     <context:annotation-config/>
-
+    <import resource="classpath*:services.xml"/>
 
 </beans>
 
