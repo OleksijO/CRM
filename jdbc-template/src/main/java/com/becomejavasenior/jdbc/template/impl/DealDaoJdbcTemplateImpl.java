@@ -138,12 +138,12 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Deal> i
 
     @Override
     public List<Deal> getDealsByStage(String stage) {
-        return jdbcTemplate.query(SELECT_ALL_DEAL_BY_STAGE, ROW_MAPPER_DEAL_FOR_STAGE);
+        return jdbcTemplate.query(SELECT_ALL_DEAL_BY_STAGE.replace("?", "'" + stage + "'"), ROW_MAPPER_DEAL_FOR_STAGE);
     }
 
     @Override
     public List<Contact> getContactsByDealName(String dealName) {
-        return jdbcTemplate.query(SELECT_ALL_CONTACT.replace("?", dealName), ROW_MAPPER_CONTACT_FOR_DEAL_NAME);
+        return jdbcTemplate.query(SELECT_ALL_CONTACT.replace("?", "'" + dealName + "'"), ROW_MAPPER_CONTACT_FOR_DEAL_NAME);
     }
 
     @Override
