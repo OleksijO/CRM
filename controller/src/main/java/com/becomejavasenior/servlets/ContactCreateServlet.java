@@ -3,14 +3,11 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.service.ContactService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -18,15 +15,9 @@ import java.io.UnsupportedEncodingException;
 
 @WebServlet(name = "contactCreateServlet", urlPatterns = "/contactcreate")
 @MultipartConfig(maxFileSize = 102400)
-public class ContactCreateServlet extends HttpServlet {
+public class ContactCreateServlet extends AbstractSpringAutowiredSupport {
     @Autowired
     private ContactService contactService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,5 +51,9 @@ public class ContactCreateServlet extends HttpServlet {
         } catch (IOException | ServletException e) {
             Logger.getRootLogger().error("WEB: error while parse or create contact", e);
         }
+    }
+
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
     }
 }

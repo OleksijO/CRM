@@ -4,12 +4,9 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.service.CompanyService;
 import com.google.common.base.Splitter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -24,16 +21,10 @@ import java.util.*;
 //@WebServlet(name = "companyServlet", urlPatterns = "/company")
 //@MultipartConfig
 @Deprecated     //changed by AddCompany in mvc module
-public class CompanyServlet extends HttpServlet {
+public class CompanyServlet extends AbstractSpringAutowiredSupport {
 
     @Autowired
     private CompanyService companyService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -256,5 +247,9 @@ public class CompanyServlet extends HttpServlet {
             }
         }
         return null;
+    }
+
+    public void setCompanyService(CompanyService companyService) {
+        this.companyService = companyService;
     }
 }

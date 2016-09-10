@@ -4,9 +4,7 @@ import com.becomejavasenior.entity.User;
 import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -14,19 +12,12 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends AbstractSpringAutowiredSupport {
 
     private static final int MAX_INACTIVE_INTERVAL = 1800;
     @Autowired
     private UserService userService;
     private Map<String, User> userMap;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-        userMap = userService.getUserMap();
-    }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -81,5 +72,9 @@ public class LoginServlet extends HttpServlet {
         } catch (IOException e) {
             Logger.getRootLogger().error("WEB: doPost: redirect to page " + fromPage + " failed", e);
         }
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

@@ -3,25 +3,16 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-public class ViewCompaniesServlet extends HttpServlet {
+public class ViewCompaniesServlet extends AbstractSpringAutowiredSupport {
     @Autowired
     private CompanyService companyService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,5 +22,9 @@ public class ViewCompaniesServlet extends HttpServlet {
 
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/pages/viewcompanies.jsp");
         requestDispatcher.forward(request, response);
+    }
+
+    public void setCompanyService(CompanyService companyService) {
+        this.companyService = companyService;
     }
 }

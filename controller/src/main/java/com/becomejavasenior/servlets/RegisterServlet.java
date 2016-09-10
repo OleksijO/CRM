@@ -3,28 +3,19 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = "/register")
-public class RegisterServlet extends HttpServlet {
+public class RegisterServlet extends AbstractSpringAutowiredSupport {
 
     private static final String URL_REGISTER = "/pages/authRegister.jsp";
     @Autowired
     private UserService userService;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,5 +51,9 @@ public class RegisterServlet extends HttpServlet {
                 Logger.getRootLogger().error("WEB: doPost: forward to register page failed", e);
             }
         }
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }
