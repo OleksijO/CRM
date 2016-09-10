@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping//(path="/rest") //this root uri folder set by map in web.xml
+@RequestMapping     //root controller's uri '/rest/'  folder set by mapping in web.xml
 public class ContactRestController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class ContactRestController {
     }
 
     @RequestMapping(path = "/contact", method = RequestMethod.POST)
-    public Contact create(@RequestBody Contact contact, HttpServletResponse response){
+    public Contact saveOrUpdate(@RequestBody Contact contact, HttpServletResponse response){
         if (contact.getId()>0) {
             contactService.update(contact);
         } else {
