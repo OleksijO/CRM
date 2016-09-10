@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("taskService")
 @Transactional
 public class TaskServiceImpl implements TaskService {
     @Autowired
@@ -52,7 +52,6 @@ public class TaskServiceImpl implements TaskService {
         taskDAO.delete(id);
     }
 
-    @Override
     public void setTaskDAO(TaskDAO taskDAO) {
         this.taskDAO = taskDAO;
     }

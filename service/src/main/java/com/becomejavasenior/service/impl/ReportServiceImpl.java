@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
-@Service
+@Service("reportService")
 @Transactional
 public class ReportServiceImpl implements ReportService {
     @Autowired
@@ -37,12 +37,12 @@ public class ReportServiceImpl implements ReportService {
         }
     }
 
-    @Override
+
     public void setReportDAO(ReportDAO reportDao) {
         this.reportDAO = reportDao;
     }
 
-    @Override
+
     public void setDealDAO(DealDAO dealDAO) {
         this.dealDAO = dealDAO;
     }

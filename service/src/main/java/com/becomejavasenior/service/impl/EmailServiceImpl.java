@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("emailService")
 public class EmailServiceImpl implements EmailService {
     @Autowired
     private MailSender mailSender;
@@ -22,7 +22,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendEmails(List<SimpleMailMessage> emails) {
         mailSender.send((SimpleMailMessage[]) emails.stream().toArray());
     }
-    @Override
+
     public void setMailSender(MailSender mailSender) {
         this.mailSender = mailSender;
     }

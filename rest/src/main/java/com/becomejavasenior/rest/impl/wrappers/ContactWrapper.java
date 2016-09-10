@@ -1,4 +1,4 @@
-package com.becomejavasenior.rest.impl.wrapper;
+package com.becomejavasenior.rest.impl.wrappers;
 
 
 import com.becomejavasenior.entity.Contact;

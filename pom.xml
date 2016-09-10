@@ -57,12 +57,14 @@
         <module>rest</module>
         <module>service</module>
         <module>tasks</module>
+        <module>main</module>
+        <module>mvc</module>
     </modules>
 
     <name>CRM Maven Webapp</name>
 
     <dependencies>
-        <!-- Put here PostgreSQL connector dependency-->
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -72,6 +74,7 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4.1208</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -135,7 +138,14 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.10</version>
+            <scope>test</scope>
+    </dependency>
     </dependencies>
     <properties>
         <spring.version>4.3.1.RELEASE</spring.version>

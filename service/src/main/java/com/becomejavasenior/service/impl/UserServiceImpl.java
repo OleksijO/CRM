@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
     private LanguageDAO languageDAO;
 
     @Override
-    @Transactional(readOnly = true)
     public Map<String, User> getUserMap() {
         List<User> userList = userDAO.getAll();
         Map<String, User> userMap = new HashMap<>();
@@ -38,7 +37,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Language> getLanguageList() {
         return languageDAO.getAll();
     }

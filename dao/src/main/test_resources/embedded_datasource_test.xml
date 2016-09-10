@@ -10,8 +10,8 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
 
 
     <jdbc:embedded-database id="testDataSource" database-name="test" type="H2" >
-        <jdbc:script location="test-schema.sql"/>
-        <jdbc:script location="test-data.sql"/>
+        <jdbc:script location="../../../../jdbc-template/src/test/resources/test-schema.sql"/>
+        <jdbc:script location="../../../../jdbc-template/src/test/resources/test-data.sql"/>
     </jdbc:embedded-database>
 
 

@@ -33,6 +33,7 @@ public class AuthenticationFilter implements Filter {
         // turning off authorization for rest service for the task implementation
         if(requestURI.toLowerCase().contains("/rest/")){
             chain.doFilter(request, response);
+            return;
         }
 
         User user = null;

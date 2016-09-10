@@ -164,35 +164,35 @@ public class CompanyServiceImpl implements CompanyService {
         }
         return timeList;
     }
-    @Override
+
     public void setCompanyDAO(CompanyDAO companyDAO) {
         this.companyDAO = companyDAO;
     }
-    @Override
+
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
-    @Override
+
     public void setContactDAO(ContactDAO contactDAO) {
         this.contactDAO = contactDAO;
     }
-    @Override
+
     public void setTaskDAO(TaskDAO taskDAO) {
         this.taskDAO = taskDAO;
     }
-    @Override
+
     public void setDealDAO(DealDAO dealDAO) {
         this.dealDAO = dealDAO;
     }
-    @Override
+
     public void setNoteDAO(NoteDAO noteDAO) {
         this.noteDAO = noteDAO;
     }
-    @Override
+
     public void setTagDAO(TagDAO tagDAO) {
         this.tagDAO = tagDAO;
     }
-    @Override
+
     public void setFileDAO(FileDAO fileDAO) {
         this.fileDAO = fileDAO;
     }

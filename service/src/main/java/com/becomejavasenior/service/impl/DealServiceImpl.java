@@ -79,7 +79,7 @@ public class DealServiceImpl implements DealService {
         //System.out.println("Deal Service Initialization...");
     }
 
-    @Override
+
     public void setDealDao(DealDAO dealDao) {
         this.dealDao = dealDao;
     }

@@ -1,7 +1,6 @@
 package com.becomejavasenior.service;
 
 import com.becomejavasenior.entity.*;
-import com.becomejavasenior.jdbc.entity.*;
 
 import javax.servlet.http.Part;
 import java.util.List;
@@ -27,21 +26,4 @@ public interface ContactService extends GenericService<Contact> {
 
     boolean createByParameters(Map<String, String[]> parameterMap, Part filePart);
 
-    void setContactDAO(ContactDAO contactDAO);
-
-    void setUserDAO(UserDAO userDAO);
-
-    void setCompanyDAO(com.becomejavasenior.jdbc.entity.CompanyDAO companyDAO);
-
-    void setStageDAO(StageDAO stageDAO);
-
-    void setTaskDAO(TaskDAO taskDAO);
-
-    void setDealDAO(DealDAO dealDAO);
-
-    void setTagDAO(TagDAO tagDAO);
-
-    void setNoteDAO(NoteDAO noteDAO);
-
-    void setFileDAO(FileDAO fileDAO);
 }

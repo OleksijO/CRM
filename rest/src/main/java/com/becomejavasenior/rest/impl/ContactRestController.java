@@ -1,7 +1,7 @@
 package com.becomejavasenior.rest.impl;
 
 import com.becomejavasenior.entity.Contact;
-import com.becomejavasenior.rest.impl.wrapper.ContactWrapper;
+import com.becomejavasenior.rest.impl.wrappers.ContactWrapper;
 import com.becomejavasenior.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

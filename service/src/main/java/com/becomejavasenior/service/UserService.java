@@ -9,11 +9,11 @@ import java.util.Map;
 
 @Transactional
 public interface UserService  {
-    @Transactional(readOnly = true)
+
     Map<String, User> getUserMap();
-    @Transactional
+
     String createNewUser(String name, String password, String email, int langId);
-    @Transactional(readOnly = true)
+
     List<Language> getLanguageList();
 
     User getById(int id);

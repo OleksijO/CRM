@@ -1,4 +1,4 @@
-package com.becomejavasenior.servlets.beans;
+package com.becomejavasenior.mvc.beans;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;

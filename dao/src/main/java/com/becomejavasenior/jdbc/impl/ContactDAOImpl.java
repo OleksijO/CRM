@@ -4,7 +4,6 @@ import com.becomejavasenior.entity.*;
 import com.becomejavasenior.jdbc.entity.ContactDAO;
 import com.becomejavasenior.jdbc.entity.TagDAO;
 import com.becomejavasenior.jdbc.exceptions.DatabaseException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,15 +34,13 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
     private static final String FIELD_CREATED_BY_ID = "created_by_id";
     private static final String FIELD_COMPANY_ID = "company_id";
     private static final String FIELD_COMPANY_NAME = "company_name";
-    private final TagDAO tagDAO;
 
-    @Autowired
-    public ContactDAOImpl(TagDAO tagDAO) {
-        this.tagDAO = tagDAO;
-    }
+    private TagDAO tagDAO;
 
     @Override
     public int insert(Contact contact) {
+            //TODO delete after test
+        tagDAO.getById(1);
 
         if (contact.getId() != 0) {
             throw new DatabaseException("contact id must be obtained from DB");
@@ -186,5 +183,9 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
             contactList.add(contact);
         }
         return contactList;
+    }
+
+    public void setTagDAO(TagDAO tagDAO) {
+        this.tagDAO = tagDAO;
     }
 }
