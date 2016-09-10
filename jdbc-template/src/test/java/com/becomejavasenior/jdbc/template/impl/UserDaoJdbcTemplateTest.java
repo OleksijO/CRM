@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class UserDaoJdbcTemplateTest extends SpringDaoJdbcTemplateImplTests{
+public class UserDaoJdbcTemplateTest extends AbstractSpringDaoJdbcTemplateImplTest {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final String DEFAULT_EMAIL = "default@email.org";

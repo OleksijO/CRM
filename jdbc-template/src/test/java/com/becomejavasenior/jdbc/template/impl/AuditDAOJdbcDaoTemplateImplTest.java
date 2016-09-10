@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AuditDAOJdbcDaoTemplateImplTest extends SpringDaoJdbcTemplateImplTests {
+public class AuditDAOJdbcDaoTemplateImplTest extends AbstractSpringDaoJdbcTemplateImplTest {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());

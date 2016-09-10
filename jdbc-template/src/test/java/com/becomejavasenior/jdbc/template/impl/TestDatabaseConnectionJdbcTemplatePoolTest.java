@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 
-public class TestDatabaseConnectionJdbcTemplatePoolTest extends SpringDaoJdbcTemplateImplTests {
+public class TestDatabaseConnectionJdbcTemplatePoolTest extends AbstractSpringDaoJdbcTemplateImplTest {
 
     @Autowired
     DataSource dataSource;

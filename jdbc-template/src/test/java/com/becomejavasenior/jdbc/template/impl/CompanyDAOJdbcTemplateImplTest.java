@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class CompanyDAOJdbcTemplateImplTest extends SpringDaoJdbcTemplateImplTests {
+public class CompanyDAOJdbcTemplateImplTest extends AbstractSpringDaoJdbcTemplateImplTest {
 
     @Autowired
     @Qualifier("companyDao")

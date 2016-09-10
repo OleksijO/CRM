@@ -27,7 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class ReportDAOJdbcDaoTemplateImplTest extends SpringDaoJdbcTemplateImplTests {
+public class ReportDAOJdbcDaoTemplateImplTest extends AbstractSpringDaoJdbcTemplateImplTest {
 
     private static final String DEFAULT_NAME = "Default Name";
     private static final Date DEFAULT_DATE = new Timestamp(new Date().getTime());

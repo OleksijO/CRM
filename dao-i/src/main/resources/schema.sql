@@ -9,15 +9,6 @@ GRANT ALL ON SCHEMA public TO public;
 SET SEARCH_PATH TO public;
 
 
-CREATE TABLE IF NOT EXISTS audit (
-  id SERIAL NOT NULL,
-  target_id INT,
-  message VARCHAR(255),
-  is_error BOOLEAN,
-  date_create TIMESTAMP NOT NULL,
-  PRIMARY KEY (id));
-
-
 CREATE TABLE IF NOT EXISTS stage_deals (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
@@ -364,11 +355,20 @@ CREATE TABLE IF NOT EXISTS currency (
 
 
 CREATE TABLE IF NOT EXISTS report (
-  id          SERIAL    NOT NULL,
-  date        TIMESTAMP NOT NULL,
+  id SERIAL NOT NULL,
+  date TIMESTAMP NOT NULL,
   hour_amount DECIMAL(20, 2),
-  company_id  INT NOT NULL,
+  company_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (company_id)
   REFERENCES company (id)
 );
+
+
+CREATE TABLE IF NOT EXISTS audit (
+  id SERIAL NOT NULL,
+  target_id INT,
+  message VARCHAR(255),
+  is_error BOOLEAN,
+  date_create TIMESTAMP NOT NULL,
+  PRIMARY KEY (id));

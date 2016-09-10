@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 @Transactional
-public class LogTransactionTest extends SpringDaoJdbcTemplateImplTests {
+public class LogTransactionTest extends AbstractSpringDaoJdbcTemplateImplTest {
     @Autowired
     UserDAO userDAO;
     @Autowired
