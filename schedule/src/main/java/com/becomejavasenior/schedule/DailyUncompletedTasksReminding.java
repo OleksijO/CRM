@@ -24,7 +24,7 @@ public class DailyUncompletedTasksReminding {
     @Autowired
     private static final String EMAIL_FROM = "Office reminder";
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "30 0 0 * * ?")
     public void executeInternal() {
         List<Task> taskList = taskService.getUncompletedTasks();
         Map<Integer, List<Task>> tableUserIdTaskList = getTableOfRespUserIdAndTaslList(taskService.getAll());
@@ -32,7 +32,6 @@ public class DailyUncompletedTasksReminding {
         Map<Integer, String> tableUserIdEmail = getTableOfUserIdAndEmail(tableUserIdTaskList.keySet());
         List<SimpleMailMessage> emailList = createEmailList(tableUserIdTaskList, tableUserIdEmail);
         emailService.sendEmails(emailList);
-        System.out.println("Send remindings");
     }
 
     private Map<Integer, List<Task>> getTableOfRespUserIdAndTaslList(List<Task> taskList) {

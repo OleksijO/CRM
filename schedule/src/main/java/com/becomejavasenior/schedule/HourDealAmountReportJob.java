@@ -13,7 +13,6 @@ public class HourDealAmountReportJob  {
     @Scheduled(cron = "0 0 0/1 1/1 * ?")
         protected void executeInternal() {
         reportService.makeHourDealAmountReports();
-        System.out.println("Hour Company Deal Amount Report is done.");
     }
 
     /*protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
