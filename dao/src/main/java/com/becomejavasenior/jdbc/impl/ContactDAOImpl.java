@@ -9,12 +9,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 //@Repository("contactDao")
 public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO contact (name, responsible_users_id, pos, type_of_phone, phone," +
             " skype, email, deleted, date_create, created_by_id, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -39,9 +35,6 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
 
     @Override
     public int insert(Contact contact) {
-            //TODO delete after test
-        tagDAO.getById(1);
-
         if (contact.getId() != 0) {
             throw new DatabaseException("contact id must be obtained from DB");
         }
@@ -68,10 +61,7 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
             } else {
                 throw new DatabaseException("Can't get contact id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW CONTACT " + contact.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         if (contact.getTags() != null && contact.getTags().size() > 0) {
@@ -84,7 +74,7 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
 
     @Override
     public void delete(int id) {
-        delete(id, "contact"/*, logger*/);
+        delete(id, "contact");
     }
 
     @Override
@@ -109,11 +99,7 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
             statement.setObject(11, contact.getCompany() == null ? null : contact.getCompany().getId(), Types.INTEGER);
             statement.setInt(12, contact.getId());
             statement.executeUpdate();
-
-            //logger.log(Level.INFO, "UPDATE CONTACT " + contact.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }
@@ -128,7 +114,6 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
             return parseResultSet(resultSet);
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }
@@ -144,7 +129,6 @@ public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
             return contactList == null || contactList.isEmpty() ? null : contactList.get(0);
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }

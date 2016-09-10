@@ -1,7 +1,6 @@
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.service.UserService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ public class RegisterServlet extends AbstractSpringAutowiredSupport {
             req.getRequestDispatcher(URL_REGISTER).forward(req, resp);
 
         } catch (ServletException | IOException e) {
-            Logger.getRootLogger().error("WEB: doGet: forward to register page failed", e);
+            logger.error("WEB: doGet: forward to register page failed", e);
         }
     }
 
@@ -36,19 +35,19 @@ public class RegisterServlet extends AbstractSpringAutowiredSupport {
                 req.getParameter("email"), Integer.parseInt(req.getParameter("language")));
 
         if ("".equals(serviceMessage)) {
-            Logger.getRootLogger().info("WEB: AUTH: new user registered '" + req.getParameter("email") + "'");
+            logger.info("WEB: AUTH: new user registered '" + req.getParameter("email") + "'");
 
             try {
                 resp.sendRedirect("/login?updateUsers=1");
             } catch (IOException e) {
-                Logger.getRootLogger().error("WEB: doPost: redirect to login page failed", e);
+                logger.error("WEB: doPost: redirect to login page failed", e);
             }
         } else {
             req.setAttribute("serviceMessage", serviceMessage);
             try {
                 req.getRequestDispatcher(URL_REGISTER).forward(req, resp);
             } catch (ServletException | IOException e) {
-                Logger.getRootLogger().error("WEB: doPost: forward to register page failed", e);
+                logger.error("WEB: doPost: forward to register page failed", e);
             }
         }
     }

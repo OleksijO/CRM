@@ -12,12 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 //@Repository("dealDao")
 public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO deal (stage_id, responsible_users_id, company_id, created_by_id, " +
             "name, amount, deleted, date_create, primary_contact_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -93,7 +89,6 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
                 deals.add(deal);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
 
@@ -127,7 +122,6 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
                 deals.add(deal);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
 
@@ -153,7 +147,6 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
                 contacts.add(contact);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
 
@@ -178,7 +171,6 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
                 stages.add(stage);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return stages;
@@ -211,10 +203,8 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
             } else {
                 throw new DatabaseException("Can't get deal id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW DEAL " + deal.toString());
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         if (deal.getContacts() != null && deal.getContacts().size() > 0) {
@@ -227,7 +217,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
 
     @Override
     public void delete(int id) {
-        delete(id, "deal"/*, logger*/);
+        delete(id, "deal");
     }
 
     @Override
@@ -250,11 +240,7 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
             statement.setObject(9, deal.getPrimaryContact() == null ? null : deal.getPrimaryContact().getId(), Types.INTEGER);
             statement.setInt(10, deal.getId());
             statement.executeUpdate();
-
-            //logger.log(Level.INFO, "UPDATE DEAL " + deal.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }
@@ -302,7 +288,6 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
                 deals.add(deal);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return deals;
@@ -349,15 +334,11 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
                     primaryContact.setId(resultSet.getInt("primary_contact_id"));
                     deal.setPrimaryContact(primaryContact);
                 }
-
-                //logger.log(Level.INFO, "GET DEAL BY ID " + deal.toString());
-
             } else {
                 return null;
             }
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         } finally {
             if (resultSet != null) {
@@ -396,7 +377,6 @@ public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
 
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return stageDeals;

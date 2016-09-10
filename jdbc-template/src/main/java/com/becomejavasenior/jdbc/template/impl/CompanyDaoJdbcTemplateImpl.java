@@ -21,8 +21,6 @@ import java.util.List;
 @Repository("companyDao")
 public class CompanyDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Company> implements CompanyDAO {
 
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
-
     private static final String INSERT_SQL = "INSERT INTO company (name, phone, email, address, responsible_users_id," +
             " web, deleted, created_by_id, date_create) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_SQL = "UPDATE company SET name = ?, phone = ?, email = ?, address = ?, responsible_users_id = ?," +
@@ -80,7 +78,7 @@ public class CompanyDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Comp
 
     @Override
     public void delete(int id) {
-        delete(id, "company"/*, logger*/);
+        delete(id, "company");
     }
 
     @Override

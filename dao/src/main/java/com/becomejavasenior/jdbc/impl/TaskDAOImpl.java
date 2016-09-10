@@ -12,12 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 @Repository("taskDao")
 public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO task (responsible_users_id, task_type_id, created_by_id," +
             " company_id, contact_id, deal_id, period, name, deleted, date_create, status_id, date_task, time_task)\n" +
@@ -82,10 +78,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
             } else {
                 throw new DatabaseException("Can't get task id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW TASK " + task.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException("Can't create task", ex);
         }
         return id;
@@ -93,7 +86,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
 
     @Override
     public void delete(int id) {
-        delete(id, "task"/*, logger*/);
+        delete(id, "task");
     }
 
     @Override
@@ -120,11 +113,7 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
             statement.setString(13, task.getTimeTask());
             statement.setInt(14, task.getId());
             statement.executeUpdate();
-
-            //logger.log(Level.INFO, "UPDATE TASK " + task.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException("Can't update task", ex);
         }
     }
@@ -137,7 +126,6 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
             return parseResultSet(resultSet);
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException("Can't get task list", ex);
         }
     }
@@ -153,7 +141,6 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
             return taskList == null || taskList.isEmpty() ? null : taskList.get(0);
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException("Can't get task by Id", ex);
         }
     }
@@ -352,7 +339,6 @@ public class TaskDAOImpl extends AbstractDAO<Task> implements TaskDAO {
 
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return taskTypes;

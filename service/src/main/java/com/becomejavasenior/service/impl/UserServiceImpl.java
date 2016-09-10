@@ -20,11 +20,12 @@ import java.util.Map;
 @Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
-    @Qualifier("userDao")
     private UserDAO userDAO;
     @Autowired
-    @Qualifier("languageDao")
     private LanguageDAO languageDAO;
+    @Autowired
+    @Qualifier("serviceLogger")
+    private Logger logger;
 
     @Override
     public Map<String, User> getUserMap() {
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
             try {
                 userDAO.insert(user);
             } catch (DatabaseException e) {
-                Logger.getRootLogger().error("Service: UserDAO insert record error", e);
+                logger.error("Service: UserDAO insert record error", e);
                 errorString = e.getMessage();
             }
         }
@@ -82,6 +83,10 @@ public class UserServiceImpl implements UserService {
 
     public void setLanguageDAO(LanguageDAO languageDAO) {
         this.languageDAO = languageDAO;
+    }
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
     }
 
     @Override

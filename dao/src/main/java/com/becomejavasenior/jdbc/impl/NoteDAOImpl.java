@@ -10,12 +10,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 @Repository("noteDao")
 public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO note (created_by_id, note, date_create, deleted," +
             " deal_id, company_id, contact_id) VALUES (?, ?, ?, FALSE, ?, ?, ?)";
@@ -49,10 +45,7 @@ public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
             } else {
                 throw new DatabaseException("Can't get note id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW NOTE " + note.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return id;
@@ -60,7 +53,7 @@ public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
 
     @Override
     public void delete(int id) {
-        delete(id, "note"/*, logger*/);
+        delete(id, "note");
     }
 
     @Override
@@ -81,11 +74,7 @@ public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
             statement.setObject(7, note.getContact() == null ? null : note.getContact().getId(), Types.INTEGER);
             statement.setInt(8, note.getId());
             statement.executeUpdate();
-
-            //logger.log(Level.INFO, "UPDATE NOTE " + note.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }
@@ -130,7 +119,6 @@ public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
                 notes.add(note);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return notes;
@@ -175,14 +163,11 @@ public class NoteDAOImpl extends AbstractDAO<Note> implements NoteDAO {
                     contact.setId(resultSet.getInt("contact_id"));
                     note.setContact(contact);
                 }
-                //logger.log(Level.INFO, "GET NOTE BY ID " + note.toString());
-
             } else {
                 return null;
             }
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         } finally {
             if (resultSet != null) {

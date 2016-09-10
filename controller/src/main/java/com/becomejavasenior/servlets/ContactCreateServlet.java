@@ -1,7 +1,6 @@
 package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.service.ContactService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.RequestDispatcher;
@@ -34,7 +33,7 @@ public class ContactCreateServlet extends AbstractSpringAutowiredSupport {
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
-            Logger.getRootLogger().error("WEB: forward to contact create failed", e);
+            logger.error("WEB: forward to contact create failed", e);
         }
     }
 
@@ -44,12 +43,12 @@ public class ContactCreateServlet extends AbstractSpringAutowiredSupport {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
-            Logger.getRootLogger().error(e);
+            logger.error(e);
         }
         try {
             contactService.createByParameters(request.getParameterMap(), request.getPart("file_file"));
         } catch (IOException | ServletException e) {
-            Logger.getRootLogger().error("WEB: error while parse or create contact", e);
+            logger.error("WEB: error while parse or create contact", e);
         }
     }
 

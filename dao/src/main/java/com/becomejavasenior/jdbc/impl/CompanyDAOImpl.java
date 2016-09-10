@@ -51,10 +51,8 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
             } else {
                 throw new DatabaseException("Can't get company id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW COMPANY " + company.toString());
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return id;
@@ -62,7 +60,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
     @Override
     public void delete(int id) {
-        delete(id, "company"/*, logger*/);
+        delete(id, "company");
     }
 
     @Override
@@ -85,11 +83,7 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
             statement.setTimestamp(9, new Timestamp(company.getDateCreate().getTime()));
             statement.setInt(10, company.getId());
             statement.executeUpdate();
-
-            //logger.log(Level.INFO, "UPDATE COMPANY " + company.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }
@@ -128,7 +122,6 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
                 companies.add(company);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return companies;
@@ -166,15 +159,11 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
                 company.setCreator(creator);
                 creator.setId(resultSet.getInt("created_by_id"));
                 company.setDateCreate(resultSet.getTimestamp("date_create"));
-
-                //logger.log(Level.INFO, "GET COMPANY BY ID " + company.toString());
-
             } else {
                 return null;
             }
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         } finally {
             if (resultSet != null) {
@@ -189,14 +178,10 @@ public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_COMPANY_TAG_SQL)) {
-
             statement.setInt(1, tag.getId());
             statement.setInt(2, company.getId());
             statement.executeUpdate();
-            //logger.log(Level.INFO, "INSERT NEW COMPANY " + company.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }

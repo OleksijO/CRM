@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 @Component
 abstract class AbstractDAO<T> implements GenericDAO<T> {
 
@@ -45,7 +43,7 @@ abstract class AbstractDAO<T> implements GenericDAO<T> {
         return dataSource.getConnection();
     }
 
-    public void delete(int id, String tableName /*, Logger logger*/) {
+    public void delete(int id, String tableName) {
 
         final String DELETE_SQL = "UPDATE " + tableName + " SET deleted = TRUE WHERE id = ?";
 
@@ -55,10 +53,7 @@ abstract class AbstractDAO<T> implements GenericDAO<T> {
             statement.setInt(1, id);
             statement.executeUpdate();
 
-            //logger.log(Level.INFO, "DELETE ENTITY WITH ID = " + id + " FROM TABLE " + tableName);
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }

@@ -30,6 +30,10 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
 
     </bean>
 
+    <bean id="serviceLogger" class="org.apache.log4j.Logger" factory-method="getLogger">
+        <constructor-arg value="service_logger"/>
+    </bean>
+
 
 </beans>
 

@@ -48,10 +48,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
             } else {
                 throw new DatabaseException("Can't get user id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW USER " + user.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return id;
@@ -84,11 +81,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
             statement.setInt(11, user.getLanguage().getId());
             statement.setInt(12, user.getId());
             statement.executeUpdate();
-
-            //logger.log(Level.INFO, "UPDATE USERS " + user.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }
@@ -101,7 +94,6 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL)) {
             return parseResultSet(resultSet);
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }
@@ -119,7 +111,6 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
             return userList == null || userList.isEmpty() ? null : userList.get(0);
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         } finally {
             if (resultSet != null) {

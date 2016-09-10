@@ -2,13 +2,15 @@ package com.becomejavasenior.servlets;
 
 import com.becomejavasenior.entity.User;
 import com.becomejavasenior.service.UserService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
@@ -37,7 +39,7 @@ public class LoginServlet extends AbstractSpringAutowiredSupport {
             req.getRequestDispatcher("/pages/authLogin.jsp").forward(req, res);
 
         } catch (ServletException | IOException e) {
-            Logger.getRootLogger().error("WEB: doGet: forward to login page failed", e);
+            logger.error("WEB: doGet: forward to login page failed", e);
         }
     }
 
@@ -69,16 +71,16 @@ public class LoginServlet extends AbstractSpringAutowiredSupport {
             userName.setMaxAge(MAX_INACTIVE_INTERVAL);
             res.addCookie(userName);
 
-            Logger.getRootLogger().info("WEB: AUTH: '" + email + "' logged in");
+            logger.info("WEB: AUTH: '" + email + "' logged in");
         } else {
             req.getSession().setAttribute("authMessage", "Предоставлены неверные учетные данные");
-            Logger.getRootLogger().info("WEB: AUTH: login failed for '" + email + "'");
+            logger.info("WEB: AUTH: login failed for '" + email + "'");
         }
 
         try {
             res.sendRedirect(res.encodeRedirectURL(fromPage));
         } catch (IOException e) {
-            Logger.getRootLogger().error("WEB: doPost: redirect to page " + fromPage + " failed", e);
+            logger.error("WEB: doPost: redirect to page " + fromPage + " failed", e);
         }
     }
 

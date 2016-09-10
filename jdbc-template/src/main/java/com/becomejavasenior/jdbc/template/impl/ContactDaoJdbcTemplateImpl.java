@@ -112,7 +112,7 @@ public class ContactDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Cont
 
     @Override
     public void delete(int id) {
-        delete(id, "contact"/*, logger*/);
+        delete(id, "contact");
     }
 
     @Override

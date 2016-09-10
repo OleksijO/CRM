@@ -185,7 +185,7 @@ public class DealDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Deal> i
 
     @Override
     public void delete(int id) {
-        delete(id, "deal"/*, logger*/);
+        delete(id, "deal");
     }
 
     @Override

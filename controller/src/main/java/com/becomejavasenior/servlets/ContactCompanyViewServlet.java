@@ -3,7 +3,7 @@ package com.becomejavasenior.servlets;
 import com.becomejavasenior.entity.Company;
 import com.becomejavasenior.entity.Contact;
 import com.becomejavasenior.service.ContactService;
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +18,7 @@ import java.util.List;
 public class ContactCompanyViewServlet extends AbstractSpringAutowiredSupport {
     @Autowired
     private ContactService contactService;
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,11 +37,7 @@ public class ContactCompanyViewServlet extends AbstractSpringAutowiredSupport {
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
-            Logger.getRootLogger().error("WEB: forward to contact/company view failed", e);
+            logger.error("WEB: forward to contact/company view failed", e);
         }
-    }
-
-    public void setContactService(ContactService contactService) {
-        this.contactService = contactService;
     }
 }

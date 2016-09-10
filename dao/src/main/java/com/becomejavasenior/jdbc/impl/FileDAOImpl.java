@@ -10,12 +10,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 @Repository("fileDao")
 public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
-
-    //private final static Logger logger = Logger.getLogger(CompanyDAOImpl.class.getName());
 
     private static final String INSERT_SQL = "INSERT INTO attached_file (created_by_id, date_create, filename, filesize, deleted," +
             " url_file, file, contact_id, company_id, deal_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -52,10 +48,7 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
             } else {
                 throw new DatabaseException("Can't get file id from database.");
             }
-            //logger.log(Level.INFO, "INSERT NEW FILE " + file.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return id;
@@ -63,7 +56,7 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
 
     @Override
     public void delete(int id) {
-        delete(id, "attached_file"/*, logger*/);
+        delete(id, "attached_file");
     }
 
     @Override
@@ -87,11 +80,7 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
             statement.setObject(10, file.getDeal() == null ? null : file.getDeal().getId(), Types.INTEGER);
             statement.setInt(11, file.getId());
             statement.executeUpdate();
-
-            //logger.log(Level.INFO, "UPDATE FILE " + file.toString());
-
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
     }
@@ -141,7 +130,6 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
                 files.add(file);
             }
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         }
         return files;
@@ -194,15 +182,11 @@ public class FileDAOImpl extends AbstractDAO<File> implements FileDAO {
                     deal.setId(resultSet.getInt("deal_id"));
                     file.setDeal(deal);
                 }
-
-                //logger.log(Level.INFO, "GET FILE BY ID " + file.toString());
-
             } else {
                 return null;
             }
 
         } catch (SQLException ex) {
-            //logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DatabaseException(ex);
         } finally {
             if (resultSet != null) {
