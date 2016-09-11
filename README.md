@@ -23,6 +23,8 @@ Some issues and explanations:
 
 10. Some modules were not renamed to decrease number of changes in github repo.
 
+11. It was a try to do as more changes in original project files as possible, except injects of spring support.
+
 
 
 
