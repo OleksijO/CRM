@@ -11,7 +11,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class replaced by 'com.becomejavasenior.jdbc.template.UserDaoJdbcTemplateImpl' one in jdbc-template module.
+ */
+@Deprecated
 public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
     private static final String INSERT_SQL = "INSERT INTO users (name, email, password, is_admin, phone, " +
             "mobile_phone, note, deleted, url, image, language_id) VALUES (?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?, ?)";

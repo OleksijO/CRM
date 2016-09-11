@@ -11,7 +11,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class replaced by 'com.becomejavasenior.jdbc.template.CompanyDaoJdbcTemplateImpl' one in jdbc-template module.
+ */
+@Deprecated
 public class CompanyDAOImpl extends AbstractDAO<Company> implements CompanyDAO {
 
     private static final String INSERT_SQL = "INSERT INTO company (name, phone, email, address, responsible_users_id," +

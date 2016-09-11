@@ -9,7 +9,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class replaced by 'com.becomejavasenior.jdbc.template.ContactDaoJdbcTemplateImpl' one in jdbc-template module.
+ */
+@Deprecated
 public class ContactDAOImpl extends AbstractDAO<Contact> implements ContactDAO {
 
     private static final String INSERT_SQL = "INSERT INTO contact (name, responsible_users_id, pos, type_of_phone, phone," +

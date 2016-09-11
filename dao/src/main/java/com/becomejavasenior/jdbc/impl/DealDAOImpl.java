@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class replaced by 'com.becomejavasenior.jdbc.template.DealDaoJdbcTemplateImpl' one in jdbc-template module.
+ */
+@Deprecated
 public class DealDAOImpl extends AbstractDAO<Deal> implements DealDAO {
 
     private static final String INSERT_SQL = "INSERT INTO deal (stage_id, responsible_users_id, company_id, created_by_id, " +

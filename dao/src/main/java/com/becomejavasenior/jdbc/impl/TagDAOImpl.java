@@ -10,6 +10,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class replaced by 'com.becomejavasenior.jdbc.template.TagDaoJdbcTemplateImpl' one in jdbc-template module.
+ */
+@Deprecated
 public class TagDAOImpl extends AbstractDAO<Tag> implements TagDAO {
 
     private static final String INSERT_SQL = "INSERT INTO tag (name, deleted) VALUES (?, FALSE)";

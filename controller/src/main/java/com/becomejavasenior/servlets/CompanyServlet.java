@@ -18,9 +18,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.*;
 
-//@WebServlet(name = "companyServlet", urlPatterns = "/company")
-//@MultipartConfig
-@Deprecated     //changed by AddCompany in mvc module
+/**
+ * This class replaced by 'com.becomejavasenior.mvc.AddCompany' one in mvc module.
+ */
+@Deprecated
 public class CompanyServlet extends AbstractSpringAutowiredSupport {
 
     @Autowired
