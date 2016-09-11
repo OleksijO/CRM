@@ -23,9 +23,24 @@
 
         <br>
         <br>
-        <h3><spring:message code="operationResult"/>:</h3>
+        <h2><spring:message code="error.title"/>.</h2>
         <br>
-        <h2>${message}</h2>
+        <br>
+        <br>
+        <h3><spring:message code="error.info"/>: </h3>
+        <br>
+        <br>
+        <h4><spring:message code="error.requested.url"/>: ${url}</h4>
+        <br>
+        <h4><spring:message code="error.type"/>: ${exceptionClass}</h4>
+        <br>
+        <h4><spring:message code="error.message"/>: ${exceptionMessage} </h4>
+        <br>
+        <br>
+        <h5><spring:message code="error.logged"/>. </h5>
+        <br>
+        <h4><spring:message code="error.inform.support"/>. </h4>
+
 
     </div>
 </div>

@@ -19,6 +19,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
                 <value>localization.messages.addcompany</value>
                 <value>localization.messages.message</value>
                 <value>localization.messages.validation.addcompany</value>
+                <value>localization.messages.errorPage</value>
             </list>
         </property>
         <property name="defaultEncoding" value="UTF8"/>

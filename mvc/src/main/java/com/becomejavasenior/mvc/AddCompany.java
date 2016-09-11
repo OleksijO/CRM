@@ -57,7 +57,7 @@ public class AddCompany {
                          Model model,
                          @RequestParam("companyFile") MultipartFile file) throws UnsupportedEncodingException {
         if (validationResult.hasErrors()&&isGroupValidationPassed()){
-            return "newcompany";
+            return "createcompany";
         }
 
         Exception error=null;

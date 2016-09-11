@@ -28,7 +28,7 @@ public class DaoLogger extends AspectLogger {
 
     @AfterThrowing(value = JOIN_POINT, throwing = "e")
     public void logAfterThrowing(JoinPoint jp, Exception e) {
-        logger.error("DAO: ERROR: \t" + parseJointPoint(jp) + " EXCEPTION: " + e.getClass() + " : " + e.getMessage());
+        logger.error("DAO: ERROR: \t" + parseJointPoint(jp) + " EXCEPTION: " + e.getClass() + " : " + e.getMessage(), e);
     }
 
 
