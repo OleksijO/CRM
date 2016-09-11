@@ -59,7 +59,7 @@ public class ErrorHandler extends AbstractSpringAutowiredSupport {
         }
 
         out.write("<br><br>");
-        out.write("<a href=\"index.html\">Home Page</a>");
+        out.write("<a href=\"index.jsp\">Home Page</a>");
         out.write("</body></html>");
     }
 

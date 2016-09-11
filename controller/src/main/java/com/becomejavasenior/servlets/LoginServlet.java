@@ -53,7 +53,7 @@ public class LoginServlet extends AbstractSpringAutowiredSupport {
 
         if (fromPage == null || fromPage.isEmpty()|| fromPage.equals("/")) {
             //todo go to dashboard
-            fromPage = "/logout";
+            fromPage = "/pages/mainMenu.jsp";
         }
 
         if (email != null && !email.isEmpty() && password != null) {
