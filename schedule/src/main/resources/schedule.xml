@@ -15,6 +15,9 @@
     <task:executor id="myExecutor" pool-size="17"/>
     <task:scheduler id="myScheduler" pool-size="17"/>
 
+    <bean id="scheduleLogger" class="org.apache.log4j.Logger" factory-method="getLogger">
+        <constructor-arg value="schedule_logger"/>
+    </bean>
 
 
 </beans>

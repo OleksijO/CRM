@@ -6,18 +6,18 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HourDealAmountReportJob  {
+public class HourDealAmountReportJob  extends AbstractTask {
     @Autowired
     ReportService reportService;
 
     @Scheduled(cron = "0 0 0/1 1/1 * ?")
-        protected void executeInternal() {
-        reportService.makeHourDealAmountReports();
+    protected void executeInternal() {
+        tryDoTask();
     }
 
-    /*protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        reportService.makeHourDealAmountReports();
-        System.out.println("Hour Company Deal Amount Report is done.");
-    }*/
 
+    @Override
+    protected void doTask() {
+        reportService.makeHourDealAmountReports();
+    }
 }

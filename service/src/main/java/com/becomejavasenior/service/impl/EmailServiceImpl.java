@@ -20,7 +20,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendEmails(List<SimpleMailMessage> emails) {
-        mailSender.send((SimpleMailMessage[]) emails.stream().toArray());
+        SimpleMailMessage email[] = new SimpleMailMessage[emails.size()];
+        emails.toArray(email);
+        mailSender.send(email);
     }
 
     public void setMailSender(MailSender mailSender) {

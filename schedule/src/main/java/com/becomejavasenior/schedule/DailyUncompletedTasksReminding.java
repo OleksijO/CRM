@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class DailyUncompletedTasksReminding {
+public class DailyUncompletedTasksReminding extends AbstractTask {
     @Autowired
     private TaskService taskService;
     @Autowired
@@ -22,19 +22,25 @@ public class DailyUncompletedTasksReminding {
     @Autowired
     private static final String EMAIL_SUBJECT = "Uncompleted tasks reminding";
     @Autowired
-    private static final String EMAIL_FROM = "Office reminder";
+    private static final String EMAIL_FROM = "reminder@company.office.com";
 
-    @Scheduled(cron = "30 0 0 * * ?")
+
+    @Scheduled(cron = "0 0 0 * * ?")
     public void executeInternal() {
+      tryDoTask();
+    }
+
+    @Override
+    protected void doTask(){
         List<Task> taskList = taskService.getUncompletedTasks();
-        Map<Integer, List<Task>> tableUserIdTaskList = getTableOfRespUserIdAndTaslList(taskService.getAll());
+        Map<Integer, List<Task>> tableUserIdTaskList = getTableOfRespUserIdAndTaskList(taskList);
         Set<Integer> respUserIdList = tableUserIdTaskList.keySet();
-        Map<Integer, String> tableUserIdEmail = getTableOfUserIdAndEmail(tableUserIdTaskList.keySet());
+        Map<Integer, String> tableUserIdEmail = getTableOfUserIdAndEmail(respUserIdList);
         List<SimpleMailMessage> emailList = createEmailList(tableUserIdTaskList, tableUserIdEmail);
         emailService.sendEmails(emailList);
     }
 
-    private Map<Integer, List<Task>> getTableOfRespUserIdAndTaslList(List<Task> taskList) {
+    private Map<Integer, List<Task>> getTableOfRespUserIdAndTaskList(List<Task> taskList) {
         Map<Integer, List<Task>> tableUserIdTaskList = new HashMap<>();
         for (Task task : taskList) {
             int respUserId = task.getResponsibleUser().getId();
@@ -61,7 +67,7 @@ public class DailyUncompletedTasksReminding {
         List<SimpleMailMessage> emails = new ArrayList<>(tableIdTasks.size());
         for (int id : tableIdTasks.keySet()) {
             SimpleMailMessage email = new SimpleMailMessage();
-            email.setFrom("Office reminder");
+            email.setFrom(EMAIL_FROM);
             email.setSubject(EMAIL_SUBJECT);
             StringBuffer emailBody = new StringBuffer("Good evening,\n");
             emailBody.append("You have ").append(tableIdTasks.get(id).size()).append(" not finished tasks:\n");
