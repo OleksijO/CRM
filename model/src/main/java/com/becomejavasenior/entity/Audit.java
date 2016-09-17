@@ -9,16 +9,14 @@ public class Audit implements Serializable {
     private int id;
     private int targetId;
     private String message;
-    private boolean isError;
     private Date date;
 
     public Audit() {
     }
 
-    public Audit(int targetId, String message, boolean isError, Date date) {
+    public Audit(int targetId, String message, Date date) {
         this.targetId = targetId;
         this.message = message;
-        this.isError = isError;
         this.date = date;
     }
 
@@ -32,10 +30,6 @@ public class Audit implements Serializable {
 
     public String getMessage() {
         return message;
-    }
-
-    public boolean isError() {
-        return isError;
     }
 
     public Date getDate() {
@@ -54,10 +48,6 @@ public class Audit implements Serializable {
         this.message = message;
     }
 
-    public void setError(boolean error) {
-        isError = error;
-    }
-
     public void setDate(Date date) {
         this.date = date;
     }
@@ -71,7 +61,6 @@ public class Audit implements Serializable {
 
         if (id != audit.id) return false;
         if (targetId != audit.targetId) return false;
-        if (isError != audit.isError) return false;
         if (message != null ? !message.equals(audit.message) : audit.message != null) return false;
         return date != null ? date.equals(audit.date) : audit.date == null;
 
@@ -82,7 +71,6 @@ public class Audit implements Serializable {
         int result = id;
         result = 31 * result + targetId;
         result = 31 * result + (message != null ? message.hashCode() : 0);
-        result = 31 * result + (isError ? 1 : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }
@@ -93,7 +81,6 @@ public class Audit implements Serializable {
                 "id=" + id +
                 ", targetId=" + targetId +
                 ", message='" + message + '\'' +
-                ", isError=" + isError +
                 ", date=" + date +
                 '}';
     }

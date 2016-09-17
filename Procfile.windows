@@ -1,1 +1,0 @@
-web:    java -jar target\dependency\webapp-runner.jar controller\target\controller-1.0-SNAPSHOT.war

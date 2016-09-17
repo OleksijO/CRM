@@ -83,7 +83,6 @@ public class AuditDAOJdbcDaoTemplateImplTest extends AbstractSpringDaoJdbcTempla
         Assert.assertEquals("Audit read by PK not equals to test one", auditTest.getDate(), auditFromDB.getDate());
         Assert.assertEquals("Audit read by PK not equals to test one", auditTest.getMessage(), auditFromDB.getMessage());
         Assert.assertEquals("Audit read by PK not equals to test one", auditTest.getTargetId(), auditFromDB.getTargetId());
-        Assert.assertEquals("Audit read by PK not equals to test one", auditTest.isError(), auditFromDB.isError());
     }
 
     private Audit createTestAudit() throws ParseException {
@@ -92,7 +91,6 @@ public class AuditDAOJdbcDaoTemplateImplTest extends AbstractSpringDaoJdbcTempla
         auditTest.setTargetId(1);
         auditTest.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-11 10:00:00"));
         auditTest.setMessage("SomeClass some method called");
-        auditTest.setError(false);
         return auditTest;
     }
 }

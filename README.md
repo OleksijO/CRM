@@ -1,34 +1,56 @@
-# spring-framework
+?# CRM
 
-Some issues and explanations:
+Initial state of source files before implementing Spring in.
+https://github.com/OleksijO/CRM/commit/5321df9d20f5ef0871f15165c1dd075d7da3da7c
 
-1. Logging added not in all modules.
+Compare changes: https://github.com/OleksijO/CRM/compare/master@%7B1%7D...master
 
-2. Not all DAO moved to JdbcTemplate implementation. This caused using dao module during tests in jdbc-template module
+Tasks (issues):
 
-3. On mvc moved only create company page. Added page with message showing results of adding company operation.
+1. Внедрить Spring DI в DAO слой
 
-4. Not solved problem with clearing form 'add company' after validation error.
+2. Добавить Spring DI в Service
 
-5. To UserDAO added method getUserById() equivalent to getById(). Result in case of absent user with specified id - EmptyResultDataAccessException.
-  Method getById returned null in mentioned case.
+3. Инициализация Spring Beans
 
-6. DAO tests are using real but another (crm-crius-test) from work (crm-crius) postgresql database.
+4. Управление Scope бинов
 
-7. Web deployment descriptor and resources were moved to main module.
+5. Добавить Spring DI в Controller слой
 
-8. Used some temporary "features" to set up navigation system: rest without auth., added mainMenu.jsp, added welcome page with redirect to menu etc.
+6. Создать DAO для отображения информации для Dashboard
 
-9. DAO interface moved to another module, service didn't because it has one implementation.
+7. Внедрение зависимостей в Spring
 
-10. Some modules were not renamed to decrease number of changes in github repo.
+8. Spring локализация
 
-11. It was a try to do as more changes in original project files as possible, except injects of spring support.
+9. Разбить Spring XML Context на несколько файлов
 
+10. Кофигурация Spring JdbcTemplate
 
+11. Перевести DealDAOImpl DAO на JdbcTemplate
 
+12. Перевести ContactDAOImpl на JdbcTemplate
 
+13. Перевести CompanyDAOImpl на JdbcTemplate
 
+14. Переписать Unit тесты на SpringJUnit4ClassRunner.class
 
+15. Написать DAO для управления правами пользователей на JdbcTemplate
 
+16. Добавить аспекты
 
+17. Переписать на Spring MVC сервлеты по работе со Компанией и Контактами
+
+18. REST для Контактов на Spring MVC
+
+19. REST для Сделок на Spring MVC
+
+20. Подключение Spring transaction
+
+21. Spring MVC локализация
+
+22. Validation
+
+23. Планировщик задач
+
+24. Spring transaction, аттрибут Propagation

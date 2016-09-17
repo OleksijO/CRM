@@ -21,9 +21,9 @@ import java.util.List;
 @Repository("auditDao")
 @Transactional          //Task 24 Transactional / Propagation
 public class AuditDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Audit> implements AuditDAO {
-    private static final String INSERT_SQL = "INSERT INTO audit (target_id ,message, is_error, date_create)" +
-            " VALUES (?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE audit SET target_id = ?, message = ?, is_error = ?, date_create = ?" +
+    private static final String INSERT_SQL = "INSERT INTO audit (target_id ,message, date_create)" +
+            " VALUES (?, ?, ?)";
+    private static final String UPDATE_SQL = "UPDATE audit SET target_id = ?, message = ?, date_create = ?" +
             " WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM audit";
 
@@ -32,14 +32,12 @@ public class AuditDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Audit>
     private static final String TABLE_NAME = "audit";
     private static final String FIELD_TAGET_ID = "target_id";
     private static final String FIELD_MESSAGE = "message";
-    private static final String FIELD_IS_ERROR = "is_error";
     private static final String FIELD_DATE_CREATE = "date_create";
 
     private static final RowMapper<Audit> ROW_MAPPER_AUDIT = (resultSet, i) -> {
         Audit audit = new Audit();
         audit.setId(resultSet.getInt(FIELD_ID));
         audit.setDate(new Date(resultSet.getTimestamp(FIELD_DATE_CREATE).getTime()));
-        audit.setError(resultSet.getBoolean(FIELD_IS_ERROR));
         audit.setMessage(resultSet.getString(FIELD_MESSAGE));
         audit.setTargetId(resultSet.getInt(FIELD_TAGET_ID));
         return audit;
@@ -60,8 +58,7 @@ public class AuditDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Audit>
             PreparedStatement statement = connection.prepareStatement(INSERT_SQL, new String[]{"id"});
             statement.setInt(1, audit.getTargetId());
             statement.setString(2, audit.getMessage());
-            statement.setBoolean(3, audit.isError());
-            statement.setTimestamp(4, new Timestamp(audit.getDate().getTime()));
+            statement.setTimestamp(3, new Timestamp(audit.getDate().getTime()));
             return statement;
         };
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -80,9 +77,8 @@ public class AuditDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<Audit>
         PreparedStatementSetter preparedStatementSetter = statement -> {
             statement.setInt(1, audit.getTargetId());
             statement.setString(2, audit.getMessage());
-            statement.setBoolean(3, audit.isError());
-            statement.setTimestamp(4, new Timestamp(audit.getDate().getTime()));
-            statement.setInt(5, audit.getId());
+            statement.setTimestamp(3, new Timestamp(audit.getDate().getTime()));
+            statement.setInt(4, audit.getId());
         };
         jdbcTemplate.update(UPDATE_SQL, preparedStatementSetter);
     }

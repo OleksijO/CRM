@@ -120,34 +120,27 @@ public class UserDaoJdbcTemplateImpl extends AbstractDaoJdbcTemplateImpl<User> i
     @Override
     public User getById(int id) {
         final String methodName = "getById method";
-        logTransaction(methodName, id, this.getClass() + " " + methodName + " started.", false);
-        User user = null;
+        logTransaction(methodName, id, this.getClass() + " " + methodName + " started.");
+        User user;
         try {
             user = jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", ROW_MAPPER_USER, id);
         } catch (EmptyResultDataAccessException ignored) {
-            logTransaction(
-                    methodName,
-                    id,
-                    " crushed with exception " + ignored.getCause() + ". Cause: " + ignored.getMessage(),
-                    true
-            );
             return null;
             // for backward compatibility.
         }
-        logTransaction(methodName, id, " returned successfully.", false);
         return user;
     }
 
     @Override
 
     public User getUserById(int id) {
-        this.logTransaction("getUserById method", id, " was called", false);
+        this.logTransaction("getUserById method", id, " was called");
         return jdbcTemplate.queryForObject(SELECT_ALL_SQL + " AND id = ?", ROW_MAPPER_USER, id);
     }
 
 
-    public void logTransaction(String methodName, int targetId, String message, boolean isError) {
-        auditDAO.insert(new Audit(targetId, this.getClass() + " " + methodName + " " + message, isError, new Date()));
+    public void logTransaction(String methodName, int targetId, String message) {
+        auditDAO.insert(new Audit(targetId, this.getClass() + " " + methodName + " " + message, new Date()));
     }
 
     public void setAuditDAO(AuditDAO auditDAO) {

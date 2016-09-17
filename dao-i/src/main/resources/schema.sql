@@ -369,6 +369,5 @@ CREATE TABLE IF NOT EXISTS audit (
   id SERIAL NOT NULL,
   target_id INT,
   message VARCHAR(255),
-  is_error BOOLEAN,
   date_create TIMESTAMP NOT NULL,
   PRIMARY KEY (id));

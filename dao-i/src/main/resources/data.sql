@@ -100,8 +100,8 @@ INSERT INTO report VALUES
   (DEFAULT, '2016-03-11 00:00:00.000000', 15330, 2);
 
 INSERT INTO audit VALUES
-  (DEFAULT, 1, 'SomeClass some method called', FALSE, '2016-02-11 10:00:00.000000'),
-  (DEFAULT, 1, 'SomeClass some method returned', FALSE, '2016-02-11 10:00:00.100000'),
-  (DEFAULT, 10, 'SomeClass some method called', FALSE, '2016-02-11 11:00:00.000000'),
-  (DEFAULT, 10, 'SomeClass some method returned', TRUE, '2016-02-11 11:00:00.100000');
+  (DEFAULT, 1, 'SomeClass some method called', '2016-02-11 10:00:00.000000'),
+  (DEFAULT, 1, 'SomeClass some method returned', '2016-02-11 10:00:00.100000'),
+  (DEFAULT, 10, 'SomeClass some method called', '2016-02-11 11:00:00.000000'),
+  (DEFAULT, 10, 'SomeClass some method returned', '2016-02-11 11:00:00.100000');
 
